@@ -73,7 +73,7 @@ bibliography: book.bib
 
 <div class="cover-line"></div> <img class="cover-spark" src="images/spark.png" alt="Spark" /> <div class="cover-grid"> 
 <div class="cover-box"> <div class="cover-kicker">Rédigé par</div> 
-<div class="cover-names"> COMPAORE Bassirou<br/> DIAKHATE Khadidiatou<br/> DIALLO Aissatou<br/> FOGWOUNG DJOUFACK Sarah-Laure<br/> FOUMSOU Lawa Prosper </div> <div class="cover-note">Élèves ingénieurs statisticiens économistes (ISE2)</div> </div> <div class="cover-box"> <div class="cover-kicker">Sous la supervision de</div> 
+<div class="cover-names"> COMPAORE Mohamadi Bassirou<br/> DIAKHATE Khadidiatou<br/> DIALLO Sega Aissatou<br/> FOGWOUNG DJOUFACK Sarah-Laure<br/> FOUMSOU Lawa Prosper </div> <div class="cover-note">Élèves ingénieurs statisticiens économistes (ISE2)</div> </div> <div class="cover-box"> <div class="cover-kicker">Sous la supervision de</div> 
 <div class="cover-supervisor">Mme DIAW Mously</div> 
 <div class="cover-note">Freelance Senior Data Scientist / ML Engineer</div> <div class="cover-pill">Livre réalisé dans le cadre du cours d’Initiation au Big Data &amp; Cloud Computing.
 </div> </div> </div>
