@@ -1,0 +1,80 @@
+---
+title: ""
+site: bookdown::bookdown_site
+documentclass: book
+output:
+  bookdown::gitbook:
+    css: style.css
+    toc_depth: 2
+    split_by: chapter
+    config:
+      toc:
+        collapse: section
+      edit: null
+      download: ["pdf"]
+      sharing: no
+bibliography: book.bib
+---
+
+# Apache Spark
+
+<style>
+/* Bloc logo : centré + largeur fixe + pas de scroll */
+.cover-logo{
+  width: 800px;              
+  max-width: 100%;
+  margin: 14px auto;         
+  text-align: center;
+  overflow: visible !important;  
+}
+
+/* Image centrée */
+.cover-logo img{
+  display: block;
+  margin: 0 auto 8px auto;
+}
+
+/* Légende : figée, centrée, retour à la ligne, pas de scroll */
+.cover-logo .cap{
+  display: block;
+  margin: 0 auto;
+  max-width: 520px;          
+  white-space: normal !important;  
+  overflow: visible !important;
+  text-overflow: clip !important;
+  word-break: break-word;         
+  overflow-wrap: anywhere;       
+  line-height: 1.35;
+  color: #6b7280;
+  font-style: italic;
+  font-size: 18px;
+}
+</style>
+
+<div class="cover-logo">
+  <img src="images/LOGO2.jpg" style="width:90px;">
+  <div class="cap">Agence nationale de la Statistique et de la Démographie (ANSD)</div>
+</div>
+
+<div class="cover-logo">
+  <img src="images/LOGO1.jpg" style="width:70px;">
+  <div class="cap">École nationale de la Statistique et de l’Analyse économique Pierre Ndiaye (ENSAE)</div>
+</div>
+
+
+
+</div> <div class="cover-card"> <div class="cover-pill">Présentation du projet du groupe 7 – Année académique 2025-2026</div>
+
+
+<div class="cover-title">
+  Spark : Traitement des données massives<br>
+  en temps réel
+</div>
+
+<div class="cover-line"></div> <img class="cover-spark" src="images/spark.png" alt="Spark" /> <div class="cover-grid"> 
+<div class="cover-box"> <div class="cover-kicker">Rédigé par</div> 
+<div class="cover-names"> COMPAORE Bassirou<br/> DIAKHATE Khadidiatou<br/> DIALLO Aissatou<br/> FOGWOUNG DJOUFACK Sarah-Laure<br/> FOUMSOU Lawa Prosper </div> <div class="cover-note">Élèves ingénieurs statisticiens économistes (ISE2)</div> </div> <div class="cover-box"> <div class="cover-kicker">Sous la supervision de</div> 
+<div class="cover-supervisor">Mme DIAW Mously</div> 
+<div class="cover-note">Freelance Senior Data Scientist / ML Engineer</div> <div class="cover-pill">Livre réalisé dans le cadre du cours d’Initiation au Big Data &amp; Cloud Computing.
+</div> </div> </div>
+</div>

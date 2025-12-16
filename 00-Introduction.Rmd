@@ -1,0 +1,44 @@
+# Introduction
+
+## Contexte général : l’explosion des données
+
+Au cours des dernières années, la production de données à l’échelle mondiale a connu une croissance exponentielle. Cette évolution est principalement portée par la généralisation des objets connectés (Internet of Things – IoT), l’essor massif des réseaux sociaux, la digitalisation des transactions économiques ainsi que la multiplication des capteurs et systèmes automatisés dans des secteurs variés tels que l’énergie, la santé, la finance ou encore les transports.
+
+Contrairement aux modèles traditionnels, les données ne sont plus produites de manière ponctuelle ou quotidienne, mais de façon **continue et en temps réel**. Chaque seconde, des millions d’événements sont générés : messages, clics, paiements, mesures de capteurs, flux applicatifs, journaux systèmes (logs), etc. Cette transformation marque un changement profond dans la nature des données, désormais caractérisées par des **volumes très élevés**, une **grande diversité de formats** (texte, images, vidéos, flux JSON, données semi-structurées) et une **vitesse de génération particulièrement élevée**.
+
+Face à cette nouvelle réalité, les systèmes classiques de gestion et de traitement des données atteignent rapidement leurs limites, tant en termes de performance que de capacité d’adaptation.
+
+---
+
+## Limites des approches traditionnelles : SQL et Hadoop
+
+Les bases de données relationnelles classiques telles que MySQL, PostgreSQL ou Oracle ont longtemps constitué la solution de référence pour le stockage et l’analyse des données. Conçues pour des données essentiellement structurées et organisées sous forme de tables, elles reposent généralement sur des architectures centralisées ou faiblement distribuées. Dans ce contexte, leur capacité de montée en charge demeure limitée lorsqu’il s’agit de traiter des volumes massifs de données ou des flux continus en temps réel.
+
+Dans un second temps, l’écosystème Hadoop a apporté une réponse partielle à ces problématiques. Grâce au système de fichiers distribué HDFS, Hadoop permet le stockage de données sur plusieurs machines, tandis que le modèle de calcul MapReduce offre une bonne tolérance aux pannes et une certaine robustesse. Toutefois, Hadoop présente également plusieurs limites importantes :
+
+- des temps de traitement élevés dus aux écritures fréquentes sur disque ;
+- une orientation principalement vers le traitement **batch** ;
+- une complexité de développement et de configuration non négligeable ;
+- une faible adaptation aux besoins de traitement interactif et temps réel.
+
+Ces contraintes ont progressivement mis en évidence la nécessité de solutions plus rapides, plus flexibles et mieux adaptées aux exigences modernes du Big Data.
+
+---
+
+## Apache Spark : une réponse aux besoins modernes du Big Data
+
+C’est dans ce contexte qu’**Apache Spark** s’est imposé comme une technologie centrale du Big Data. Conçu pour dépasser les limitations du modèle Hadoop MapReduce, Spark repose sur un **modèle de calcul en mémoire**, permettant d’améliorer significativement les performances, en particulier pour les traitements analytiques et itératifs.
+
+Apache Spark se distingue notamment par :
+
+- sa **rapidité**, grâce à l’exécution en mémoire et au parallélisme sur plusieurs cœurs ou plusieurs machines ;
+- sa **flexibilité**, en prenant en charge des données structurées, semi-structurées et non structurées ;
+- sa **scalabilité**, pouvant fonctionner aussi bien sur une machine unique que sur un cluster distribué ;
+- son **écosystème riche**, intégrant le traitement batch, le streaming en temps réel, le machine learning et l’analyse SQL ;
+- sa **compatibilité avec les architectures Cloud modernes**, notamment dans les environnements de type Lakehouse.
+
+Dans le cadre de ce projet d’initiation au Big Data et au Cloud Computing, Apache Spark constitue la technologie centrale étudiée. L’objectif est de comprendre, à travers des cas concrets, les principes fondamentaux du traitement distribué de données massives, notamment dans des contextes batch et temps réel.
+
+La suite de ce document présentera successivement les concepts fondamentaux d’Apache Spark (architecture, fonctionnement et principaux modules), ses méthodes de traitement, ainsi que ses forces et limites dans un contexte Big Data moderne.
+
+</div>

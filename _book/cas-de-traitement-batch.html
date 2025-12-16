@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Cas de traitement batch | _main.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Cas de traitement batch | _main.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Cas de traitement batch | _main.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="cadre-pratique-et-description-des-données.html"/>
+<link rel="next" href="cas-de-traitement-streaming.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link rel="shortcut icon" href="images/bookdown.ico" type="image/x-icon">
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li style="text-align:center;">
+  <img src="images/image2.png" style="max-width:200px; width:100%; height:auto; display:inline-block; margin-bottom:0.35em;">
+</li>
+<li><a href="index.html"> Apache Spark</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Apache Spark</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#contexte-général-lexplosion-des-données"><i class="fa fa-check"></i><b>2.1</b> Contexte général : l’explosion des données</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#limites-des-approches-traditionnelles-sql-et-hadoop"><i class="fa fa-check"></i><b>2.2</b> Limites des approches traditionnelles : SQL et Hadoop</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#apache-spark-une-réponse-aux-besoins-modernes-du-big-data"><i class="fa fa-check"></i><b>2.3</b> Apache Spark : une réponse aux besoins modernes du Big Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html"><i class="fa fa-check"></i><b>3</b> Présentation générale d’Apache Spark</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html#quest-ce-quapache-spark"><i class="fa fa-check"></i><b>3.1</b> Qu’est-ce qu’Apache Spark ?</a></li>
+<li class="chapter" data-level="3.2" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html#philosophie-et-objectifs-de-spark"><i class="fa fa-check"></i><b>3.2</b> Philosophie et objectifs de Spark</a></li>
+<li class="chapter" data-level="3.3" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html#concepts-fondamentaux-de-spark"><i class="fa fa-check"></i><b>3.3</b> Concepts fondamentaux de Spark</a></li>
+<li class="chapter" data-level="3.4" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html#fonctionnement-général-dapache-spark"><i class="fa fa-check"></i><b>3.4</b> Fonctionnement général d’Apache Spark</a></li>
+<li class="chapter" data-level="3.5" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html#architecture-de-spark"><i class="fa fa-check"></i><b>3.5</b> Architecture de Spark</a></li>
+<li class="chapter" data-level="3.6" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html#principaux-modules-de-spark"><i class="fa fa-check"></i><b>3.6</b> Principaux modules de Spark</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="méthodologie-de-traitement-avec-apache-spark.html"><a href="méthodologie-de-traitement-avec-apache-spark.html"><i class="fa fa-check"></i><b>4</b> Méthodologie de traitement avec Apache Spark</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="méthodologie-de-traitement-avec-apache-spark.html"><a href="méthodologie-de-traitement-avec-apache-spark.html#traitement-batch-par-lots"><i class="fa fa-check"></i><b>4.1</b> Traitement Batch (par lots)</a></li>
+<li class="chapter" data-level="4.2" data-path="méthodologie-de-traitement-avec-apache-spark.html"><a href="méthodologie-de-traitement-avec-apache-spark.html#traitement-streaming-par-flux"><i class="fa fa-check"></i><b>4.2</b> Traitement Streaming (par flux)</a></li>
+<li class="chapter" data-level="4.3" data-path="méthodologie-de-traitement-avec-apache-spark.html"><a href="méthodologie-de-traitement-avec-apache-spark.html#comparaison-batch-vs-streaming"><i class="fa fa-check"></i><b>4.3</b> Comparaison Batch vs Streaming</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="cadre-pratique-et-description-des-données.html"><a href="cadre-pratique-et-description-des-données.html"><i class="fa fa-check"></i><b>5</b> Cadre pratique et description des données</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="cadre-pratique-et-description-des-données.html"><a href="cadre-pratique-et-description-des-données.html#justification-du-choix-des-données-de-cryptomonnaies"><i class="fa fa-check"></i><b>5.1</b> Justification du choix des données de cryptomonnaies</a></li>
+<li class="chapter" data-level="5.2" data-path="cadre-pratique-et-description-des-données.html"><a href="cadre-pratique-et-description-des-données.html#collecte-des-données-connexion-à-la-plateforme-binance"><i class="fa fa-check"></i><b>5.2</b> Collecte des données : connexion à la plateforme Binance</a></li>
+<li class="chapter" data-level="5.3" data-path="cadre-pratique-et-description-des-données.html"><a href="cadre-pratique-et-description-des-données.html#description-des-variables-collectées"><i class="fa fa-check"></i><b>5.3</b> Description des variables collectées</a></li>
+<li class="chapter" data-level="5.4" data-path="cadre-pratique-et-description-des-données.html"><a href="cadre-pratique-et-description-des-données.html#métriques-analysées-et-intérêt-du-traitement-distribué"><i class="fa fa-check"></i><b>5.4</b> Métriques analysées et intérêt du traitement distribué</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html"><i class="fa fa-check"></i><b>6</b> Cas de traitement batch</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#mise-en-place-de-lenvironnement-de-travail"><i class="fa fa-check"></i><b>6.1</b> Mise en place de l’environnement de travail</a></li>
+<li class="chapter" data-level="6.2" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#connexion-aux-données-et-lecture-du-dernier-batch-disponible"><i class="fa fa-check"></i><b>6.2</b> Connexion aux données et lecture du dernier batch disponible</a></li>
+<li class="chapter" data-level="6.3" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#connexion-aux-données-et-sélection-du-dernier-batch"><i class="fa fa-check"></i><b>6.3</b> Connexion aux données et sélection du dernier batch</a></li>
+<li class="chapter" data-level="6.4" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#enrichissement-et-construction-des-indicateurs-de-marché"><i class="fa fa-check"></i><b>6.4</b> Enrichissement et construction des indicateurs de marché</a></li>
+<li class="chapter" data-level="6.5" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#agrégation-des-résultats-et-classements-top-5"><i class="fa fa-check"></i><b>6.5</b> Agrégation des résultats et classements « Top 5 »</a></li>
+<li class="chapter" data-level="6.6" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#génération-automatisée-dun-rapport-html"><i class="fa fa-check"></i><b>6.6</b> Génération automatisée d’un rapport HTML</a></li>
+<li class="chapter" data-level="6.7" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#envoi-automatique-du-rapport-par-courrier-électronique"><i class="fa fa-check"></i><b>6.7</b> Envoi automatique du rapport par courrier électronique</a></li>
+<li class="chapter" data-level="6.8" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#reproductibilité-du-traitement"><i class="fa fa-check"></i><b>6.8</b> Reproductibilité du traitement</a></li>
+<li class="chapter" data-level="6.9" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#exécution-du-batch"><i class="fa fa-check"></i><b>6.9</b> Exécution du batch</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html"><i class="fa fa-check"></i><b>7</b> Cas de traitement streaming</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#mise-en-place-de-lenvironnement-de-travail-1"><i class="fa fa-check"></i><b>7.1</b> Mise en place de l’environnement de travail</a></li>
+<li class="chapter" data-level="7.2" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#installation-et-configuration-dapache-spark-en-local"><i class="fa fa-check"></i><b>7.2</b> Installation et configuration d’Apache Spark en local</a></li>
+<li class="chapter" data-level="7.3" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#rôle-de-docker-dans-le-projet"><i class="fa fa-check"></i><b>7.3</b> Rôle de Docker dans le projet</a></li>
+<li class="chapter" data-level="7.4" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#orchestration-des-services-avec-docker-compose"><i class="fa fa-check"></i><b>7.4</b> Orchestration des services avec <em>docker-compose</em></a></li>
+<li class="chapter" data-level="7.5" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#kafka-organisation-du-streaming-des-données"><i class="fa fa-check"></i><b>7.5</b> Kafka : organisation du streaming des données</a></li>
+<li class="chapter" data-level="7.6" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#extraction-des-données-en-temps-réel-websocket-binance-vers-kafka"><i class="fa fa-check"></i><b>7.6</b> Extraction des données en temps réel : WebSocket Binance vers Kafka</a></li>
+<li class="chapter" data-level="7.7" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#traitement-des-flux-avec-spark-structured-streaming"><i class="fa fa-check"></i><b>7.7</b> Traitement des flux avec Spark Structured Streaming</a></li>
+<li class="chapter" data-level="7.8" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#stockage-des-données-traitées-dans-postgresql"><i class="fa fa-check"></i><b>7.8</b> Stockage des données traitées dans PostgreSQL</a></li>
+<li class="chapter" data-level="7.9" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#dashboard"><i class="fa fa-check"></i><b>7.9</b> Dashboard</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="forces-et-limites-dapache-spark.html"><a href="forces-et-limites-dapache-spark.html"><i class="fa fa-check"></i><b>8</b> Forces et limites d’Apache Spark</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="forces-et-limites-dapache-spark.html"><a href="forces-et-limites-dapache-spark.html#forces-dapache-spark"><i class="fa fa-check"></i><b>8.1</b> 1. Forces d’Apache Spark</a></li>
+<li class="chapter" data-level="8.2" data-path="forces-et-limites-dapache-spark.html"><a href="forces-et-limites-dapache-spark.html#limites-dapache-spark"><i class="fa fa-check"></i><b>8.2</b> 2. Limites d’Apache Spark</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="conclusion-générale.html"><a href="conclusion-générale.html"><i class="fa fa-check"></i><b>9</b> Conclusion générale</a></li>
+<li class="chapter" data-level="10" data-path="ressources-bibliographiques.html"><a href="ressources-bibliographiques.html"><i class="fa fa-check"></i><b>10</b> Ressources bibliographiques</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ressources-bibliographiques.html"><a href="ressources-bibliographiques.html#apache-spark-et-big-data"><i class="fa fa-check"></i><b>10.1</b> Apache Spark et Big Data</a></li>
+<li class="chapter" data-level="10.2" data-path="ressources-bibliographiques.html"><a href="ressources-bibliographiques.html#streaming-de-données-et-kafka"><i class="fa fa-check"></i><b>10.2</b> Streaming de données et Kafka</a></li>
+<li class="chapter" data-level="10.3" data-path="ressources-bibliographiques.html"><a href="ressources-bibliographiques.html#conteneurisation-et-docker"><i class="fa fa-check"></i><b>10.3</b> Conteneurisation et Docker</a></li>
+<li class="chapter" data-level="10.4" data-path="ressources-bibliographiques.html"><a href="ressources-bibliographiques.html#bases-de-données-relationnelles"><i class="fa fa-check"></i><b>10.4</b> Bases de données relationnelles</a></li>
+<li class="chapter" data-level="10.5" data-path="ressources-bibliographiques.html"><a href="ressources-bibliographiques.html#données-financières-et-api-binance"><i class="fa fa-check"></i><b>10.5</b> Données financières et API Binance</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publié avec bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="cas-de-traitement-batch" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> Cas de traitement batch<a href="cas-de-traitement-batch.html#cas-de-traitement-batch" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Cette section présente de manière progressive et structurée la mise en œuvre du traitement batch appliqué aux données de marché issues de la plateforme Binance. L’objectif est de décrire clairement l’architecture mise en place, les choix techniques réalisés et les différentes étapes du traitement, depuis la préparation de l’environnement jusqu’à l’automatisation complète.</p>
+<hr />
+<div id="mise-en-place-de-lenvironnement-de-travail" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Mise en place de l’environnement de travail<a href="cas-de-traitement-batch.html#mise-en-place-de-lenvironnement-de-travail" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Le traitement batch a été réalisé sur une <strong>machine unique</strong>, configurée de manière à reproduire une chaîne complète de traitement Big Data à échelle locale. Cette étape vise à garantir que l’ensemble du pipeline puisse fonctionner de manière cohérente, reproductible et autonome.</p>
+<div id="outils-et-logiciels-nécessaires" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Outils et logiciels nécessaires<a href="cas-de-traitement-batch.html#outils-et-logiciels-nécessaires" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Plusieurs composants ont été installés afin de couvrir l’ensemble des besoins du projet.</p>
+<ul>
+<li><p><strong>Python</strong><br />
+Python constitue le langage de pilotage du projet. Il est utilisé pour orchestrer les scripts, interagir avec Apache Spark via PySpark, générer les rapports HTML et automatiser l’exécution du pipeline.</p></li>
+<li><p><strong>PostgreSQL</strong><br />
+PostgreSQL est utilisé comme système de gestion de base de données relationnelle. Il assure le stockage persistant et structuré des données de marché collectées depuis Binance.<br />
+Dans le cadre du projet, PostgreSQL a été téléchargé depuis le site officiel (<em>PostgreSQL: Downloads</em>), puis une base de données nommée <code>crypto_db</code> a été créée, cette base contient une table <code>binance_tickers</code> destinée à recevoir les observations de marché.
+PostgreSQL joue ici le rôle de <strong>couche de stockage intermédiaire</strong> entre la collecte et l’analyse.</p></li>
+<li><p><strong>Java</strong><br />
+Apache Spark étant développé en Scala et exécuté sur la <strong>Java Virtual Machine (JVM)</strong>, l’installation de Java est indispensable. Même si les traitements sont écrits en Python (PySpark), la présence de Java est indispensable pour :</p>
+<ul>
+<li>lancer Spark,</li>
+<li>gérer l’exécution distribuée,</li>
+<li>assurer la communication entre les différents composants internes de Spark.</li>
+</ul></li>
+</ul>
+<p>Sans Java, Spark ne peut tout simplement pas fonctionner.</p>
+<hr />
+</div>
+<div id="architecture-générale-et-composants-intégrés" class="section level3 hasAnchor" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Architecture générale et composants intégrés<a href="cas-de-traitement-batch.html#architecture-générale-et-composants-intégrés" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>L’architecture retenue repose sur une séparation claire entre la <strong>collecte</strong>, le <strong>stockage</strong> et le <strong>traitement analytique</strong>.</p>
+<p>Les données de marché ne sont pas traitées directement lors de leur réception. Elles sont d’abord stockées dans PostgreSQL, ce qui permet de conserver un historique fiable et de découpler la phase de collecte de la phase d’analyse.</p>
+<ul>
+<li><p><strong>Script d’ingestion des données</strong><br />
+Un script d’ingestion indépendant, nommé <code>API_Postgres</code>, est chargé de :</p>
+<ul>
+<li>se connecter à l’API de Binance,</li>
+<li>récupérer les données de marché,</li>
+<li>insérer ces données dans la table <code>binance_tickers</code>.</li>
+</ul></li>
+<li><p><strong>Connexion entre Spark et PostgreSQL (driver JDBC)</strong><br />
+Apache Spark n’accède pas directement aux bases de données relationnelles. Pour établir la communication avec PostgreSQL, un <strong>driver JDBC PostgreSQL</strong> a été téléchargé et ajouté au projet sous la forme d’un fichier <code>.jar</code>, placé dans le dossier <code>jars</code>.</p>
+<p>Ce driver joue le rôle d’interface :</p>
+<ul>
+<li>Spark envoie des requêtes via JDBC,</li>
+<li>PostgreSQL exécute ces requêtes,</li>
+<li>les résultats sont renvoyés à Spark sous forme de DataFrame.</li>
+</ul></li>
+</ul>
+<p>Grâce à ce mécanisme, Spark peut lire les données de la table binance_tickers comme s’il s’agissait de données natives.</p>
+<ul>
+<li><p><strong>Centralisation des paramètres de connexion</strong><br />
+Les paramètres de connexion à PostgreSQL (hôte, port, nom de la base, utilisateur, mot de passe) ont été regroupés dans un module Python distinct, nommé config_binance. Cette organisation présente plusieurs avantages :</p></li>
+<li><p>elle évite de dupliquer les informations de connexion dans plusieurs scripts,</p></li>
+<li><p>elle améliore la lisibilité du code,</p></li>
+<li><p>elle facilite la maintenance,</p></li>
+<li><p>elle rend le projet facilement reproductible sur une autre machine.</p></li>
+</ul>
+<p>Ainsi, un nouvel utilisateur souhaitant reproduire le projet n’a besoin que :
+- d’installer PostgreSQL,
+- de créer la table binance_tickers,
+- de renseigner ses propres paramètres de connexion dans ce module, - puis d’exécuter les scripts Spark sans autre modification.</p>
+<hr />
+</div>
+</div>
+<div id="connexion-aux-données-et-lecture-du-dernier-batch-disponible" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Connexion aux données et lecture du dernier batch disponible<a href="cas-de-traitement-batch.html#connexion-aux-données-et-lecture-du-dernier-batch-disponible" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="connexion-aux-données-et-sélection-du-dernier-batch" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Connexion aux données et sélection du dernier batch<a href="cas-de-traitement-batch.html#connexion-aux-données-et-sélection-du-dernier-batch" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Le cœur du traitement batch repose sur l’exploitation des données de marché issues de Binance et stockées de manière persistante dans la base de données <strong>PostgreSQL</strong>.</p>
+<div id="lecture-des-données-avec-apache-spark" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Lecture des données avec Apache Spark<a href="cas-de-traitement-batch.html#lecture-des-données-avec-apache-spark" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dans un premier temps, une <strong>session Spark</strong> est créée et configurée afin d’utiliser le <strong>driver JDBC PostgreSQL</strong>. Cette configuration permet à Spark d’établir une connexion directe avec la base relationnelle.</p>
+<p>À partir de cette session, la table <code>binance_tickers</code> est lue et chargée dans un <strong>DataFrame Spark</strong>, qui constitue la structure centrale pour l’ensemble des traitements analytiques réalisés par la suite.</p>
+</div>
+<div id="notion-de-batch-et-rôle-de-lhorodatage-run_ts" class="section level3 hasAnchor" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Notion de batch et rôle de l’horodatage <code>run_ts</code><a href="cas-de-traitement-batch.html#notion-de-batch-et-rôle-de-lhorodatage-run_ts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La table <code>binance_tickers</code> est alimentée de manière régulière par le script d’ingestion.<br />
+Chaque insertion de données correspond à un <strong>lot de données (batch)</strong> et est associée à un horodatage spécifique, stocké dans la colonne <code>run_ts</code>.</p>
+<p>Cet horodatage joue un rôle clé : il permet d’identifier précisément à quel batch appartient chaque enregistrement.</p>
+<p>Afin de garantir un reporting à jour tout en limitant les coûts de calcul, le traitement Spark ne s’applique pas à l’ensemble de l’historique, mais uniquement au <strong>dernier batch disponible</strong>. Pour cela, la démarche suivante est adoptée :</p>
+<ul>
+<li>identification de la valeur maximale de <code>run_ts</code> dans la table ;</li>
+<li>filtrage du DataFrame afin de ne conserver que les lignes correspondant à ce <code>run_ts</code> maximal.</li>
+</ul>
+<p>Ainsi, chaque exécution du script travaille uniquement sur la <strong>fenêtre de données la plus récente</strong>, sans retraiter l’historique complet des observations.</p>
+</div>
+<div id="notion-de-ticker-et-structure-des-données-de-marché" class="section level3 hasAnchor" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> Notion de ticker et structure des données de marché<a href="cas-de-traitement-batch.html#notion-de-ticker-et-structure-des-données-de-marché" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dans le cadre de ce projet, un <strong>ticker</strong> désigne une paire de trading fournie par l’API Binance et identifiée par le champ <code>symbol</code> (par exemple : <code>BTCUSDT</code>, <code>ETHUSDT</code>).</p>
+<p>Chaque <code>symbol</code> représente un <strong>marché unique</strong>, correspondant à l’échange d’une cryptomonnaie contre une devise de référence (généralement l’USDT). Une même cryptomonnaie (par exemple le Bitcoin) peut donc apparaître dans plusieurs tickers, mais chaque ticker reste distinct.</p>
+<p>Au sein d’un même batch, un ticker peut apparaître <strong>plusieurs fois</strong> sur la période observée, ce qui justifie la construction d’indicateurs agrégés (rendement moyen, volatilité, volumes échangés, etc.) afin de résumer et d’interpréter correctement le comportement du marché.</p>
+<hr />
+</div>
+</div>
+<div id="enrichissement-et-construction-des-indicateurs-de-marché" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Enrichissement et construction des indicateurs de marché<a href="cas-de-traitement-batch.html#enrichissement-et-construction-des-indicateurs-de-marché" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Les données brutes issues de Binance (prix d’ouverture, de clôture, plus haut, plus bas, volumes) sont ensuite enrichies afin de produire des indicateurs plus interprétables.</p>
+<p>Les principales transformations réalisées sont :</p>
+<ul>
+<li>calcul du <strong>spread de prix</strong> (différence entre le plus haut et le plus bas) ;</li>
+<li>calcul du <strong>prix médian (mid price)</strong>, défini comme la moyenne du prix maximum et du prix minimum ;</li>
+<li>extraction d’une <strong>date au format AAAA-MM-JJ</strong> à partir du timestamp ;</li>
+<li>conversion du temps d’événement en secondes depuis 1970.</li>
+</ul>
+<p>Les volumes sont exprimés en <strong>millions d’USDT</strong> afin de faciliter la lecture des résultats.</p>
+<p>À partir de ces variables, trois indicateurs analytiques sont calculés :</p>
+<ul>
+<li>le <strong>rendement relatif</strong>, basé sur la variation entre le prix d’ouverture et le prix de clôture ;</li>
+<li>la <strong>volatilité absolue</strong>, mesurant l’amplitude des variations de prix ;</li>
+<li>la <strong>volatilité relative</strong>, obtenue en rapportant la volatilité absolue au prix médian.</li>
+</ul>
+<p>Les cas de division par zéro sont explicitement traités afin d’éviter toute erreur de calcul.</p>
+<hr />
+</div>
+<div id="agrégation-des-résultats-et-classements-top-5" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Agrégation des résultats et classements « Top 5 »<a href="cas-de-traitement-batch.html#agrégation-des-résultats-et-classements-top-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Deux niveaux d’agrégation sont ensuite réalisés.</p>
+<ul>
+<li><strong>Indicateurs globaux de marché</strong> :
+<ul>
+<li>nombre d’échanges ;</li>
+<li>nombre total d’observations ;</li>
+<li>volume total échangé ;</li>
+<li>rendement moyen du marché ;</li>
+<li>volatilité moyenne du marché.</li>
+</ul></li>
+<li><strong>Statistiques par échange</strong> :
+<ul>
+<li>rendement moyen ;</li>
+<li>volatilité moyenne ;</li>
+<li>volume total échangé.</li>
+</ul></li>
+</ul>
+<p>À partir de ces résultats, plusieurs classements « Top 5 » sont établis :
+- meilleures performances ;
+- plus faibles performances ;
+- volumes les plus élevés ;
+- volatilités les plus fortes.</p>
+<p>Ces classements offrent une lecture synthétique et comparative du marché.</p>
+<hr />
+</div>
+<div id="génération-automatisée-dun-rapport-html" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Génération automatisée d’un rapport HTML<a href="cas-de-traitement-batch.html#génération-automatisée-dun-rapport-html" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Les résultats sont ensuite convertis en un <strong>rapport HTML automatisé</strong>, comprenant :</p>
+<ul>
+<li>des graphiques illustrant les classements ;</li>
+<li>des tableaux formatés ;</li>
+<li>une synthèse textuelle du comportement global du marché ;</li>
+<li>une section d’aide à la décision, présentée à titre informatif et non comme une recommandation d’investissement.</li>
+</ul>
+Chaque rapport est sauvegardé dans un dossier dédié avec un nom horodaté.
+<div style="max-width: 980px; margin: 0 auto; padding: 8px 0;">
+<img src="images/rapport_binance1.png" style="width:100%; border-radius:14px; box-shadow: 0 10px 26px rgba(0,0,0,0.10);">
+<img src="images/rapport_binance2.png" style="width:100%; border-radius:14px; box-shadow: 0 10px 26px rgba(0,0,0,0.10);">
+<div style="font-size:0.9em; color:#555; margin-top:8px; text-align:center;">
+
+</div>
+</div>
+<hr />
+</div>
+<div id="envoi-automatique-du-rapport-par-courrier-électronique" class="section level2 hasAnchor" number="6.7">
+<h2><span class="header-section-number">6.7</span> Envoi automatique du rapport par courrier électronique<a href="cas-de-traitement-batch.html#envoi-automatique-du-rapport-par-courrier-électronique" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Afin de faciliter le partage des résultats, un module d’envoi de courriels a été intégré au pipeline.</p>
+<p>Le principe repose sur :</p>
+<ul>
+<li>l’utilisation d’un compte Gmail configuré avec un mot de passe d’application ;</li>
+<li>la construction d’un message électronique dont le contenu reprend directement le rapport HTML ;</li>
+<li>l’envoi du message à une liste de destinataires prédéfinie.</li>
+</ul>
+<p>Ainsi, à chaque exécution du traitement batch, un nouveau rapport est généré puis immédiatement transmis, sans intervention manuelle.</p>
+<div style="max-width: 980px; margin: 0 auto; padding: 8px 0;">
+<img src="images/mail.png" style="width:100%; border-radius:14px; box-shadow: 0 10px 26px rgba(0,0,0,0.10);">
+<div style="font-size:0.9em; color:#555; margin-top:8px; text-align:center;">
+
+</div>
+</div>
+<hr />
+</div>
+<div id="reproductibilité-du-traitement" class="section level2 hasAnchor" number="6.8">
+<h2><span class="header-section-number">6.8</span> Reproductibilité du traitement<a href="cas-de-traitement-batch.html#reproductibilité-du-traitement" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Le fichier <code>config_binance.py</code> centralise l’ensemble des paramètres nécessaires au bon fonctionnement du pipeline <strong>Binance → PostgreSQL → Spark → Rapport</strong>, en les séparant clairement du code métier.<br />
+Ce fichier est <strong>propre à chaque machine</strong> : avant toute exécution, l’utilisateur doit l’adapter à sa configuration locale.</p>
+<div id="configuration-postgresql" class="section level3 hasAnchor" number="6.8.1">
+<h3><span class="header-section-number">6.8.1</span> Configuration PostgreSQL<a href="cas-de-traitement-batch.html#configuration-postgresql" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La première partie du fichier concerne la base de données PostgreSQL et regroupe les paramètres suivants :</p>
+<ul>
+<li><code>PG_HOST</code> : adresse de l’hôte PostgreSQL<br />
+</li>
+<li><code>PG_PORT</code> : port d’écoute<br />
+</li>
+<li><code>PG_SUPER_DB</code> : base « super » (souvent <code>postgres</code>) utilisée pour les opérations d’administration<br />
+</li>
+<li><code>PG_USER</code> et <code>PG_PWD</code> : identifiants de connexion<br />
+</li>
+<li><code>PG_TARGET_DB</code> : base de données du projet (ici <code>crypto_db</code>)</li>
+</ul>
+<p>Ces paramètres permettent au script d’ingestion de :
+- se connecter à PostgreSQL,
+- créer la base du projet si nécessaire,
+- alimenter automatiquement les tables cibles,</p>
+<p>sans modifier le code principal.</p>
+</div>
+<div id="configuration-de-lenvoi-de-mails" class="section level3 hasAnchor" number="6.8.2">
+<h3><span class="header-section-number">6.8.2</span> Configuration de l’envoi d’e-mails<a href="cas-de-traitement-batch.html#configuration-de-lenvoi-de-mails" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La section suivante définit les paramètres nécessaires à l’envoi automatique des rapports :</p>
+<ul>
+<li><code>EMAIL_USER</code> : adresse Gmail expéditrice<br />
+</li>
+<li><code>EMAIL_PWD</code> : mot de passe d’application associé</li>
+</ul>
+<p>Ces informations sont utilisées pour transmettre automatiquement un rapport HTML synthétique par e-mail à la fin de chaque exécution batch.</p>
+</div>
+<div id="paramètres-du-batch-spark" class="section level3 hasAnchor" number="6.8.3">
+<h3><span class="header-section-number">6.8.3</span> Paramètres du batch Spark<a href="cas-de-traitement-batch.html#paramètres-du-batch-spark" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Enfin, la configuration du batch contrôle le comportement du traitement Spark :</p>
+<ul>
+<li><code>BATCH_INTERVAL_SECONDS</code> : intervalle entre deux exécutions complètes (par exemple toutes les 6 heures)<br />
+</li>
+<li><code>SPARK_MASTER = "local[*]"</code> : exécution de Spark en mode local en exploitant tous les cœurs disponibles de la machine</li>
+</ul>
+<p>Ainsi, le fichier <code>config_binance.py</code> constitue un point d’entrée configuration, rendant le projet à la fois <strong>portable</strong> (chaque utilisateur adapte ce fichier) et <strong>reproductible</strong> (même pipeline, environnement différent).</p>
+<hr />
+</div>
+</div>
+<div id="exécution-du-batch" class="section level2 hasAnchor" number="6.9">
+<h2><span class="header-section-number">6.9</span> Exécution du batch<a href="cas-de-traitement-batch.html#exécution-du-batch" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Dans le dossier du projet, l’exécution du batch se fait en deux commandes simples via le terminal / cmd :</p>
+<p>’‘’bash
+python -m pip install -r requirements.txt
+python Analyse_Binance.py’’’</p>
+<ul>
+<li><p>La première commande python -m pip install -r requirements.txt installe automatiquement toutes les bibliothèques Python nécessaires au projet (pandas, requests, psycopg2, pyspark, etc.) à partir du fichier requirements.txt. Cela garantit que l’environnement contient exactement les dépendances attendues pour que le script tourne correctement.</p></li>
+<li><p>La deuxième commande python Analyse_Binance.py lance le pipeline batch complet :</p>
+<ul>
+<li>appel de l’API Binance et récupération des tickers,</li>
+<li>insertion/actualisation des données dans PostgreSQL (crypto_db),</li>
+<li>lancement de Spark en mode local pour analyser les données (gagnants/perdants, volumes, volatilité, etc.),</li>
+<li>génération périodique du rapport et envoi par email.</li>
+</ul></li>
+</ul>
+<p>L’ensemble du processus est ainsi entièrement automatisé et peut être relancé de manière identique sur toute machine correctement configurée.</p>
+</div>
+
+</div>
+</div>
+<footer style="
+  margin-top:3.2em;
+  padding:0;
+  font-family: inherit;
+">
+  <!-- Bande supérieure (accent) -->
+  <div style="
+    height:6px;
+    background: linear-gradient(90deg, #0A1C34 0%, #1A4FA3 40%, #2D7FF9 100%);
+  "></div>
+
+  <!-- Fond footer -->
+  <div style="
+    background: radial-gradient(circle at top, rgba(45,127,249,0.14) 0%, rgba(10,28,52,0.00) 55%),
+                linear-gradient(180deg, #0A1C34 0%, #081A2F 100%);
+    color:#EAF2FF;
+    padding:22px 0;
+    border-top:1px solid rgba(255,255,255,0.08);
+  ">
+    <div style="
+      width:1100
+      margin:0 auto;
+      padding:0 16px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      align-items:center;
+      justify-content:space-between;
+    ">
+
+      <!-- Bloc gauche -->
+      <div style="min-width:260px;">
+        <div style="
+          display:flex;
+          align-items:center;
+          gap:10px;
+          margin-bottom:6px;
+        ">
+          <span style="
+            display:inline-flex;
+            width:34px; height:34px;
+            border-radius:10px;
+            background: rgba(45,127,249,0.18);
+            border:1px solid rgba(45,127,249,0.35);
+            align-items:center; justify-content:center;
+            font-size:16px;
+          ">⚡</span>
+
+          <div style="line-height:1.1;">
+            <div style="
+              font-weight:700;
+              font-size:0.98em;
+              letter-spacing:0.2px;
+            ">Spark — Traitement des données massives</div>
+            <div style="
+              font-size:0.82em;
+              color:rgba(234,242,255,0.78);
+              margin-top:2px;
+            ">Temps réel · Batch · Streaming</div>
+          </div>
+        </div>
+
+        <div style="
+          font-size:0.82em;
+          color:rgba(234,242,255,0.78);
+          line-height:1.35;
+        ">
+          ENSAE Dakar · ISEP 2 · <span style="white-space:nowrap;">2025–2026</span><br/>
+          Cours : <em>Initiation au Big Data &amp; Cloud Computing</em>
+        </div>
+      </div>
+
+      <!-- Bloc centre (membres) -->
+      <div style="
+        flex:1;
+        min-width:280px;
+        padding:12px 14px;
+        border-radius:14px;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.10);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      ">
+        <div style="
+          font-size:0.78em;
+          color:rgba(234,242,255,0.75);
+          text-transform:uppercase;
+          letter-spacing:0.08em;
+          margin-bottom:6px;
+          text-align:center;
+        ">Membres du groupe</div>
+
+        <div style="
+          font-size:0.86em;
+          line-height:1.35;
+          color:#EAF2FF;
+        ">
+          <strong>COMPAORE Bassirou</strong> ·
+          <strong>DIAKHATE Khadidiatou</strong> ·
+          <strong>DIALLO Aissatou</strong> ·
+          <strong>FOGWOUNG DJOUFACK Sarah-Laure</strong> ·
+          <strong>FOUMSOU Lawa Prosper</strong>
+        </div>
+      </div>
+
+      <!-- Bloc droit (liens) -->
+      <div style="min-width:240px; text-align:right;">
+        <div style="
+          font-size:0.78em;
+          color:rgba(234,242,255,0.75);
+          margin-bottom:8px;
+        "> Cliquez ici pour accéder à nos ressources </div>
+
+        <a href="https://github.com/Sarahlaure/projet-BDCC-2025---spark-real-time-data-processing-groupe7-"
+           target="_blank" rel="noopener"
+           style="
+             display:inline-block;
+             padding:9px 12px;
+             border-radius:12px;
+             background: rgba(45,127,249,0.18);
+             border:1px solid rgba(45,127,249,0.40);
+             color:#EAF2FF;
+             text-decoration:none;
+             font-weight:600;
+             font-size:0.84em;
+             margin-left:8px;
+           ">
+          GitHub ↗
+        </a>
+
+        <div style="
+          margin-top:10px;
+          font-size:0.78em;
+          color:rgba(234,242,255,0.55);
+        ">
+          © 2025–2026 · Groupe 7
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="cadre-pratique-et-description-des-données.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="cas-de-traitement-streaming.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": false,
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": null,
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

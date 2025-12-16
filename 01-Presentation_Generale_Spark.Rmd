@@ -1,0 +1,238 @@
+# Présentation générale d’Apache Spark
+
+## Qu’est-ce qu’Apache Spark ?
+
+Apache Spark est un **framework open source de calcul distribué**, conçu pour le **traitement efficace de données massives (Big Data)**.  
+Il permet d’analyser de très grands volumes de données en exploitant le **calcul parallèle** sur plusieurs machines, tout en offrant une **exécution rapide grâce au traitement en mémoire**.
+
+Contrairement aux approches classiques basées sur des traitements sur disque, Spark a été pensé pour répondre aux besoins modernes du Big Data : **vitesse**, **flexibilité** et **scalabilité**.
+
+> *Apache Spark unifie le traitement batch, le streaming temps réel, l’analyse SQL et le machine learning au sein d’un même moteur.*
+
+---
+
+## Philosophie et objectifs de Spark
+
+La conception de Spark repose sur trois principes fondamentaux :
+
+### Vitesse  
+Spark est capable d’exécuter certains traitements **jusqu’à 100 fois plus rapidement que Hadoop MapReduce**, notamment grâce à :
+- l’exécution des calculs **en mémoire (in-memory computing)**,
+- la réduction des écritures disque,
+- l’optimisation automatique des plans d’exécution.
+
+### Facilité d’utilisation  
+Spark propose des **API simples et expressives** dans plusieurs langages :
+- **Scala**, **Python**, **Java**, **R** et **SQL**.  
+Cela permet aux utilisateurs de développer des applications distribuées sans gérer directement la complexité du parallélisme.
+
+### Généralité  
+Spark est une plateforme **polyvalente**, capable de gérer :
+- le traitement **batch**,
+- le **streaming temps réel**,
+- l’analyse **SQL**,
+- le **machine learning**,
+- l’analyse de **graphes**.
+
+---
+
+## Concepts fondamentaux de Spark
+
+### Environnement distribué : le cluster
+
+Un **cluster** est un ensemble de machines (nœuds) qui collaborent pour stocker et traiter les données.  
+Spark fonctionne dans cet environnement distribué afin de répartir le calcul et d’augmenter les performances.
+
+### Partitions
+
+Les données sont découpées en **partitions**, chacune étant traitée indépendamment.  
+Ce découpage permet :
+- le **traitement parallèle**,
+- une meilleure utilisation des ressources,
+- une montée en charge efficace.
+
+### RDD et DataFrames
+
+- Les **RDD (Resilient Distributed Datasets)** sont la structure de données historique de Spark, distribuée et tolérante aux pannes.
+- Aujourd’hui, les **DataFrames** et **Datasets** sont privilégiés car plus optimisés et plus simples à utiliser, tout en reposant sur les mêmes principes.
+
+### Transformations et actions
+
+- Une **transformation** prépare un traitement (ex. `filter`, `map`) mais **n’exécute pas immédiatement** le calcul.
+- Une **action** déclenche réellement l’exécution (ex. `count`, `collect`).
+
+Ce mécanisme repose sur le principe de **lazy evaluation**, qui permet à Spark d’optimiser le plan d’exécution.
+
+### DAG (Directed Acyclic Graph)
+
+Le **DAG (graphe orienté acyclique)** est un **plan logique d’exécution** construit automatiquement par Spark à partir des transformations définies par l’utilisateur.
+
+Il représente :
+- l’ordre des opérations à effectuer,
+- les dépendances entre les transformations,
+- les étapes nécessaires avant toute exécution réelle.
+
+Le DAG permet à Spark :
+- d’optimiser l’enchaînement des opérations,
+- de retarder l’exécution grâce au principe de *lazy evaluation*,
+- de préparer efficacement la création des stages et des tasks.
+
+Aucune donnée n’est réellement traitée tant qu’une **action** n’est pas appelée.
+
+### Shuffle
+
+Le **shuffle** correspond à un **échange de données entre les différentes machines du cluster**.
+
+Il intervient lors d’opérations nécessitant un regroupement ou une redistribution des données, telles que :
+- `groupBy`,
+- `join`,
+- `reduceByKey`,
+- `orderBy`.
+
+Le shuffle est une opération :
+- coûteuse en temps,
+- consommatrice de ressources (réseau et disque).
+
+Spark cherche donc à **minimiser le nombre de shuffles**, car ils ont un impact direct sur les performances globales de l’application.
+
+### Stages
+
+Les **stages** sont des **étapes d’exécution** dérivées du DAG.
+
+Un stage regroupe :
+- un ensemble d’opérations pouvant être exécutées **sans échange de données entre les machines**,
+- des transformations successives qui ne nécessitent pas de shuffle.
+
+Chaque fois qu’un shuffle est requis, Spark **sépare le DAG en plusieurs stages**.  
+Ainsi, le nombre de stages dépend directement de la structure des opérations et de la présence de shuffles.
+
+### Tasks
+
+Les **tasks** représentent la **plus petite unité d’exécution** dans Spark.
+
+Chaque stage est découpé en plusieurs tasks, et :
+- chaque task traite **une partition de données**,
+- les tasks s’exécutent **en parallèle** sur les executors du cluster.
+
+Ce mécanisme permet à Spark :
+- d’exploiter pleinement le parallélisme,
+- d’améliorer les performances,
+- d’assurer une bonne tolérance aux pannes.
+
+---
+
+## Fonctionnement général d’Apache Spark
+
+Le fonctionnement de Spark peut être compris comme une succession d’étapes logiques allant de l’écriture du programme à l’exécution effective des calculs sur le cluster.
+
+### Ecriture du programme
+
+L’utilisateur écrit un programme Spark en utilisant une API (Python, Scala, SQL, etc.) et définit une suite de transformations sur les données.
+
+À ce stade :
+- aucune donnée n’est encore traitée,
+- Spark se contente d’enregistrer les opérations demandées.
+
+### Construction du DAG
+
+Lorsque l’utilisateur appelle une **action**, Spark analyse l’ensemble des transformations et construit un **DAG** représentant le plan logique d’exécution.
+
+Ce DAG permet à Spark :
+- d’identifier les dépendances entre les opérations,
+- d’optimiser l’ordre des calculs,
+- de détecter les points nécessitant des échanges de données (shuffles).
+
+### Découpage en stages
+
+À partir du DAG, Spark divise le plan d’exécution en **stages**.
+
+Chaque stage correspond à :
+- un ensemble d’opérations pouvant être exécutées localement,
+- une phase sans échange de données entre machines.
+
+Les frontières entre les stages sont généralement définies par les opérations de shuffle.
+
+### Création et exécution des tasks
+
+Chaque stage est ensuite découpé en **tasks**, correspondant aux partitions des données.
+
+Les tasks sont :
+- distribuées aux executors,
+- exécutées en parallèle,
+- supervisées par le driver.
+
+Cette exécution parallèle permet à Spark de traiter efficacement de très grands volumes de données.
+
+### Collecte des résultats
+
+Une fois les tasks terminées :
+- les résultats sont agrégés,
+- renvoyés au driver si nécessaire,
+- ou stockés dans un système externe (HDFS, S3, base de données, etc.).
+
+Le traitement Spark est alors considéré comme terminé.
+
+
+---
+
+## Architecture de Spark
+
+### Le Driver Program
+
+Le **Driver** est le cerveau de l’application Spark. Il :
+- contient le code principal,
+- crée la **SparkSession**,
+- planifie les opérations,
+- distribue les tâches aux executors,
+- récupère les résultats.
+
+Le driver **ne traite pas directement les données**, il coordonne l’exécution.
+
+### Les Executors
+
+Les **Executors** sont des processus lancés sur les machines du cluster. Ils :
+- exécutent les tasks envoyées par le driver,
+- stockent temporairement les données en mémoire,
+- renvoient les résultats.
+
+Plus le nombre d’executors est élevé, plus le traitement est **parallèle et performant**.
+
+### Le Cluster Manager
+
+Le **Cluster Manager** gère l’allocation des ressources (CPU, mémoire).  
+Spark peut fonctionner avec différents gestionnaires :
+- **Standalone**,
+- **YARN**,
+- **Mesos**,
+- **Kubernetes**, très utilisé dans les environnements Cloud.
+
+---
+
+## Principaux modules de Spark
+
+### Spark SQL  
+Module dédié aux données structurées :
+- exécution de requêtes SQL distribuées,
+- manipulation de DataFrames/Datasets,
+- optimisation automatique via le **Catalyst Optimizer**,
+- lecture de formats comme Parquet, ORC, JSON, CSV.
+
+### Spark Streaming  
+Module de traitement de flux de données en continu :
+- ingestion depuis Kafka, Kinesis, fichiers streamés,
+- fonctionnement par **micro-batches**,
+- adapté aux applications temps réel (monitoring, détection de fraude).
+
+### MLlib  
+Bibliothèque de machine learning distribué :
+- régression, classification, clustering,
+- systèmes de recommandation,
+- pipelines de machine learning à grande échelle.
+
+### GraphX  
+Module spécialisé dans l’analyse de graphes :
+- représentation de graphes distribués,
+- algorithmes comme PageRank ou Connected Components,
+- utile pour l’analyse de réseaux complexes.
+
+</div>

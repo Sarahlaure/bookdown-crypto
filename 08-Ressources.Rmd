@@ -1,0 +1,54 @@
+# Ressources bibliographiques 
+
+---
+
+## Apache Spark et Big Data
+
+- **AWS** — *Qu’est-ce qu’Apache Spark ?*  
+  Présentation générale d’Apache Spark, de ses principes fondamentaux et de ses cas d’usage dans le Big Data et le Cloud.  
+  <https://aws.amazon.com/fr/what-is/apache-spark/>
+
+---
+
+## Streaming de données et Kafka
+
+- **Confluent** — *Kafka Basics*  
+  Introduction aux concepts clés de Kafka (topics, producers, consumers, partitions), utile pour comprendre les architectures de streaming.  
+  <https://developer.confluent.io/learn-kafka/>
+
+- **Adaltas** — *Spark Streaming Data Pipelines with Structured Streaming*  
+  Article détaillant la conception de pipelines de données temps réel à l’aide de Spark Structured Streaming.  
+  <https://www.adaltas.com/fr/2019/04/18/spark-streaming-data-pipelines-structured-streaming/>
+
+---
+
+## Conteneurisation et Docker
+
+- **Docker Inc.** — *Docker Documentation*  
+  Documentation officielle sur Docker, Docker Desktop et les principes de la conteneurisation.  
+  <https://docs.docker.com/>
+
+- **Subham Kharwal** — *Docker Images Repository*  
+  Exemples d’images Docker et bonnes pratiques de structuration de conteneurs.  
+  <https://github.com/subhamkharwal/docker-images?tab=readme-ov-file>
+
+---
+
+## Bases de données relationnelles
+
+- **PostgreSQL Global Development Group** — *PostgreSQL Documentation*  
+  Documentation officielle du système de gestion de base de données PostgreSQL, utilisée pour le stockage des données du projet.  
+  <https://www.postgresql.org/docs/>
+
+---
+
+## Données financières et API Binance
+
+- **Binance** — *Plateforme de trading Spot*  
+  Source des données financières exploitées dans le projet.  
+  <https://www.binance.com/fr>
+
+- **Binance Developers** — *Binance Spot API Documentation*  
+  Documentation officielle des API REST et WebSocket permettant l’accès programmatique aux données de marché.  
+  <https://developers.binance.com/docs/binance-spot-api-docs>
+</div>

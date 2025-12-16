@@ -1,0 +1,87 @@
+# Méthodologie de traitement avec Apache Spark
+
+Apache Spark propose deux grandes approches complémentaires pour le traitement des données massives :  
+le **traitement Batch (par lots)** et le **traitement Streaming (par flux)**.  
+Ces deux méthodes répondent à des besoins différents en fonction de la nature des données et des contraintes de temps.
+
+---
+
+## Traitement Batch (par lots)
+
+Le traitement **Batch** correspond au traitement de **grands volumes de données déjà stockées**.  
+Les données sont collectées sur une période donnée, puis traitées **en une seule fois**, sous forme de lots complets.
+
+### Principe général
+
+- Les données sont préalablement stockées dans des systèmes de stockage distribués  
+  (HDFS, Amazon S3, bases de données, fichiers CSV/Parquet, etc.).
+- Spark lit l’ensemble des données, applique une série de transformations, puis produit un résultat final.
+- Le traitement n’est **pas continu** : il démarre à un instant donné et s’arrête une fois le calcul terminé.
+
+### Fonctionnement avec Spark
+
+- Spark construit un **DAG (Directed Acyclic Graph)** représentant la chaîne logique des transformations.
+- Ce DAG est découpé en **stages**, eux-mêmes composés de **tasks** exécutées en parallèle.
+- L’exécution repose sur le **calcul en mémoire**, ce qui améliore fortement les performances par rapport aux approches classiques basées uniquement sur le disque.
+
+### Cas d’usage typiques
+
+Le traitement Batch est particulièrement adapté pour :
+- les pipelines **ETL** (Extraction, Transformation, Loading),
+- le nettoyage massif de données,
+- les agrégations statistiques lourdes,
+- l’entraînement de modèles de **machine learning**,
+- les analyses historiques où la latence n’est pas critique.
+
+---
+
+## Traitement Streaming (par flux)
+
+Le traitement **Streaming** est utilisé lorsque les données arrivent **en continu** et doivent être traitées **quasi en temps réel**.
+
+### Principe général
+
+- Les données sont produites sous forme de flux continus  
+  (Kafka, capteurs IoT, logs applicatifs, transactions, événements systèmes).
+- Spark traite les données dès leur arrivée, sans attendre la fin d’un lot complet.
+- L’objectif principal est de **réagir rapidement** à de nouveaux événements.
+
+### Streaming dans Spark : le micro-batch
+
+- Spark Streaming repose sur un modèle de **micro-batch** :
+  - le flux continu est découpé en **petits blocs temporels successifs**,
+  - chaque micro-lot est traité comme un job batch très rapide.
+- Ce modèle permet de combiner :
+  - la simplicité du batch,
+  - et la réactivité du temps réel.
+
+### Capacités offertes
+
+Le traitement Streaming permet notamment :
+- des **agrégations continues**,
+- des calculs glissants via des **fenêtres temporelles**,
+- des mises à jour en temps réel,
+- la génération d’alertes ou de tableaux de bord dynamiques.
+
+### Cas d’usage typiques
+
+Le streaming est indispensable pour :
+- la détection de fraude,
+- la surveillance de systèmes,
+- l’analyse de logs en temps réel,
+- les systèmes d’alerte,
+- les applications nécessitant une **faible latence**.
+
+---
+
+## Comparaison Batch vs Streaming
+
+| Critère | Batch | Streaming |
+|------|------|-----------|
+| Nature des données | Données stockées | Données en continu |
+| Mode de traitement | Par lots complets | Flux (micro-batch) |
+| Latence | Minutes à heures | Millisecondes à secondes |
+| Complexité | Moins élevée | Plus exigeante |
+| Cas d’usage | ETL, analyses lourdes, rapports | Alertes, monitoring, temps réel |
+
+</div>

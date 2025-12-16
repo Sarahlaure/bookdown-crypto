@@ -1,0 +1,1747 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[]{natbib}
+\bibliographystyle{plainnat}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\chapter{Apache Spark}\label{apache-spark}
+
+Agence nationale de la Statistique et de la Démographie (ANSD)
+
+École nationale de la Statistique et de l'Analyse économique Pierre Ndiaye (ENSAE)
+
+Présentation du projet du groupe 7 -- Année académique 2025-2026
+
+Spark : Traitement des données massives
+en temps réel
+
+Rédigé par
+
+COMPAORE Bassirou DIAKHATE Khadidiatou DIALLO Aissatou FOGWOUNG DJOUFACK Sarah-Laure FOUMSOU Lawa Prosper
+
+Élèves ingénieurs statisticiens économistes (ISE2)
+
+Sous la supervision de
+
+Mme DIAW Mously
+
+Freelance Senior Data Scientist / ML Engineer
+
+Livre réalisé dans le cadre du cours d'Initiation au Big Data \& Cloud Computing.
+
+\chapter{Introduction}\label{introduction}
+
+\section{Contexte général : l'explosion des données}\label{contexte-guxe9nuxe9ral-lexplosion-des-donnuxe9es}
+
+Au cours des dernières années, la production de données à l'échelle mondiale a connu une croissance exponentielle. Cette évolution est principalement portée par la généralisation des objets connectés (Internet of Things -- IoT), l'essor massif des réseaux sociaux, la digitalisation des transactions économiques ainsi que la multiplication des capteurs et systèmes automatisés dans des secteurs variés tels que l'énergie, la santé, la finance ou encore les transports.
+
+Contrairement aux modèles traditionnels, les données ne sont plus produites de manière ponctuelle ou quotidienne, mais de façon \textbf{continue et en temps réel}. Chaque seconde, des millions d'événements sont générés : messages, clics, paiements, mesures de capteurs, flux applicatifs, journaux systèmes (logs), etc. Cette transformation marque un changement profond dans la nature des données, désormais caractérisées par des \textbf{volumes très élevés}, une \textbf{grande diversité de formats} (texte, images, vidéos, flux JSON, données semi-structurées) et une \textbf{vitesse de génération particulièrement élevée}.
+
+Face à cette nouvelle réalité, les systèmes classiques de gestion et de traitement des données atteignent rapidement leurs limites, tant en termes de performance que de capacité d'adaptation.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Limites des approches traditionnelles : SQL et Hadoop}\label{limites-des-approches-traditionnelles-sql-et-hadoop}
+
+Les bases de données relationnelles classiques telles que MySQL, PostgreSQL ou Oracle ont longtemps constitué la solution de référence pour le stockage et l'analyse des données. Conçues pour des données essentiellement structurées et organisées sous forme de tables, elles reposent généralement sur des architectures centralisées ou faiblement distribuées. Dans ce contexte, leur capacité de montée en charge demeure limitée lorsqu'il s'agit de traiter des volumes massifs de données ou des flux continus en temps réel.
+
+Dans un second temps, l'écosystème Hadoop a apporté une réponse partielle à ces problématiques. Grâce au système de fichiers distribué HDFS, Hadoop permet le stockage de données sur plusieurs machines, tandis que le modèle de calcul MapReduce offre une bonne tolérance aux pannes et une certaine robustesse. Toutefois, Hadoop présente également plusieurs limites importantes :
+
+\begin{itemize}
+\tightlist
+\item
+  des temps de traitement élevés dus aux écritures fréquentes sur disque ;
+\item
+  une orientation principalement vers le traitement \textbf{batch} ;
+\item
+  une complexité de développement et de configuration non négligeable ;
+\item
+  une faible adaptation aux besoins de traitement interactif et temps réel.
+\end{itemize}
+
+Ces contraintes ont progressivement mis en évidence la nécessité de solutions plus rapides, plus flexibles et mieux adaptées aux exigences modernes du Big Data.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Apache Spark : une réponse aux besoins modernes du Big Data}\label{apache-spark-une-ruxe9ponse-aux-besoins-modernes-du-big-data}
+
+C'est dans ce contexte qu'\textbf{Apache Spark} s'est imposé comme une technologie centrale du Big Data. Conçu pour dépasser les limitations du modèle Hadoop MapReduce, Spark repose sur un \textbf{modèle de calcul en mémoire}, permettant d'améliorer significativement les performances, en particulier pour les traitements analytiques et itératifs.
+
+Apache Spark se distingue notamment par :
+
+\begin{itemize}
+\tightlist
+\item
+  sa \textbf{rapidité}, grâce à l'exécution en mémoire et au parallélisme sur plusieurs cœurs ou plusieurs machines ;
+\item
+  sa \textbf{flexibilité}, en prenant en charge des données structurées, semi-structurées et non structurées ;
+\item
+  sa \textbf{scalabilité}, pouvant fonctionner aussi bien sur une machine unique que sur un cluster distribué ;
+\item
+  son \textbf{écosystème riche}, intégrant le traitement batch, le streaming en temps réel, le machine learning et l'analyse SQL ;
+\item
+  sa \textbf{compatibilité avec les architectures Cloud modernes}, notamment dans les environnements de type Lakehouse.
+\end{itemize}
+
+Dans le cadre de ce projet d'initiation au Big Data et au Cloud Computing, Apache Spark constitue la technologie centrale étudiée. L'objectif est de comprendre, à travers des cas concrets, les principes fondamentaux du traitement distribué de données massives, notamment dans des contextes batch et temps réel.
+
+La suite de ce document présentera successivement les concepts fondamentaux d'Apache Spark (architecture, fonctionnement et principaux modules), ses méthodes de traitement, ainsi que ses forces et limites dans un contexte Big Data moderne.
+
+\chapter{Présentation générale d'Apache Spark}\label{pruxe9sentation-guxe9nuxe9rale-dapache-spark}
+
+\section{Qu'est-ce qu'Apache Spark ?}\label{quest-ce-quapache-spark}
+
+Apache Spark est un \textbf{framework open source de calcul distribué}, conçu pour le \textbf{traitement efficace de données massives (Big Data)}.\\
+Il permet d'analyser de très grands volumes de données en exploitant le \textbf{calcul parallèle} sur plusieurs machines, tout en offrant une \textbf{exécution rapide grâce au traitement en mémoire}.
+
+Contrairement aux approches classiques basées sur des traitements sur disque, Spark a été pensé pour répondre aux besoins modernes du Big Data : \textbf{vitesse}, \textbf{flexibilité} et \textbf{scalabilité}.
+
+\begin{quote}
+\emph{Apache Spark unifie le traitement batch, le streaming temps réel, l'analyse SQL et le machine learning au sein d'un même moteur.}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Philosophie et objectifs de Spark}\label{philosophie-et-objectifs-de-spark}
+
+La conception de Spark repose sur trois principes fondamentaux :
+
+\subsection{Vitesse}\label{vitesse}
+
+Spark est capable d'exécuter certains traitements \textbf{jusqu'à 100 fois plus rapidement que Hadoop MapReduce}, notamment grâce à :
+- l'exécution des calculs \textbf{en mémoire (in-memory computing)},
+- la réduction des écritures disque,
+- l'optimisation automatique des plans d'exécution.
+
+\subsection{Facilité d'utilisation}\label{facilituxe9-dutilisation}
+
+Spark propose des \textbf{API simples et expressives} dans plusieurs langages :
+- \textbf{Scala}, \textbf{Python}, \textbf{Java}, \textbf{R} et \textbf{SQL}.\\
+Cela permet aux utilisateurs de développer des applications distribuées sans gérer directement la complexité du parallélisme.
+
+\subsection{Généralité}\label{guxe9nuxe9ralituxe9}
+
+Spark est une plateforme \textbf{polyvalente}, capable de gérer :
+- le traitement \textbf{batch},
+- le \textbf{streaming temps réel},
+- l'analyse \textbf{SQL},
+- le \textbf{machine learning},
+- l'analyse de \textbf{graphes}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Concepts fondamentaux de Spark}\label{concepts-fondamentaux-de-spark}
+
+\subsection{Environnement distribué : le cluster}\label{environnement-distribuuxe9-le-cluster}
+
+Un \textbf{cluster} est un ensemble de machines (nœuds) qui collaborent pour stocker et traiter les données.\\
+Spark fonctionne dans cet environnement distribué afin de répartir le calcul et d'augmenter les performances.
+
+\subsection{Partitions}\label{partitions}
+
+Les données sont découpées en \textbf{partitions}, chacune étant traitée indépendamment.\\
+Ce découpage permet :
+- le \textbf{traitement parallèle},
+- une meilleure utilisation des ressources,
+- une montée en charge efficace.
+
+\subsection{RDD et DataFrames}\label{rdd-et-dataframes}
+
+\begin{itemize}
+\tightlist
+\item
+  Les \textbf{RDD (Resilient Distributed Datasets)} sont la structure de données historique de Spark, distribuée et tolérante aux pannes.
+\item
+  Aujourd'hui, les \textbf{DataFrames} et \textbf{Datasets} sont privilégiés car plus optimisés et plus simples à utiliser, tout en reposant sur les mêmes principes.
+\end{itemize}
+
+\subsection{Transformations et actions}\label{transformations-et-actions}
+
+\begin{itemize}
+\tightlist
+\item
+  Une \textbf{transformation} prépare un traitement (ex. \texttt{filter}, \texttt{map}) mais \textbf{n'exécute pas immédiatement} le calcul.
+\item
+  Une \textbf{action} déclenche réellement l'exécution (ex. \texttt{count}, \texttt{collect}).
+\end{itemize}
+
+Ce mécanisme repose sur le principe de \textbf{lazy evaluation}, qui permet à Spark d'optimiser le plan d'exécution.
+
+\subsection{DAG (Directed Acyclic Graph)}\label{dag-directed-acyclic-graph}
+
+Le \textbf{DAG (graphe orienté acyclique)} est un \textbf{plan logique d'exécution} construit automatiquement par Spark à partir des transformations définies par l'utilisateur.
+
+Il représente :
+- l'ordre des opérations à effectuer,
+- les dépendances entre les transformations,
+- les étapes nécessaires avant toute exécution réelle.
+
+Le DAG permet à Spark :
+- d'optimiser l'enchaînement des opérations,
+- de retarder l'exécution grâce au principe de \emph{lazy evaluation},
+- de préparer efficacement la création des stages et des tasks.
+
+Aucune donnée n'est réellement traitée tant qu'une \textbf{action} n'est pas appelée.
+
+\subsection{Shuffle}\label{shuffle}
+
+Le \textbf{shuffle} correspond à un \textbf{échange de données entre les différentes machines du cluster}.
+
+Il intervient lors d'opérations nécessitant un regroupement ou une redistribution des données, telles que :
+- \texttt{groupBy},
+- \texttt{join},
+- \texttt{reduceByKey},
+- \texttt{orderBy}.
+
+Le shuffle est une opération :
+- coûteuse en temps,
+- consommatrice de ressources (réseau et disque).
+
+Spark cherche donc à \textbf{minimiser le nombre de shuffles}, car ils ont un impact direct sur les performances globales de l'application.
+
+\subsection{Stages}\label{stages}
+
+Les \textbf{stages} sont des \textbf{étapes d'exécution} dérivées du DAG.
+
+Un stage regroupe :
+- un ensemble d'opérations pouvant être exécutées \textbf{sans échange de données entre les machines},
+- des transformations successives qui ne nécessitent pas de shuffle.
+
+Chaque fois qu'un shuffle est requis, Spark \textbf{sépare le DAG en plusieurs stages}.\\
+Ainsi, le nombre de stages dépend directement de la structure des opérations et de la présence de shuffles.
+
+\subsection{Tasks}\label{tasks}
+
+Les \textbf{tasks} représentent la \textbf{plus petite unité d'exécution} dans Spark.
+
+Chaque stage est découpé en plusieurs tasks, et :
+- chaque task traite \textbf{une partition de données},
+- les tasks s'exécutent \textbf{en parallèle} sur les executors du cluster.
+
+Ce mécanisme permet à Spark :
+- d'exploiter pleinement le parallélisme,
+- d'améliorer les performances,
+- d'assurer une bonne tolérance aux pannes.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Fonctionnement général d'Apache Spark}\label{fonctionnement-guxe9nuxe9ral-dapache-spark}
+
+Le fonctionnement de Spark peut être compris comme une succession d'étapes logiques allant de l'écriture du programme à l'exécution effective des calculs sur le cluster.
+
+\subsection{Ecriture du programme}\label{ecriture-du-programme}
+
+L'utilisateur écrit un programme Spark en utilisant une API (Python, Scala, SQL, etc.) et définit une suite de transformations sur les données.
+
+À ce stade :
+- aucune donnée n'est encore traitée,
+- Spark se contente d'enregistrer les opérations demandées.
+
+\subsection{Construction du DAG}\label{construction-du-dag}
+
+Lorsque l'utilisateur appelle une \textbf{action}, Spark analyse l'ensemble des transformations et construit un \textbf{DAG} représentant le plan logique d'exécution.
+
+Ce DAG permet à Spark :
+- d'identifier les dépendances entre les opérations,
+- d'optimiser l'ordre des calculs,
+- de détecter les points nécessitant des échanges de données (shuffles).
+
+\subsection{Découpage en stages}\label{duxe9coupage-en-stages}
+
+À partir du DAG, Spark divise le plan d'exécution en \textbf{stages}.
+
+Chaque stage correspond à :
+- un ensemble d'opérations pouvant être exécutées localement,
+- une phase sans échange de données entre machines.
+
+Les frontières entre les stages sont généralement définies par les opérations de shuffle.
+
+\subsection{Création et exécution des tasks}\label{cruxe9ation-et-exuxe9cution-des-tasks}
+
+Chaque stage est ensuite découpé en \textbf{tasks}, correspondant aux partitions des données.
+
+Les tasks sont :
+- distribuées aux executors,
+- exécutées en parallèle,
+- supervisées par le driver.
+
+Cette exécution parallèle permet à Spark de traiter efficacement de très grands volumes de données.
+
+\subsection{Collecte des résultats}\label{collecte-des-ruxe9sultats}
+
+Une fois les tasks terminées :
+- les résultats sont agrégés,
+- renvoyés au driver si nécessaire,
+- ou stockés dans un système externe (HDFS, S3, base de données, etc.).
+
+Le traitement Spark est alors considéré comme terminé.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Architecture de Spark}\label{architecture-de-spark}
+
+\subsection{Le Driver Program}\label{le-driver-program}
+
+Le \textbf{Driver} est le cerveau de l'application Spark. Il :
+- contient le code principal,
+- crée la \textbf{SparkSession},
+- planifie les opérations,
+- distribue les tâches aux executors,
+- récupère les résultats.
+
+Le driver \textbf{ne traite pas directement les données}, il coordonne l'exécution.
+
+\subsection{Les Executors}\label{les-executors}
+
+Les \textbf{Executors} sont des processus lancés sur les machines du cluster. Ils :
+- exécutent les tasks envoyées par le driver,
+- stockent temporairement les données en mémoire,
+- renvoient les résultats.
+
+Plus le nombre d'executors est élevé, plus le traitement est \textbf{parallèle et performant}.
+
+\subsection{Le Cluster Manager}\label{le-cluster-manager}
+
+Le \textbf{Cluster Manager} gère l'allocation des ressources (CPU, mémoire).\\
+Spark peut fonctionner avec différents gestionnaires :
+- \textbf{Standalone},
+- \textbf{YARN},
+- \textbf{Mesos},
+- \textbf{Kubernetes}, très utilisé dans les environnements Cloud.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Principaux modules de Spark}\label{principaux-modules-de-spark}
+
+\subsection{Spark SQL}\label{spark-sql}
+
+Module dédié aux données structurées :
+- exécution de requêtes SQL distribuées,
+- manipulation de DataFrames/Datasets,
+- optimisation automatique via le \textbf{Catalyst Optimizer},
+- lecture de formats comme Parquet, ORC, JSON, CSV.
+
+\subsection{Spark Streaming}\label{spark-streaming}
+
+Module de traitement de flux de données en continu :
+- ingestion depuis Kafka, Kinesis, fichiers streamés,
+- fonctionnement par \textbf{micro-batches},
+- adapté aux applications temps réel (monitoring, détection de fraude).
+
+\subsection{MLlib}\label{mllib}
+
+Bibliothèque de machine learning distribué :
+- régression, classification, clustering,
+- systèmes de recommandation,
+- pipelines de machine learning à grande échelle.
+
+\subsection{GraphX}\label{graphx}
+
+Module spécialisé dans l'analyse de graphes :
+- représentation de graphes distribués,
+- algorithmes comme PageRank ou Connected Components,
+- utile pour l'analyse de réseaux complexes.
+
+\chapter{Méthodologie de traitement avec Apache Spark}\label{muxe9thodologie-de-traitement-avec-apache-spark}
+
+Apache Spark propose deux grandes approches complémentaires pour le traitement des données massives :\\
+le \textbf{traitement Batch (par lots)} et le \textbf{traitement Streaming (par flux)}.\\
+Ces deux méthodes répondent à des besoins différents en fonction de la nature des données et des contraintes de temps.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Traitement Batch (par lots)}\label{traitement-batch-par-lots}
+
+Le traitement \textbf{Batch} correspond au traitement de \textbf{grands volumes de données déjà stockées}.\\
+Les données sont collectées sur une période donnée, puis traitées \textbf{en une seule fois}, sous forme de lots complets.
+
+\subsection{Principe général}\label{principe-guxe9nuxe9ral}
+
+\begin{itemize}
+\tightlist
+\item
+  Les données sont préalablement stockées dans des systèmes de stockage distribués\\
+  (HDFS, Amazon S3, bases de données, fichiers CSV/Parquet, etc.).
+\item
+  Spark lit l'ensemble des données, applique une série de transformations, puis produit un résultat final.
+\item
+  Le traitement n'est \textbf{pas continu} : il démarre à un instant donné et s'arrête une fois le calcul terminé.
+\end{itemize}
+
+\subsection{Fonctionnement avec Spark}\label{fonctionnement-avec-spark}
+
+\begin{itemize}
+\tightlist
+\item
+  Spark construit un \textbf{DAG (Directed Acyclic Graph)} représentant la chaîne logique des transformations.
+\item
+  Ce DAG est découpé en \textbf{stages}, eux-mêmes composés de \textbf{tasks} exécutées en parallèle.
+\item
+  L'exécution repose sur le \textbf{calcul en mémoire}, ce qui améliore fortement les performances par rapport aux approches classiques basées uniquement sur le disque.
+\end{itemize}
+
+\subsection{Cas d'usage typiques}\label{cas-dusage-typiques}
+
+Le traitement Batch est particulièrement adapté pour :
+- les pipelines \textbf{ETL} (Extraction, Transformation, Loading),
+- le nettoyage massif de données,
+- les agrégations statistiques lourdes,
+- l'entraînement de modèles de \textbf{machine learning},
+- les analyses historiques où la latence n'est pas critique.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Traitement Streaming (par flux)}\label{traitement-streaming-par-flux}
+
+Le traitement \textbf{Streaming} est utilisé lorsque les données arrivent \textbf{en continu} et doivent être traitées \textbf{quasi en temps réel}.
+
+\subsection{Principe général}\label{principe-guxe9nuxe9ral-1}
+
+\begin{itemize}
+\tightlist
+\item
+  Les données sont produites sous forme de flux continus\\
+  (Kafka, capteurs IoT, logs applicatifs, transactions, événements systèmes).
+\item
+  Spark traite les données dès leur arrivée, sans attendre la fin d'un lot complet.
+\item
+  L'objectif principal est de \textbf{réagir rapidement} à de nouveaux événements.
+\end{itemize}
+
+\subsection{Streaming dans Spark : le micro-batch}\label{streaming-dans-spark-le-micro-batch}
+
+\begin{itemize}
+\tightlist
+\item
+  Spark Streaming repose sur un modèle de \textbf{micro-batch} :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    le flux continu est découpé en \textbf{petits blocs temporels successifs},
+  \item
+    chaque micro-lot est traité comme un job batch très rapide.
+  \end{itemize}
+\item
+  Ce modèle permet de combiner :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    la simplicité du batch,
+  \item
+    et la réactivité du temps réel.
+  \end{itemize}
+\end{itemize}
+
+\subsection{Capacités offertes}\label{capacituxe9s-offertes}
+
+Le traitement Streaming permet notamment :
+- des \textbf{agrégations continues},
+- des calculs glissants via des \textbf{fenêtres temporelles},
+- des mises à jour en temps réel,
+- la génération d'alertes ou de tableaux de bord dynamiques.
+
+\subsection{Cas d'usage typiques}\label{cas-dusage-typiques-1}
+
+Le streaming est indispensable pour :
+- la détection de fraude,
+- la surveillance de systèmes,
+- l'analyse de logs en temps réel,
+- les systèmes d'alerte,
+- les applications nécessitant une \textbf{faible latence}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Comparaison Batch vs Streaming}\label{comparaison-batch-vs-streaming}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2609}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2609}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4783}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Critère
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Batch
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Streaming
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Nature des données & Données stockées & Données en continu \\
+Mode de traitement & Par lots complets & Flux (micro-batch) \\
+Latence & Minutes à heures & Millisecondes à secondes \\
+Complexité & Moins élevée & Plus exigeante \\
+Cas d'usage & ETL, analyses lourdes, rapports & Alertes, monitoring, temps réel \\
+\end{longtable}
+
+\chapter{Cadre pratique et description des données}\label{cadre-pratique-et-description-des-donnuxe9es}
+
+\section{Justification du choix des données de cryptomonnaies}\label{justification-du-choix-des-donnuxe9es-de-cryptomonnaies}
+
+Dans le cadre de ce projet d'initiation au Big Data et au Cloud Computing, les données issues des marchés de cryptomonnaies ont été retenues comme cas d'étude. Ce choix repose sur des considérations à la fois techniques et méthodologiques.
+
+Les marchés de cryptomonnaies constituent un environnement particulièrement adapté à l'étude des systèmes Big Data, en raison de la nature \textbf{continue, volumineuse et fortement dynamique} des données produites. Contrairement aux marchés financiers traditionnels, ces plateformes fonctionnent sans interruption, générant des flux de données en temps réel 24 heures sur 24 et 7 jours sur 7.
+
+Les données de cryptomonnaies présentent ainsi les principales caractéristiques du Big Data (les 3V) :
+- un \textbf{volume élevé}, lié au nombre important de transactions,
+- une \textbf{vélocité importante}, avec des mises à jour fréquentes des prix et volumes,
+- une \textbf{variété des formats}, incluant des données numériques, temporelles et semi-structurées.
+
+Ce contexte en fait un support pertinent pour illustrer les problématiques de traitement distribué, ainsi que la distinction entre traitements batch et traitements streaming.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Collecte des données : connexion à la plateforme Binance}\label{collecte-des-donnuxe9es-connexion-uxe0-la-plateforme-binance}
+
+Pour la collecte des données, nous nous sommes connectés à la plateforme \textbf{Binance}, l'une des plus grandes plateformes d'échange de cryptomonnaies au monde, via ses \textbf{API publiques}.
+
+Techniquement, Binance met à disposition des \textbf{flux de données en temps réel (WebSocket)} permettant de recevoir en continu les informations de marché pour différentes paires de cryptomonnaies. Une fois la connexion établie, les données sont transmises \textbf{événement par événement}, sans interruption, sous forme de messages structurés.
+
+Ces messages sont ensuite publiés sur un \textbf{topic Kafka}, jouant le rôle de couche d'ingestion et de mise en file des données. Kafka permet ainsi de :
+- découpler la phase de collecte de la phase de traitement,
+- assurer une tolérance aux pannes,
+- gérer efficacement des flux de données continus à forte fréquence.
+
+Les flux Kafka sont intégrés dans un traitement où \textbf{Apache Spark} intervient pour :
+- ingérer les données en continu ou par lots,
+- structurer les messages reçus,
+- appliquer des transformations et nettoyages.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Description des variables collectées}\label{description-des-variables-collectuxe9es}
+
+Les données collectées depuis la plateforme Binance sont composées des variables suivantes :
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{symbol} : identifiant de la paire de cryptomonnaies (par exemple BTCUSDT), permettant de distinguer les actifs analysés.
+\item
+  \textbf{open\_price} : prix d'ouverture sur l'intervalle de temps considéré.
+\item
+  \textbf{close\_price} : prix de clôture sur l'intervalle, souvent utilisé pour l'analyse des tendances.
+\item
+  \textbf{high\_price} : prix maximum atteint durant l'intervalle.
+\item
+  \textbf{low\_price} : prix minimum atteint durant l'intervalle.
+\item
+  \textbf{volume} : volume total de l'actif échangé sur la période.
+\item
+  \textbf{quote\_volume} : volume échangé exprimé dans la devise de cotation (par exemple en USDT).
+\item
+  \textbf{timestamp\_ts} : horodatage associé à chaque observation, essentiel pour les analyses temporelles (par la suite mis sous format date).
+\item
+  \textbf{spread} : écart entre les prix acheteur et vendeur, indicateur de la liquidité du marché.
+\item
+  \textbf{mid\_price} : prix moyen calculé à partir des valeurs extrêmes, servant de référence analytique.
+\end{itemize}
+
+Ces variables constituent une base de données cohérente pour l'analyse quantitative des marchés de cryptomonnaies.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Métriques analysées et intérêt du traitement distribué}\label{muxe9triques-analysuxe9es-et-intuxe9ruxeat-du-traitement-distribuuxe9}
+
+À partir des données collectées, plusieurs métriques ont été calculées afin de caractériser le comportement du marché, notamment :
+- les rendements: mesure de l'évolution relative des prix sur une période donnée,
+- les mesures de volatilité:
+- les volumes agrégés par période,
+- les indicateurs statistiques descriptifs (moyennes, écarts-types, minimums et maximums).
+
+L'analyse de ces métriques permet de mieux comprendre la dynamique des marchés, d'identifier les périodes de forte activité ou de volatilité, et de fournir des éléments d'aide à la décision.
+
+Apache Spark joue ici un rôle central en permettant :
+- le traitement de volumes importants de données,
+- l'exécution de calculs analytiques distribués,
+- la gestion efficace des fenêtres temporelles en streaming,
+- l'unification des traitements batch et temps réel au sein d'un même environnement.
+
+\chapter{Cas de traitement batch}\label{cas-de-traitement-batch}
+
+Cette section présente de manière progressive et structurée la mise en œuvre du traitement batch appliqué aux données de marché issues de la plateforme Binance. L'objectif est de décrire clairement l'architecture mise en place, les choix techniques réalisés et les différentes étapes du traitement, depuis la préparation de l'environnement jusqu'à l'automatisation complète.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Mise en place de l'environnement de travail}\label{mise-en-place-de-lenvironnement-de-travail}
+
+Le traitement batch a été réalisé sur une \textbf{machine unique}, configurée de manière à reproduire une chaîne complète de traitement Big Data à échelle locale. Cette étape vise à garantir que l'ensemble du pipeline puisse fonctionner de manière cohérente, reproductible et autonome.
+
+\subsection{Outils et logiciels nécessaires}\label{outils-et-logiciels-nuxe9cessaires}
+
+Plusieurs composants ont été installés afin de couvrir l'ensemble des besoins du projet.
+
+\begin{itemize}
+\item
+  \textbf{Python}\\
+  Python constitue le langage de pilotage du projet. Il est utilisé pour orchestrer les scripts, interagir avec Apache Spark via PySpark, générer les rapports HTML et automatiser l'exécution du pipeline.
+\item
+  \textbf{PostgreSQL}\\
+  PostgreSQL est utilisé comme système de gestion de base de données relationnelle. Il assure le stockage persistant et structuré des données de marché collectées depuis Binance.\\
+  Dans le cadre du projet, PostgreSQL a été téléchargé depuis le site officiel (\emph{PostgreSQL: Downloads}), puis une base de données nommée \texttt{crypto\_db} a été créée, cette base contient une table \texttt{binance\_tickers} destinée à recevoir les observations de marché.
+  PostgreSQL joue ici le rôle de \textbf{couche de stockage intermédiaire} entre la collecte et l'analyse.
+\item
+  \textbf{Java}\\
+  Apache Spark étant développé en Scala et exécuté sur la \textbf{Java Virtual Machine (JVM)}, l'installation de Java est indispensable. Même si les traitements sont écrits en Python (PySpark), la présence de Java est indispensable pour :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    lancer Spark,
+  \item
+    gérer l'exécution distribuée,
+  \item
+    assurer la communication entre les différents composants internes de Spark.
+  \end{itemize}
+\end{itemize}
+
+Sans Java, Spark ne peut tout simplement pas fonctionner.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Architecture générale et composants intégrés}\label{architecture-guxe9nuxe9rale-et-composants-intuxe9gruxe9s}
+
+L'architecture retenue repose sur une séparation claire entre la \textbf{collecte}, le \textbf{stockage} et le \textbf{traitement analytique}.
+
+Les données de marché ne sont pas traitées directement lors de leur réception. Elles sont d'abord stockées dans PostgreSQL, ce qui permet de conserver un historique fiable et de découpler la phase de collecte de la phase d'analyse.
+
+\begin{itemize}
+\item
+  \textbf{Script d'ingestion des données}\\
+  Un script d'ingestion indépendant, nommé \texttt{API\_Postgres}, est chargé de :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    se connecter à l'API de Binance,
+  \item
+    récupérer les données de marché,
+  \item
+    insérer ces données dans la table \texttt{binance\_tickers}.
+  \end{itemize}
+\item
+  \textbf{Connexion entre Spark et PostgreSQL (driver JDBC)}\\
+  Apache Spark n'accède pas directement aux bases de données relationnelles. Pour établir la communication avec PostgreSQL, un \textbf{driver JDBC PostgreSQL} a été téléchargé et ajouté au projet sous la forme d'un fichier \texttt{.jar}, placé dans le dossier \texttt{jars}.
+
+  Ce driver joue le rôle d'interface :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Spark envoie des requêtes via JDBC,
+  \item
+    PostgreSQL exécute ces requêtes,
+  \item
+    les résultats sont renvoyés à Spark sous forme de DataFrame.
+  \end{itemize}
+\end{itemize}
+
+Grâce à ce mécanisme, Spark peut lire les données de la table binance\_tickers comme s'il s'agissait de données natives.
+
+\begin{itemize}
+\item
+  \textbf{Centralisation des paramètres de connexion}\\
+  Les paramètres de connexion à PostgreSQL (hôte, port, nom de la base, utilisateur, mot de passe) ont été regroupés dans un module Python distinct, nommé config\_binance. Cette organisation présente plusieurs avantages :
+\item
+  elle évite de dupliquer les informations de connexion dans plusieurs scripts,
+\item
+  elle améliore la lisibilité du code,
+\item
+  elle facilite la maintenance,
+\item
+  elle rend le projet facilement reproductible sur une autre machine.
+\end{itemize}
+
+Ainsi, un nouvel utilisateur souhaitant reproduire le projet n'a besoin que :
+- d'installer PostgreSQL,
+- de créer la table binance\_tickers,
+- de renseigner ses propres paramètres de connexion dans ce module, - puis d'exécuter les scripts Spark sans autre modification.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Connexion aux données et lecture du dernier batch disponible}\label{connexion-aux-donnuxe9es-et-lecture-du-dernier-batch-disponible}
+
+\section{Connexion aux données et sélection du dernier batch}\label{connexion-aux-donnuxe9es-et-suxe9lection-du-dernier-batch}
+
+Le cœur du traitement batch repose sur l'exploitation des données de marché issues de Binance et stockées de manière persistante dans la base de données \textbf{PostgreSQL}.
+
+\subsection{Lecture des données avec Apache Spark}\label{lecture-des-donnuxe9es-avec-apache-spark}
+
+Dans un premier temps, une \textbf{session Spark} est créée et configurée afin d'utiliser le \textbf{driver JDBC PostgreSQL}. Cette configuration permet à Spark d'établir une connexion directe avec la base relationnelle.
+
+À partir de cette session, la table \texttt{binance\_tickers} est lue et chargée dans un \textbf{DataFrame Spark}, qui constitue la structure centrale pour l'ensemble des traitements analytiques réalisés par la suite.
+
+\subsection{\texorpdfstring{Notion de batch et rôle de l'horodatage \texttt{run\_ts}}{Notion de batch et rôle de l'horodatage run\_ts}}\label{notion-de-batch-et-ruxf4le-de-lhorodatage-run_ts}
+
+La table \texttt{binance\_tickers} est alimentée de manière régulière par le script d'ingestion.\\
+Chaque insertion de données correspond à un \textbf{lot de données (batch)} et est associée à un horodatage spécifique, stocké dans la colonne \texttt{run\_ts}.
+
+Cet horodatage joue un rôle clé : il permet d'identifier précisément à quel batch appartient chaque enregistrement.
+
+Afin de garantir un reporting à jour tout en limitant les coûts de calcul, le traitement Spark ne s'applique pas à l'ensemble de l'historique, mais uniquement au \textbf{dernier batch disponible}. Pour cela, la démarche suivante est adoptée :
+
+\begin{itemize}
+\tightlist
+\item
+  identification de la valeur maximale de \texttt{run\_ts} dans la table ;
+\item
+  filtrage du DataFrame afin de ne conserver que les lignes correspondant à ce \texttt{run\_ts} maximal.
+\end{itemize}
+
+Ainsi, chaque exécution du script travaille uniquement sur la \textbf{fenêtre de données la plus récente}, sans retraiter l'historique complet des observations.
+
+\subsection{Notion de ticker et structure des données de marché}\label{notion-de-ticker-et-structure-des-donnuxe9es-de-marchuxe9}
+
+Dans le cadre de ce projet, un \textbf{ticker} désigne une paire de trading fournie par l'API Binance et identifiée par le champ \texttt{symbol} (par exemple : \texttt{BTCUSDT}, \texttt{ETHUSDT}).
+
+Chaque \texttt{symbol} représente un \textbf{marché unique}, correspondant à l'échange d'une cryptomonnaie contre une devise de référence (généralement l'USDT). Une même cryptomonnaie (par exemple le Bitcoin) peut donc apparaître dans plusieurs tickers, mais chaque ticker reste distinct.
+
+Au sein d'un même batch, un ticker peut apparaître \textbf{plusieurs fois} sur la période observée, ce qui justifie la construction d'indicateurs agrégés (rendement moyen, volatilité, volumes échangés, etc.) afin de résumer et d'interpréter correctement le comportement du marché.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Enrichissement et construction des indicateurs de marché}\label{enrichissement-et-construction-des-indicateurs-de-marchuxe9}
+
+Les données brutes issues de Binance (prix d'ouverture, de clôture, plus haut, plus bas, volumes) sont ensuite enrichies afin de produire des indicateurs plus interprétables.
+
+Les principales transformations réalisées sont :
+
+\begin{itemize}
+\tightlist
+\item
+  calcul du \textbf{spread de prix} (différence entre le plus haut et le plus bas) ;
+\item
+  calcul du \textbf{prix médian (mid price)}, défini comme la moyenne du prix maximum et du prix minimum ;
+\item
+  extraction d'une \textbf{date au format AAAA-MM-JJ} à partir du timestamp ;
+\item
+  conversion du temps d'événement en secondes depuis 1970.
+\end{itemize}
+
+Les volumes sont exprimés en \textbf{millions d'USDT} afin de faciliter la lecture des résultats.
+
+À partir de ces variables, trois indicateurs analytiques sont calculés :
+
+\begin{itemize}
+\tightlist
+\item
+  le \textbf{rendement relatif}, basé sur la variation entre le prix d'ouverture et le prix de clôture ;
+\item
+  la \textbf{volatilité absolue}, mesurant l'amplitude des variations de prix ;
+\item
+  la \textbf{volatilité relative}, obtenue en rapportant la volatilité absolue au prix médian.
+\end{itemize}
+
+Les cas de division par zéro sont explicitement traités afin d'éviter toute erreur de calcul.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Agrégation des résultats et classements « Top 5 »}\label{agruxe9gation-des-ruxe9sultats-et-classements-top-5}
+
+Deux niveaux d'agrégation sont ensuite réalisés.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Indicateurs globaux de marché} :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    nombre d'échanges ;
+  \item
+    nombre total d'observations ;
+  \item
+    volume total échangé ;
+  \item
+    rendement moyen du marché ;
+  \item
+    volatilité moyenne du marché.
+  \end{itemize}
+\item
+  \textbf{Statistiques par échange} :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    rendement moyen ;
+  \item
+    volatilité moyenne ;
+  \item
+    volume total échangé.
+  \end{itemize}
+\end{itemize}
+
+À partir de ces résultats, plusieurs classements « Top 5 » sont établis :
+- meilleures performances ;
+- plus faibles performances ;
+- volumes les plus élevés ;
+- volatilités les plus fortes.
+
+Ces classements offrent une lecture synthétique et comparative du marché.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Génération automatisée d'un rapport HTML}\label{guxe9nuxe9ration-automatisuxe9e-dun-rapport-html}
+
+Les résultats sont ensuite convertis en un \textbf{rapport HTML automatisé}, comprenant :
+
+\begin{itemize}
+\tightlist
+\item
+  des graphiques illustrant les classements ;
+\item
+  des tableaux formatés ;
+\item
+  une synthèse textuelle du comportement global du marché ;
+\item
+  une section d'aide à la décision, présentée à titre informatif et non comme une recommandation d'investissement.
+\end{itemize}
+
+Chaque rapport est sauvegardé dans un dossier dédié avec un nom horodaté.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Envoi automatique du rapport par courrier électronique}\label{envoi-automatique-du-rapport-par-courrier-uxe9lectronique}
+
+Afin de faciliter le partage des résultats, un module d'envoi de courriels a été intégré au pipeline.
+
+Le principe repose sur :
+
+\begin{itemize}
+\tightlist
+\item
+  l'utilisation d'un compte Gmail configuré avec un mot de passe d'application ;
+\item
+  la construction d'un message électronique dont le contenu reprend directement le rapport HTML ;
+\item
+  l'envoi du message à une liste de destinataires prédéfinie.
+\end{itemize}
+
+Ainsi, à chaque exécution du traitement batch, un nouveau rapport est généré puis immédiatement transmis, sans intervention manuelle.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Reproductibilité du traitement}\label{reproductibilituxe9-du-traitement}
+
+Le fichier \texttt{config\_binance.py} centralise l'ensemble des paramètres nécessaires au bon fonctionnement du pipeline \textbf{Binance → PostgreSQL → Spark → Rapport}, en les séparant clairement du code métier.\\
+Ce fichier est \textbf{propre à chaque machine} : avant toute exécution, l'utilisateur doit l'adapter à sa configuration locale.
+
+\subsection{Configuration PostgreSQL}\label{configuration-postgresql}
+
+La première partie du fichier concerne la base de données PostgreSQL et regroupe les paramètres suivants :
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{PG\_HOST} : adresse de l'hôte PostgreSQL\\
+\item
+  \texttt{PG\_PORT} : port d'écoute\\
+\item
+  \texttt{PG\_SUPER\_DB} : base « super » (souvent \texttt{postgres}) utilisée pour les opérations d'administration\\
+\item
+  \texttt{PG\_USER} et \texttt{PG\_PWD} : identifiants de connexion\\
+\item
+  \texttt{PG\_TARGET\_DB} : base de données du projet (ici \texttt{crypto\_db})
+\end{itemize}
+
+Ces paramètres permettent au script d'ingestion de :
+- se connecter à PostgreSQL,
+- créer la base du projet si nécessaire,
+- alimenter automatiquement les tables cibles,
+
+sans modifier le code principal.
+
+\subsection{Configuration de l'envoi d'e-mails}\label{configuration-de-lenvoi-de-mails}
+
+La section suivante définit les paramètres nécessaires à l'envoi automatique des rapports :
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{EMAIL\_USER} : adresse Gmail expéditrice\\
+\item
+  \texttt{EMAIL\_PWD} : mot de passe d'application associé
+\end{itemize}
+
+Ces informations sont utilisées pour transmettre automatiquement un rapport HTML synthétique par e-mail à la fin de chaque exécution batch.
+
+\subsection{Paramètres du batch Spark}\label{paramuxe8tres-du-batch-spark}
+
+Enfin, la configuration du batch contrôle le comportement du traitement Spark :
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{BATCH\_INTERVAL\_SECONDS} : intervalle entre deux exécutions complètes (par exemple toutes les 6 heures)\\
+\item
+  \texttt{SPARK\_MASTER\ =\ "local{[}*{]}"} : exécution de Spark en mode local en exploitant tous les cœurs disponibles de la machine
+\end{itemize}
+
+Ainsi, le fichier \texttt{config\_binance.py} constitue un point d'entrée configuration, rendant le projet à la fois \textbf{portable} (chaque utilisateur adapte ce fichier) et \textbf{reproductible} (même pipeline, environnement différent).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Exécution du batch}\label{exuxe9cution-du-batch}
+
+Dans le dossier du projet, l'exécution du batch se fait en deux commandes simples via le terminal / cmd :
+
+'\,`'bash
+python -m pip install -r requirements.txt
+python Analyse\_Binance.py'\,'\,'
+
+\begin{itemize}
+\item
+  La première commande python -m pip install -r requirements.txt installe automatiquement toutes les bibliothèques Python nécessaires au projet (pandas, requests, psycopg2, pyspark, etc.) à partir du fichier requirements.txt. Cela garantit que l'environnement contient exactement les dépendances attendues pour que le script tourne correctement.
+\item
+  La deuxième commande python Analyse\_Binance.py lance le pipeline batch complet :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    appel de l'API Binance et récupération des tickers,
+  \item
+    insertion/actualisation des données dans PostgreSQL (crypto\_db),
+  \item
+    lancement de Spark en mode local pour analyser les données (gagnants/perdants, volumes, volatilité, etc.),
+  \item
+    génération périodique du rapport et envoi par email.
+  \end{itemize}
+\end{itemize}
+
+L'ensemble du processus est ainsi entièrement automatisé et peut être relancé de manière identique sur toute machine correctement configurée.
+
+\chapter{Cas de traitement streaming}\label{cas-de-traitement-streaming}
+
+Cette section présente de manière détaillée la mise en œuvre du \textbf{traitement en streaming} appliqué aux données de marché issues de la plateforme Binance.\\
+Contrairement au traitement batch, le streaming vise à traiter les données \textbf{au fil de leur arrivée}, avec une faible latence, afin de réagir quasi instantanément aux nouveaux événements de marché.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Mise en place de l'environnement de travail}\label{mise-en-place-de-lenvironnement-de-travail-1}
+
+La mise en œuvre du traitement streaming repose sur une \textbf{architecture hybride}, combinant des services conteneurisés et un moteur de calcul exécuté localement.
+
+Plus précisément :
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Docker} est utilisé pour exécuter les services d'infrastructure (Kafka, Zookeeper, PostgreSQL) dans des environnements isolés et reproductibles ;
+\item
+  \textbf{Apache Spark} est exécuté en local (hors conteneur), afin de faciliter le développement, le débogage et l'observation des traitements.
+\end{itemize}
+
+Cette approche permet de bénéficier à la fois :
+- de la \textbf{reproductibilité} offerte par Docker,
+- et de la \textbf{simplicité de développement} d'un Spark local.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Installation et configuration d'Apache Spark en local}\label{installation-et-configuration-dapache-spark-en-local}
+
+Le traitement streaming est réalisé à l'aide d'Apache Spark exécuté directement sur une machine Windows.
+
+\subsection{Installation d'Apache Spark}\label{installation-dapache-spark}
+
+La version suivante a été utilisée :
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Apache Spark 4.0.1} (\texttt{spark-4.0.1-bin-hadoop3.tgz})
+\end{itemize}
+
+Apache Spark est développé en \textbf{Scala} et repose sur l'écosystème Hadoop. Même lorsque les traitements sont écrits en Python (via PySpark), Spark s'exécute sur la \textbf{Java Virtual Machine (JVM)}.
+
+\subsection{Spécificités Windows}\label{spuxe9cificituxe9s-windows}
+
+Sous Windows, certaines dépendances Hadoop ne sont pas disponibles nativement. Afin d'assurer le bon fonctionnement de Spark, les éléments suivants ont été ajoutés :
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{winutils.exe}
+\item
+  \texttt{hadoop.dll}
+\end{itemize}
+
+Ces fichiers sont nécessaires pour :
+- la gestion correcte du système de fichiers,
+- certaines opérations internes de Spark et Hadoop.
+
+Sans ces composants, Spark peut démarrer mais échouer lors de traitements plus avancés.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Rôle de Docker dans le projet}\label{ruxf4le-de-docker-dans-le-projet}
+
+\subsection{Pourquoi utiliser Docker ?}\label{pourquoi-utiliser-docker}
+
+Docker est une plateforme de \textbf{conteneurisation} permettant d'exécuter des applications dans des environnements isolés, incluant toutes leurs dépendances.
+
+Dans le cadre de ce projet, Docker permet de :
+
+\begin{itemize}
+\tightlist
+\item
+  déployer rapidement les services nécessaires au streaming,
+\item
+  éviter les conflits de versions entre machines,
+\item
+  garantir un environnement d'exécution reproductible.
+\end{itemize}
+
+Contrairement à une machine virtuelle complète, Docker :
+
+\begin{itemize}
+\tightlist
+\item
+  partage le noyau du système hôte,
+\item
+  est plus léger,
+\item
+  démarre plus rapidement.
+\end{itemize}
+
+\subsection{Docker Desktop sous Windows}\label{docker-desktop-sous-windows}
+
+Docker repose sur des mécanismes propres au noyau Linux. Sous Windows, Docker Desktop s'appuie donc sur \textbf{WSL2} ou \textbf{Hyper-V} afin d'exécuter une machine Linux légère permettant au moteur Docker de fonctionner correctement.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{\texorpdfstring{Orchestration des services avec \emph{docker-compose}}{Orchestration des services avec docker-compose}}\label{orchestration-des-services-avec-docker-compose}
+
+Afin de gérer plusieurs services simultanément, un fichier \texttt{docker-compose.yml} a été utilisé.
+
+Ce fichier permet de :
+
+\begin{itemize}
+\tightlist
+\item
+  définir plusieurs services dans un seul document,
+\item
+  configurer les ports, volumes et réseaux,
+\item
+  lancer ou arrêter l'ensemble de l'infrastructure avec une seule commande.
+\end{itemize}
+
+\subsection{Services déployés}\label{services-duxe9ployuxe9s}
+
+Dans le cadre de ce projet, \texttt{docker-compose} permet de lancer :
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Zookeeper}, nécessaire à la coordination de Kafka ;
+\item
+  \textbf{Kafka}, utilisé pour la gestion des flux de données en temps réel ;
+\item
+  \textbf{PostgreSQL}, utilisé pour le stockage persistant des données traitées.
+\end{itemize}
+
+Apache Spark n'est pas conteneurisé et reste exécuté localement.
+
+\subsection{Image Docker et conteneur Docker}\label{image-docker-et-conteneur-docker}
+
+Il convient de distinguer :
+
+\begin{itemize}
+\tightlist
+\item
+  une \textbf{image Docker}, qui correspond à un modèle statique contenant l'application et ses dépendances ;
+\item
+  un \textbf{conteneur Docker}, qui est une instance active créée à partir de cette image.
+\end{itemize}
+
+\subsection{Lancement des services}\label{lancement-des-services}
+
+Les services sont démarrés à l'aide de la commande suivante :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{docker}\NormalTok{ compose up }\AttributeTok{{-}d}
+\end{Highlighting}
+\end{Shaded}
+
+Une fois cette commande exécutée, l'ensemble des services devient accessible via les ports définis dans le fichier de configuration.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Kafka : organisation du streaming des données}\label{kafka-organisation-du-streaming-des-donnuxe9es}
+
+Le cœur de l'architecture de streaming repose sur \textbf{Apache Kafka}, qui joue le rôle de système de messagerie distribué et tolérant aux pannes. Kafka permet de découpler la \textbf{production des données} de leur \textbf{traitement}, tout en garantissant un débit élevé et une faible latence.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{\texorpdfstring{Notion de \emph{topic} Kafka}{Notion de topic Kafka}}\label{notion-de-topic-kafka}
+
+Dans Kafka, les données sont organisées autour du concept de \textbf{topic}.\\
+Un topic peut être vu comme un \textbf{canal de diffusion} dans lequel circulent des messages.
+
+Un topic met en relation deux types d'acteurs :
+
+\begin{itemize}
+\tightlist
+\item
+  un \textbf{producer}, qui publie (écrit) les messages dans le topic ;
+\item
+  un \textbf{consumer}, qui s'abonne au topic pour lire les messages.
+\end{itemize}
+
+Chaque topic est découpé en \textbf{partitions}. Cette organisation permet :
+
+\begin{itemize}
+\tightlist
+\item
+  le \textbf{parallélisme}, car plusieurs consommateurs peuvent lire différentes partitions en parallèle ;
+\item
+  la \textbf{montée en charge}, en répartissant les données sur plusieurs partitions ;
+\item
+  la \textbf{conservation temporaire des messages}, ce qui permet de relire les données si nécessaire.
+\end{itemize}
+
+Kafka garantit ainsi un stockage fiable des flux entrants, même en cas de pic de charge ou de ralentissement du système de traitement.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Topic utilisé dans le projet}\label{topic-utilisuxe9-dans-le-projet}
+
+Dans le cadre de ce projet, un seul topic Kafka a été créé :
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{projet-bdcc}
+\end{itemize}
+
+Ce topic centralise l'ensemble des messages de marché transmis en temps réel depuis la plateforme Binance.\\
+Il constitue le point d'entrée unique des données streaming avant leur traitement par Apache Spark.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Extraction des données en temps réel : WebSocket Binance vers Kafka}\label{extraction-des-donnuxe9es-en-temps-ruxe9el-websocket-binance-vers-kafka}
+
+\subsection{Principe du WebSocket}\label{principe-du-websocket}
+
+Un \textbf{WebSocket} est un protocole de communication permettant d'établir une connexion persistante entre un client et un serveur.\\
+Contrairement aux requêtes HTTP classiques, la connexion reste ouverte et permet l'échange de données \textbf{en continu}, sans avoir à relancer de nouvelles requêtes.
+
+Ce mécanisme est particulièrement adapté aux cas d'usage temps réel, où les données sont produites de manière fréquente et imprévisible.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Flux Binance utilisé}\label{flux-binance-utilisuxe9}
+
+Les données de marché sont récupérées à partir du flux WebSocket public fourni par Binance : \url{wss://stream.binance.com:9443/ws/!miniTicker@arr}
+
+Ce flux diffuse en continu des informations de marché pour un grand nombre de paires de cryptomonnaies.\\
+Les messages sont transmis sous forme \textbf{JSON}, chaque message correspondant à un événement de marché (mise à jour de prix, volumes, etc.).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Envoi des données vers Kafka}\label{envoi-des-donnuxe9es-vers-kafka}
+
+Une fois la connexion WebSocket établie :
+
+\begin{itemize}
+\tightlist
+\item
+  chaque message reçu est immédiatement pris en charge par un \textbf{Kafka Producer} ;
+\item
+  le message est publié dans le topic \texttt{projet-bdcc}.
+\end{itemize}
+
+Kafka joue ainsi le rôle de \textbf{tampon fiable} entre la source de données (Binance) et le moteur de calcul (Apache Spark).\\
+Cette architecture permet de :
+
+\begin{itemize}
+\tightlist
+\item
+  absorber les variations de débit des données entrantes ;
+
+  \begin{itemize}
+  \tightlist
+  \item
+    garantir qu'aucune donnée ne soit perdue ;
+  \end{itemize}
+\item
+  découpler la collecte des données de leur traitement analytique.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Traitement des flux avec Spark Structured Streaming}\label{traitement-des-flux-avec-spark-structured-streaming}
+
+Les messages stockés dans Kafka sont ensuite consommés par Apache Spark à l'aide du module \textbf{Structured Streaming}.
+
+Spark Structured Streaming permet de traiter des flux de données continus en s'appuyant sur le modèle des \textbf{DataFrames}, déjà utilisé pour les traitements batch.
+
+Concrètement, Spark assure les opérations suivantes :
+
+\begin{itemize}
+\tightlist
+\item
+  lecture continue des messages depuis le topic Kafka ;
+\item
+  parsing et désérialisation des messages JSON ;
+\item
+  normalisation des champs (prix, volumes, horodatage, symboles, etc.) ;
+\item
+  application de transformations et de calculs analytiques en temps réel.
+\end{itemize}
+
+Grâce à cette approche, les traitements streaming restent proches des traitements batch classiques, ce qui facilite :
+
+\begin{itemize}
+\tightlist
+\item
+  la compréhension du code,
+\item
+  la maintenance,
+\item
+  et l'évolution du pipeline analytique.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Stockage des données traitées dans PostgreSQL}\label{stockage-des-donnuxe9es-traituxe9es-dans-postgresql}
+
+Une fois les données traitées par Spark, elles sont stockées dans une base de données relationnelle afin d'assurer leur persistance et leur exploitation ultérieure.
+
+Dans l'architecture mise en place :
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{PostgreSQL} s'exécute dans un conteneur Docker ;
+\item
+  Apache Spark écrit les données via une connexion \textbf{JDBC} ;
+\item
+  les données sont insérées ou mises à jour selon la logique définie dans le projet.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Dashboard}\label{dashboard}
+
+Un tableau de bord interactif a été développé avec \textbf{Streamlit} afin de visualiser, en quasi temps réel, les données de marché issues de Binance et traitées par le pipeline de streaming.
+
+\subsection{Architecture et flux de données}\label{architecture-et-flux-de-donnuxe9es}
+
+Le dashboard se connecte directement à la base \textbf{PostgreSQL} (via \texttt{SQLAlchemy}) contenant une table \texttt{projet\_bdcc}. À chaque rafraîchissement, l'application exécute une requête SQL filtrant les observations selon :
+
+\begin{itemize}
+\tightlist
+\item
+  une sélection de cryptomonnaies (\texttt{symbol}) choisie dans la barre latérale ;
+\item
+  une limite d'observations (\texttt{LIMIT}) afin de contrôler le volume chargé en mémoire ;
+\item
+  un tri temporel sur \texttt{timestamp\_ts} afin de reconstruire correctement les séries temporelles.
+\end{itemize}
+
+Les données sont ensuite converties en \texttt{DataFrame} Pandas pour permettre la production rapide de métriques et de graphiques.
+
+\subsection{Rafraîchissement automatique et logique de cache}\label{rafrauxeechissement-automatique-et-logique-de-cache}
+
+Le suivi temps réel est assuré par un \textbf{auto-refresh} (\texttt{streamlit\_autorefresh}) déclenché toutes les \texttt{REFRESH\_INTERVAL\ =\ 5} secondes. Ce mécanisme permet de recharger les données en continu sans intervention manuelle.
+
+Pour éviter des requêtes inutiles et améliorer la performance, le chargement est encapsulé dans une fonction décorée par \texttt{@st.cache\_data} avec un \emph{TTL} (Time To Live). Ainsi, sur un court intervalle, Streamlit réutilise le résultat en cache plutôt que de relancer systématiquement la requête.
+
+\subsection{Enrichissement des données : indicateurs calculés côté dashboard}\label{enrichissement-des-donnuxe9es-indicateurs-calculuxe9s-cuxf4tuxe9-dashboard}
+
+Après chargement, l'application calcule plusieurs indicateurs dérivés afin d'obtenir des mesures directement interprétables :
+
+\begin{itemize}
+\item
+  \textbf{Variation relative (\%)} : Cet indicateur mesure le rendement sur la période observée.
+\item
+  \textbf{Volatilité relative} : Il donne une approximation de l'amplitude des fluctuations, normalisée par le prix.
+\item
+  \textbf{Spread} : Il représente l'écart absolu entre le maximum et le minimum observés sur la période.
+\end{itemize}
+
+Ces calculs sont effectués à l'affichage afin de rendre l'interface autonome, tout en laissant la persistance se concentrer sur les variables brutes essentielles.
+
+\subsection{Paramétrage utilisateur (Sidebar)}\label{paramuxe9trage-utilisateur-sidebar}
+
+La barre latérale permet :
+
+\begin{itemize}
+\tightlist
+\item
+  de sélectionner les cryptomonnaies à suivre (\texttt{multiselect}) à partir de la liste des symboles disponibles en base ;
+\item
+  de filtrer la période d'observation (\texttt{1H}, \texttt{24H}, \texttt{7J}, \texttt{30J}, \texttt{Tout}) via un filtre temporel appliqué sur \texttt{timestamp\_ts} ;
+\end{itemize}
+
+Ce choix d'interface permet à l'utilisateur d'adapter dynamiquement le périmètre d'analyse sans modifier le code.
+
+\subsection{Organisation fonctionnelle du dashboard (onglets)}\label{organisation-fonctionnelle-du-dashboard-onglets}
+
+Le dashboard est structuré en cinq onglets principaux, chacun répondant à un besoin analytique complémentaire.
+
+\subsubsection{\texorpdfstring{\emph{Overview} : résumé par actif}{Overview : résumé par actif}}\label{overview-ruxe9sumuxe9-par-actif}
+
+L'onglet \textbf{Overview} fournit, pour chaque crypto sélectionnée :
+
+\begin{itemize}
+\tightlist
+\item
+  le dernier prix de clôture ;
+\item
+  la variation absolue et relative sur la période filtrée ;
+\item
+  des statistiques agrégées : prix moyen, maximum, minimum, volatilité moyenne et volume cumulé.
+\end{itemize}
+
+Ces métriques sont affichées sous forme de \emph{cards} et de blocs synthétiques afin de faciliter une lecture rapide de l'état du marché.
+
+\subsubsection{\texorpdfstring{\emph{Graphiques} : volume et tendances}{Graphiques : volume et tendances}}\label{graphiques-volume-et-tendances}
+
+L'onglet \textbf{Graphiques} propose, pour chaque crypto :
+
+\begin{itemize}
+\tightlist
+\item
+  un graphique \emph{candlestick} (Open/High/Low/Close) ;
+\item
+  deux \textbf{moyennes mobiles} (\texttt{MA7}, \texttt{MA25}) pour visualiser la tendance ;
+\item
+  un histogramme de \textbf{volume} superposé.
+\end{itemize}
+
+L'objectif est de combiner sur une même vue :
+
+\begin{itemize}
+\tightlist
+\item
+  la dynamique des prix,
+\item
+  les zones de volatilité,
+\item
+  et l'intensité des échanges (liquidité via le volume).
+\end{itemize}
+
+\subsubsection{\texorpdfstring{\emph{Top Cryptos} : classements et comparaison}{Top Cryptos : classements et comparaison}}\label{top-cryptos-classements-et-comparaison}
+
+L'onglet \textbf{Top Cryptos} construit des classements à partir de la dernière observation de chaque symbole :
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Top 5 par volume} (actifs les plus échangés) ;
+\item
+  \textbf{Top Gainers} (plus fortes hausses, via \texttt{pct\_change}) ;
+\item
+  \textbf{Top Losers} (plus fortes baisses).
+\end{itemize}
+
+Deux visualisations complémentaires sont proposées :
+
+\begin{itemize}
+\tightlist
+\item
+  évolution des \emph{gainers} sous forme d'indice base 100 (comparabilité des trajectoires) ;
+\item
+  barres de variation (\%) pour les \emph{losers} (lecture immédiate des chutes).
+\end{itemize}
+
+\subsubsection{\texorpdfstring{\emph{Anomalies} : alertes de marché}{Anomalies : alertes de marché}}\label{anomalies-alertes-de-marchuxe9}
+
+L'onglet \textbf{Anomalies} détecte des comportements atypiques sur la dernière observation disponible :
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Variations extrêmes} : \(|pct\_change| > 5\%\)\\
+\item
+  \textbf{Volatilité élevée} : sélection des symboles au-dessus du 3e quartile de \texttt{volatility}
+\end{itemize}
+
+Les anomalies sont accompagnées :
+
+\begin{itemize}
+\tightlist
+\item
+  de tableaux stylisés (gradients),
+\item
+  et de graphiques en barres pour synthétiser les alertes.
+\end{itemize}
+
+Cette partie vise à fournir un mécanisme simple de \emph{surveillance} du marché, utile pour identifier rapidement les actifs ``instables'' ou ``en mouvement''.
+
+\subsubsection{\texorpdfstring{\emph{Détails Crypto} : focus sur un actif}{Détails Crypto : focus sur un actif}}\label{duxe9tails-crypto-focus-sur-un-actif}
+
+L'onglet \textbf{Détails Crypto} permet une analyse approfondie d'un actif choisi :
+
+\begin{itemize}
+\tightlist
+\item
+  tableau récapitulatif des dernières valeurs (Open, Close, High, Low, spread, variation, volatilité, volume) ;
+\item
+  graphique High/Low + moyennes mobiles ;
+\item
+  graphique de volume ;
+\item
+  historique complet formaté (table interactive) avec mise en évidence de la variation et de la volatilité.
+\end{itemize}
+
+Cette vue détaillée permet à l'utilisation, après une observation globale, d'explorer un actif en profondeur.
+
+\subsubsection{Apport du dashboard dans le pipeline streaming}\label{apport-du-dashboard-dans-le-pipeline-streaming}
+
+Le dashboard Streamlit matérialise la dernière étape du pipeline en offrant :
+
+\begin{itemize}
+\tightlist
+\item
+  une \textbf{visualisation quasi temps réel} des données ingérées en streaming,
+\item
+  une capacité de \textbf{monitoring} via des indicateurs et alertes,
+\item
+  une \textbf{interface interactive} facilitant l'exploration des séries temporelles et des anomalies,
+\item
+  une exploitation directe des données persistées dans PostgreSQL, sans dépendre d'un environnement de développement.
+\end{itemize}
+
+En pratique, il constitue un composant clé pour démontrer la valeur du streaming : au lieu d'attendre un traitement batch, l'information est consultable dès qu'elle est disponible dans la base, avec un rafraîchissement automatique.
+
+\chapter{Forces et limites d'Apache Spark}\label{forces-et-limites-dapache-spark}
+
+Cette section propose une synthèse critique des principaux \textbf{atouts} et \textbf{limites} d'Apache Spark. L'objectif est de mettre en évidence les situations dans lesquelles Spark constitue une solution particulièrement adaptée, ainsi que les contraintes techniques qu'il convient de prendre en compte lors de son utilisation.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{1. Forces d'Apache Spark}\label{forces-dapache-spark}
+
+\subsection{1.1 Performances élevées grâce au calcul en mémoire}\label{performances-uxe9levuxe9es-gruxe2ce-au-calcul-en-muxe9moire}
+
+L'un des principaux atouts d'Apache Spark réside dans son modèle de calcul \textbf{in-memory}.\\
+Contrairement à Hadoop MapReduce, qui écrit systématiquement les résultats intermédiaires sur disque, Spark conserve les données en mémoire vive (RAM) lorsque cela est possible.
+
+Ce mécanisme permet :
+- une réduction significative des temps de latence,
+- des performances très élevées pour les traitements itératifs,
+- une exécution rapide des algorithmes analytiques et de machine learning.
+
+Dans les cas pratiques étudiés, ce modèle est particulièrement adapté :
+- au calcul fréquent d'indicateurs de marché,
+- à l'analyse répétée de fenêtres temporelles,
+- aux agrégations complexes sur des volumes importants de données.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1.2 Un moteur unifié pour différents types de traitements}\label{un-moteur-unifiuxe9-pour-diffuxe9rents-types-de-traitements}
+
+Apache Spark se distingue par sa \textbf{polyvalence}. Il repose sur un moteur unique capable de gérer :
+- le traitement \textbf{batch} de grands volumes de données,
+- le \textbf{streaming} quasi temps réel (Structured Streaming),
+- les requêtes \textbf{SQL} (Spark SQL),
+- les algorithmes de \textbf{machine learning} (MLlib),
+- le traitement de graphes (GraphX).
+
+Cette unification présente plusieurs avantages :
+- un même modèle de programmation pour des cas d'usage variés,
+- une réduction de la complexité logicielle,
+- une meilleure cohérence dans les pipelines de données.
+
+Dans le cadre de ce projet, Spark a permis d'implémenter à la fois :
+- des traitements batch pour l'analyse consolidée des données,
+- des traitements streaming pour l'analyse en continu des flux temps réel.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1.3 Scalabilité et parallélisme}\label{scalabilituxe9-et-paralluxe9lisme}
+
+Spark est conçu pour fonctionner :
+- sur une \textbf{machine unique} (mode local),
+- ou sur un \textbf{cluster distribué} composé de plusieurs nœuds.
+
+Grâce au découpage automatique des données en partitions et à l'exécution parallèle des tâches, Spark permet :
+- une montée en charge progressive,
+- une exploitation efficace des ressources CPU et mémoire,
+- une adaptation à des volumes de données croissants.
+
+Cette caractéristique rend Spark particulièrement adapté aux environnements Big Data et aux architectures Cloud.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1.4 Résilience et tolérance aux pannes}\label{ruxe9silience-et-toluxe9rance-aux-pannes}
+
+Apache Spark intègre des mécanismes avancés de \textbf{tolérance aux pannes}.\\
+Les données sont représentées sous forme de structures immuables (RDDs ou DataFrames), associées à une logique de reconstruction basée sur le \textbf{DAG (Directed Acyclic Graph)}.
+
+En cas de défaillance :
+- Spark est capable de recalculer automatiquement les partitions perdues,
+- l'exécution peut se poursuivre sans redémarrage complet du job.
+
+Cette résilience est essentielle dans des environnements distribués, où les pannes matérielles ou logicielles sont fréquentes.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{2. Limites d'Apache Spark}\label{limites-dapache-spark}
+
+\subsection{2.1 Forte consommation de ressources mémoire}\label{forte-consommation-de-ressources-muxe9moire}
+
+La principale contrepartie du calcul en mémoire est la \textbf{consommation élevée de RAM}.\\
+Pour fonctionner efficacement, Spark nécessite :
+- une quantité suffisante de mémoire,
+- un dimensionnement précis des ressources,
+- une configuration adaptée (gestion des partitions, cache, persistence).
+
+Dans les environnements Cloud ou sur des machines limitées, cela peut entraîner :
+- un coût matériel ou financier élevé,
+- des problèmes de performance si la mémoire est insuffisante.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.2 Streaming basé sur le micro-batching}\label{streaming-basuxe9-sur-le-micro-batching}
+
+Bien que Spark Structured Streaming permette le traitement de flux continus, il repose sur un modèle de \textbf{micro-batching}.\\
+Les données sont traitées par petits lots successifs, et non strictement événement par événement.
+
+Cela implique :
+- une latence faible mais non nulle,
+- une légère différence avec le ``vrai'' temps réel.
+
+Pour des applications nécessitant une latence extrêmement faible (par exemple, trading haute fréquence ou détection instantanée d'événements critiques), d'autres solutions comme \textbf{Apache Flink} peuvent être plus adaptées.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.3 Complexité de l'optimisation des performances}\label{complexituxe9-de-loptimisation-des-performances}
+
+Bien que l'API Spark soit relativement accessible, l'optimisation fine des performances peut s'avérer complexe, notamment pour :
+- le choix du nombre de partitions,
+- la gestion du cache mémoire,
+- l'équilibrage des ressources,
+- la compréhension des plans d'exécution (DAG, stages, tasks).
+
+Cette complexité peut constituer une barrière pour les débutants et nécessite une bonne compréhension des mécanismes internes de Spark.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.4 Moins adapté à la gestion d'un très grand nombre de petits fichiers}\label{moins-adaptuxe9-uxe0-la-gestion-dun-truxe8s-grand-nombre-de-petits-fichiers}
+
+Spark peut être moins performant lorsqu'il est confronté à :
+- un très grand nombre de fichiers de petite taille,
+- des accès disque fragmentés.
+
+Dans ce cas, des solutions complémentaires (compaction des fichiers, formats optimisés comme Parquet, ou systèmes spécialisés) sont souvent nécessaires.
+
+\chapter{Conclusion générale}\label{conclusion-guxe9nuxe9rale}
+
+Ce projet d'initiation au Big Data et au Cloud Computing a permis de mettre en œuvre, de manière concrète, les principaux concepts abordés en cours à travers l'étude d'un cas pratique réel sur l'analyse des données de marché des cryptomonnaies.
+
+Dans un premier temps, le travail a mis en évidence les limites des approches traditionnelles de traitement des données face à des volumes importants, des flux continus et des exigences de réactivité accrues. Ces constats ont conduit à l'utilisation d'Apache Spark, une technologie Big Data moderne, capable de répondre à ces enjeux grâce à son modèle de calcul distribué et en mémoire.
+
+La première partie pratique du projet s'est concentrée sur le \textbf{traitement batch}. À partir des données de marché collectées depuis la plateforme Binance et stockées dans une base PostgreSQL, Apache Spark a été utilisé pour construire des indicateurs analytiques pertinents (rendement, volatilité, volume, classements Top 5). Cette approche a permis de produire des analyses consolidées, synthétisées sous la forme de rapports HTML automatisés, facilitant l'interprétation des résultats et leur diffusion. Le traitement batch s'est révélé particulièrement adapté aux analyses globales et aux besoins de reporting périodique.
+
+La seconde partie du projet a porté sur le \textbf{traitement streaming}, illustrant la capacité de Spark à gérer des flux de données quasi temps réel. Grâce à l'intégration de Kafka et à l'utilisation de WebSockets pour la récupération des données Binance, un pipeline de streaming complet a été mis en place. Apache Spark Structured Streaming a permis de consommer, transformer et stocker les données en continu, tout en conservant un modèle de programmation proche de celui des traitements batch. Cette approche a mis en évidence l'intérêt du streaming pour des cas d'usage nécessitant une réactivité accrue et une surveillance continue des données de marché.
+
+L'architecture hybride adoptée, combinant Spark en local et des services d'infrastructure conteneurisés via Docker (Kafka, Zookeeper, PostgreSQL), a également permis de souligner l'importance de la reproductibilité et de la modularité dans les projets Big Data. L'utilisation de Docker a facilité le déploiement des services, tandis que Spark a assuré la cohérence des traitements analytiques.
+
+Au-delà des résultats obtenus, ce projet a permis de mieux comprendre les \textbf{forces et limites d'Apache Spark}. Si Spark offre des performances élevées, une grande polyvalence et une forte capacité de montée en charge, son utilisation efficace nécessite une bonne gestion des ressources et une compréhension des compromis techniques, notamment en matière de mémoire et de latence en streaming.
+
+En conclusion, ce travail illustre la manière dont les technologies Big Data et Cloud peuvent être mobilisées pour construire des pipelines de données complets, allant de la collecte à l'analyse, en passant par le stockage et la visualisation. Il constitue une base solide pour aborder des architectures plus avancées et des cas d'usage industriels, tout en offrant une compréhension concrète des enjeux actuels du traitement des données massives.
+
+\chapter{Ressources bibliographiques}\label{ressources-bibliographiques}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Apache Spark et Big Data}\label{apache-spark-et-big-data}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{AWS} --- \emph{Qu'est-ce qu'Apache Spark ?}\\
+  Présentation générale d'Apache Spark, de ses principes fondamentaux et de ses cas d'usage dans le Big Data et le Cloud.\\
+  \url{https://aws.amazon.com/fr/what-is/apache-spark/}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Streaming de données et Kafka}\label{streaming-de-donnuxe9es-et-kafka}
+
+\begin{itemize}
+\item
+  \textbf{Confluent} --- \emph{Kafka Basics}\\
+  Introduction aux concepts clés de Kafka (topics, producers, consumers, partitions), utile pour comprendre les architectures de streaming.\\
+  \url{https://developer.confluent.io/learn-kafka/}
+\item
+  \textbf{Adaltas} --- \emph{Spark Streaming Data Pipelines with Structured Streaming}\\
+  Article détaillant la conception de pipelines de données temps réel à l'aide de Spark Structured Streaming.\\
+  \url{https://www.adaltas.com/fr/2019/04/18/spark-streaming-data-pipelines-structured-streaming/}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Conteneurisation et Docker}\label{conteneurisation-et-docker}
+
+\begin{itemize}
+\item
+  \textbf{Docker Inc.} --- \emph{Docker Documentation}\\
+  Documentation officielle sur Docker, Docker Desktop et les principes de la conteneurisation.\\
+  \url{https://docs.docker.com/}
+\item
+  \textbf{Subham Kharwal} --- \emph{Docker Images Repository}\\
+  Exemples d'images Docker et bonnes pratiques de structuration de conteneurs.\\
+  \url{https://github.com/subhamkharwal/docker-images?tab=readme-ov-file}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Bases de données relationnelles}\label{bases-de-donnuxe9es-relationnelles}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{PostgreSQL Global Development Group} --- \emph{PostgreSQL Documentation}\\
+  Documentation officielle du système de gestion de base de données PostgreSQL, utilisée pour le stockage des données du projet.\\
+  \url{https://www.postgresql.org/docs/}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Données financières et API Binance}\label{donnuxe9es-financiuxe8res-et-api-binance}
+
+\begin{itemize}
+\item
+  \textbf{Binance} --- \emph{Plateforme de trading Spot}\\
+  Source des données financières exploitées dans le projet.\\
+  \url{https://www.binance.com/fr}
+\item
+  \textbf{Binance Developers} --- \emph{Binance Spot API Documentation}\\
+  Documentation officielle des API REST et WebSocket permettant l'accès programmatique aux données de marché.\\
+  \url{https://developers.binance.com/docs/binance-spot-api-docs}
+\end{itemize}
+
+  \bibliography{book.bib}
+
+\end{document}

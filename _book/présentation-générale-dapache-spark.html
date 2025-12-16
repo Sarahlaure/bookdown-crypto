@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Présentation générale d’Apache Spark | _main.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Présentation générale d’Apache Spark | _main.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Présentation générale d’Apache Spark | _main.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="méthodologie-de-traitement-avec-apache-spark.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link rel="shortcut icon" href="images/bookdown.ico" type="image/x-icon">
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li style="text-align:center;">
+  <img src="images/image2.png" style="max-width:200px; width:100%; height:auto; display:inline-block; margin-bottom:0.35em;">
+</li>
+<li><a href="index.html"> Apache Spark</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Apache Spark</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#contexte-général-lexplosion-des-données"><i class="fa fa-check"></i><b>2.1</b> Contexte général : l’explosion des données</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#limites-des-approches-traditionnelles-sql-et-hadoop"><i class="fa fa-check"></i><b>2.2</b> Limites des approches traditionnelles : SQL et Hadoop</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#apache-spark-une-réponse-aux-besoins-modernes-du-big-data"><i class="fa fa-check"></i><b>2.3</b> Apache Spark : une réponse aux besoins modernes du Big Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html"><i class="fa fa-check"></i><b>3</b> Présentation générale d’Apache Spark</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html#quest-ce-quapache-spark"><i class="fa fa-check"></i><b>3.1</b> Qu’est-ce qu’Apache Spark ?</a></li>
+<li class="chapter" data-level="3.2" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html#philosophie-et-objectifs-de-spark"><i class="fa fa-check"></i><b>3.2</b> Philosophie et objectifs de Spark</a></li>
+<li class="chapter" data-level="3.3" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html#concepts-fondamentaux-de-spark"><i class="fa fa-check"></i><b>3.3</b> Concepts fondamentaux de Spark</a></li>
+<li class="chapter" data-level="3.4" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html#fonctionnement-général-dapache-spark"><i class="fa fa-check"></i><b>3.4</b> Fonctionnement général d’Apache Spark</a></li>
+<li class="chapter" data-level="3.5" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html#architecture-de-spark"><i class="fa fa-check"></i><b>3.5</b> Architecture de Spark</a></li>
+<li class="chapter" data-level="3.6" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html#principaux-modules-de-spark"><i class="fa fa-check"></i><b>3.6</b> Principaux modules de Spark</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="méthodologie-de-traitement-avec-apache-spark.html"><a href="méthodologie-de-traitement-avec-apache-spark.html"><i class="fa fa-check"></i><b>4</b> Méthodologie de traitement avec Apache Spark</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="méthodologie-de-traitement-avec-apache-spark.html"><a href="méthodologie-de-traitement-avec-apache-spark.html#traitement-batch-par-lots"><i class="fa fa-check"></i><b>4.1</b> Traitement Batch (par lots)</a></li>
+<li class="chapter" data-level="4.2" data-path="méthodologie-de-traitement-avec-apache-spark.html"><a href="méthodologie-de-traitement-avec-apache-spark.html#traitement-streaming-par-flux"><i class="fa fa-check"></i><b>4.2</b> Traitement Streaming (par flux)</a></li>
+<li class="chapter" data-level="4.3" data-path="méthodologie-de-traitement-avec-apache-spark.html"><a href="méthodologie-de-traitement-avec-apache-spark.html#comparaison-batch-vs-streaming"><i class="fa fa-check"></i><b>4.3</b> Comparaison Batch vs Streaming</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="cadre-pratique-et-description-des-données.html"><a href="cadre-pratique-et-description-des-données.html"><i class="fa fa-check"></i><b>5</b> Cadre pratique et description des données</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="cadre-pratique-et-description-des-données.html"><a href="cadre-pratique-et-description-des-données.html#justification-du-choix-des-données-de-cryptomonnaies"><i class="fa fa-check"></i><b>5.1</b> Justification du choix des données de cryptomonnaies</a></li>
+<li class="chapter" data-level="5.2" data-path="cadre-pratique-et-description-des-données.html"><a href="cadre-pratique-et-description-des-données.html#collecte-des-données-connexion-à-la-plateforme-binance"><i class="fa fa-check"></i><b>5.2</b> Collecte des données : connexion à la plateforme Binance</a></li>
+<li class="chapter" data-level="5.3" data-path="cadre-pratique-et-description-des-données.html"><a href="cadre-pratique-et-description-des-données.html#description-des-variables-collectées"><i class="fa fa-check"></i><b>5.3</b> Description des variables collectées</a></li>
+<li class="chapter" data-level="5.4" data-path="cadre-pratique-et-description-des-données.html"><a href="cadre-pratique-et-description-des-données.html#métriques-analysées-et-intérêt-du-traitement-distribué"><i class="fa fa-check"></i><b>5.4</b> Métriques analysées et intérêt du traitement distribué</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html"><i class="fa fa-check"></i><b>6</b> Cas de traitement batch</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#mise-en-place-de-lenvironnement-de-travail"><i class="fa fa-check"></i><b>6.1</b> Mise en place de l’environnement de travail</a></li>
+<li class="chapter" data-level="6.2" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#connexion-aux-données-et-lecture-du-dernier-batch-disponible"><i class="fa fa-check"></i><b>6.2</b> Connexion aux données et lecture du dernier batch disponible</a></li>
+<li class="chapter" data-level="6.3" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#connexion-aux-données-et-sélection-du-dernier-batch"><i class="fa fa-check"></i><b>6.3</b> Connexion aux données et sélection du dernier batch</a></li>
+<li class="chapter" data-level="6.4" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#enrichissement-et-construction-des-indicateurs-de-marché"><i class="fa fa-check"></i><b>6.4</b> Enrichissement et construction des indicateurs de marché</a></li>
+<li class="chapter" data-level="6.5" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#agrégation-des-résultats-et-classements-top-5"><i class="fa fa-check"></i><b>6.5</b> Agrégation des résultats et classements « Top 5 »</a></li>
+<li class="chapter" data-level="6.6" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#génération-automatisée-dun-rapport-html"><i class="fa fa-check"></i><b>6.6</b> Génération automatisée d’un rapport HTML</a></li>
+<li class="chapter" data-level="6.7" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#envoi-automatique-du-rapport-par-courrier-électronique"><i class="fa fa-check"></i><b>6.7</b> Envoi automatique du rapport par courrier électronique</a></li>
+<li class="chapter" data-level="6.8" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#reproductibilité-du-traitement"><i class="fa fa-check"></i><b>6.8</b> Reproductibilité du traitement</a></li>
+<li class="chapter" data-level="6.9" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#exécution-du-batch"><i class="fa fa-check"></i><b>6.9</b> Exécution du batch</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html"><i class="fa fa-check"></i><b>7</b> Cas de traitement streaming</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#mise-en-place-de-lenvironnement-de-travail-1"><i class="fa fa-check"></i><b>7.1</b> Mise en place de l’environnement de travail</a></li>
+<li class="chapter" data-level="7.2" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#installation-et-configuration-dapache-spark-en-local"><i class="fa fa-check"></i><b>7.2</b> Installation et configuration d’Apache Spark en local</a></li>
+<li class="chapter" data-level="7.3" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#rôle-de-docker-dans-le-projet"><i class="fa fa-check"></i><b>7.3</b> Rôle de Docker dans le projet</a></li>
+<li class="chapter" data-level="7.4" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#orchestration-des-services-avec-docker-compose"><i class="fa fa-check"></i><b>7.4</b> Orchestration des services avec <em>docker-compose</em></a></li>
+<li class="chapter" data-level="7.5" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#kafka-organisation-du-streaming-des-données"><i class="fa fa-check"></i><b>7.5</b> Kafka : organisation du streaming des données</a></li>
+<li class="chapter" data-level="7.6" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#extraction-des-données-en-temps-réel-websocket-binance-vers-kafka"><i class="fa fa-check"></i><b>7.6</b> Extraction des données en temps réel : WebSocket Binance vers Kafka</a></li>
+<li class="chapter" data-level="7.7" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#traitement-des-flux-avec-spark-structured-streaming"><i class="fa fa-check"></i><b>7.7</b> Traitement des flux avec Spark Structured Streaming</a></li>
+<li class="chapter" data-level="7.8" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#stockage-des-données-traitées-dans-postgresql"><i class="fa fa-check"></i><b>7.8</b> Stockage des données traitées dans PostgreSQL</a></li>
+<li class="chapter" data-level="7.9" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#dashboard"><i class="fa fa-check"></i><b>7.9</b> Dashboard</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="forces-et-limites-dapache-spark.html"><a href="forces-et-limites-dapache-spark.html"><i class="fa fa-check"></i><b>8</b> Forces et limites d’Apache Spark</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="forces-et-limites-dapache-spark.html"><a href="forces-et-limites-dapache-spark.html#forces-dapache-spark"><i class="fa fa-check"></i><b>8.1</b> 1. Forces d’Apache Spark</a></li>
+<li class="chapter" data-level="8.2" data-path="forces-et-limites-dapache-spark.html"><a href="forces-et-limites-dapache-spark.html#limites-dapache-spark"><i class="fa fa-check"></i><b>8.2</b> 2. Limites d’Apache Spark</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="conclusion-générale.html"><a href="conclusion-générale.html"><i class="fa fa-check"></i><b>9</b> Conclusion générale</a></li>
+<li class="chapter" data-level="10" data-path="ressources-bibliographiques.html"><a href="ressources-bibliographiques.html"><i class="fa fa-check"></i><b>10</b> Ressources bibliographiques</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ressources-bibliographiques.html"><a href="ressources-bibliographiques.html#apache-spark-et-big-data"><i class="fa fa-check"></i><b>10.1</b> Apache Spark et Big Data</a></li>
+<li class="chapter" data-level="10.2" data-path="ressources-bibliographiques.html"><a href="ressources-bibliographiques.html#streaming-de-données-et-kafka"><i class="fa fa-check"></i><b>10.2</b> Streaming de données et Kafka</a></li>
+<li class="chapter" data-level="10.3" data-path="ressources-bibliographiques.html"><a href="ressources-bibliographiques.html#conteneurisation-et-docker"><i class="fa fa-check"></i><b>10.3</b> Conteneurisation et Docker</a></li>
+<li class="chapter" data-level="10.4" data-path="ressources-bibliographiques.html"><a href="ressources-bibliographiques.html#bases-de-données-relationnelles"><i class="fa fa-check"></i><b>10.4</b> Bases de données relationnelles</a></li>
+<li class="chapter" data-level="10.5" data-path="ressources-bibliographiques.html"><a href="ressources-bibliographiques.html#données-financières-et-api-binance"><i class="fa fa-check"></i><b>10.5</b> Données financières et API Binance</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publié avec bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="présentation-générale-dapache-spark" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Présentation générale d’Apache Spark<a href="présentation-générale-dapache-spark.html#présentation-générale-dapache-spark" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="quest-ce-quapache-spark" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Qu’est-ce qu’Apache Spark ?<a href="présentation-générale-dapache-spark.html#quest-ce-quapache-spark" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Apache Spark est un <strong>framework open source de calcul distribué</strong>, conçu pour le <strong>traitement efficace de données massives (Big Data)</strong>.<br />
+Il permet d’analyser de très grands volumes de données en exploitant le <strong>calcul parallèle</strong> sur plusieurs machines, tout en offrant une <strong>exécution rapide grâce au traitement en mémoire</strong>.</p>
+<p>Contrairement aux approches classiques basées sur des traitements sur disque, Spark a été pensé pour répondre aux besoins modernes du Big Data : <strong>vitesse</strong>, <strong>flexibilité</strong> et <strong>scalabilité</strong>.</p>
+<blockquote>
+<p><em>Apache Spark unifie le traitement batch, le streaming temps réel, l’analyse SQL et le machine learning au sein d’un même moteur.</em></p>
+</blockquote>
+<hr />
+</div>
+<div id="philosophie-et-objectifs-de-spark" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Philosophie et objectifs de Spark<a href="présentation-générale-dapache-spark.html#philosophie-et-objectifs-de-spark" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La conception de Spark repose sur trois principes fondamentaux :</p>
+<div id="vitesse" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Vitesse<a href="présentation-générale-dapache-spark.html#vitesse" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Spark est capable d’exécuter certains traitements <strong>jusqu’à 100 fois plus rapidement que Hadoop MapReduce</strong>, notamment grâce à :
+- l’exécution des calculs <strong>en mémoire (in-memory computing)</strong>,
+- la réduction des écritures disque,
+- l’optimisation automatique des plans d’exécution.</p>
+</div>
+<div id="facilité-dutilisation" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Facilité d’utilisation<a href="présentation-générale-dapache-spark.html#facilité-dutilisation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Spark propose des <strong>API simples et expressives</strong> dans plusieurs langages :
+- <strong>Scala</strong>, <strong>Python</strong>, <strong>Java</strong>, <strong>R</strong> et <strong>SQL</strong>.<br />
+Cela permet aux utilisateurs de développer des applications distribuées sans gérer directement la complexité du parallélisme.</p>
+</div>
+<div id="généralité" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Généralité<a href="présentation-générale-dapache-spark.html#généralité" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Spark est une plateforme <strong>polyvalente</strong>, capable de gérer :
+- le traitement <strong>batch</strong>,
+- le <strong>streaming temps réel</strong>,
+- l’analyse <strong>SQL</strong>,
+- le <strong>machine learning</strong>,
+- l’analyse de <strong>graphes</strong>.</p>
+<hr />
+</div>
+</div>
+<div id="concepts-fondamentaux-de-spark" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Concepts fondamentaux de Spark<a href="présentation-générale-dapache-spark.html#concepts-fondamentaux-de-spark" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="environnement-distribué-le-cluster" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Environnement distribué : le cluster<a href="présentation-générale-dapache-spark.html#environnement-distribué-le-cluster" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Un <strong>cluster</strong> est un ensemble de machines (nœuds) qui collaborent pour stocker et traiter les données.<br />
+Spark fonctionne dans cet environnement distribué afin de répartir le calcul et d’augmenter les performances.</p>
+</div>
+<div id="partitions" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Partitions<a href="présentation-générale-dapache-spark.html#partitions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les données sont découpées en <strong>partitions</strong>, chacune étant traitée indépendamment.<br />
+Ce découpage permet :
+- le <strong>traitement parallèle</strong>,
+- une meilleure utilisation des ressources,
+- une montée en charge efficace.</p>
+</div>
+<div id="rdd-et-dataframes" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> RDD et DataFrames<a href="présentation-générale-dapache-spark.html#rdd-et-dataframes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Les <strong>RDD (Resilient Distributed Datasets)</strong> sont la structure de données historique de Spark, distribuée et tolérante aux pannes.</li>
+<li>Aujourd’hui, les <strong>DataFrames</strong> et <strong>Datasets</strong> sont privilégiés car plus optimisés et plus simples à utiliser, tout en reposant sur les mêmes principes.</li>
+</ul>
+</div>
+<div id="transformations-et-actions" class="section level3 hasAnchor" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> Transformations et actions<a href="présentation-générale-dapache-spark.html#transformations-et-actions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Une <strong>transformation</strong> prépare un traitement (ex. <code>filter</code>, <code>map</code>) mais <strong>n’exécute pas immédiatement</strong> le calcul.</li>
+<li>Une <strong>action</strong> déclenche réellement l’exécution (ex. <code>count</code>, <code>collect</code>).</li>
+</ul>
+<p>Ce mécanisme repose sur le principe de <strong>lazy evaluation</strong>, qui permet à Spark d’optimiser le plan d’exécution.</p>
+</div>
+<div id="dag-directed-acyclic-graph" class="section level3 hasAnchor" number="3.3.5">
+<h3><span class="header-section-number">3.3.5</span> DAG (Directed Acyclic Graph)<a href="présentation-générale-dapache-spark.html#dag-directed-acyclic-graph" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le <strong>DAG (graphe orienté acyclique)</strong> est un <strong>plan logique d’exécution</strong> construit automatiquement par Spark à partir des transformations définies par l’utilisateur.</p>
+<p>Il représente :
+- l’ordre des opérations à effectuer,
+- les dépendances entre les transformations,
+- les étapes nécessaires avant toute exécution réelle.</p>
+<p>Le DAG permet à Spark :
+- d’optimiser l’enchaînement des opérations,
+- de retarder l’exécution grâce au principe de <em>lazy evaluation</em>,
+- de préparer efficacement la création des stages et des tasks.</p>
+<p>Aucune donnée n’est réellement traitée tant qu’une <strong>action</strong> n’est pas appelée.</p>
+</div>
+<div id="shuffle" class="section level3 hasAnchor" number="3.3.6">
+<h3><span class="header-section-number">3.3.6</span> Shuffle<a href="présentation-générale-dapache-spark.html#shuffle" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le <strong>shuffle</strong> correspond à un <strong>échange de données entre les différentes machines du cluster</strong>.</p>
+<p>Il intervient lors d’opérations nécessitant un regroupement ou une redistribution des données, telles que :
+- <code>groupBy</code>,
+- <code>join</code>,
+- <code>reduceByKey</code>,
+- <code>orderBy</code>.</p>
+<p>Le shuffle est une opération :
+- coûteuse en temps,
+- consommatrice de ressources (réseau et disque).</p>
+<p>Spark cherche donc à <strong>minimiser le nombre de shuffles</strong>, car ils ont un impact direct sur les performances globales de l’application.</p>
+</div>
+<div id="stages" class="section level3 hasAnchor" number="3.3.7">
+<h3><span class="header-section-number">3.3.7</span> Stages<a href="présentation-générale-dapache-spark.html#stages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les <strong>stages</strong> sont des <strong>étapes d’exécution</strong> dérivées du DAG.</p>
+<p>Un stage regroupe :
+- un ensemble d’opérations pouvant être exécutées <strong>sans échange de données entre les machines</strong>,
+- des transformations successives qui ne nécessitent pas de shuffle.</p>
+<p>Chaque fois qu’un shuffle est requis, Spark <strong>sépare le DAG en plusieurs stages</strong>.<br />
+Ainsi, le nombre de stages dépend directement de la structure des opérations et de la présence de shuffles.</p>
+</div>
+<div id="tasks" class="section level3 hasAnchor" number="3.3.8">
+<h3><span class="header-section-number">3.3.8</span> Tasks<a href="présentation-générale-dapache-spark.html#tasks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les <strong>tasks</strong> représentent la <strong>plus petite unité d’exécution</strong> dans Spark.</p>
+<p>Chaque stage est découpé en plusieurs tasks, et :
+- chaque task traite <strong>une partition de données</strong>,
+- les tasks s’exécutent <strong>en parallèle</strong> sur les executors du cluster.</p>
+<p>Ce mécanisme permet à Spark :
+- d’exploiter pleinement le parallélisme,
+- d’améliorer les performances,
+- d’assurer une bonne tolérance aux pannes.</p>
+<hr />
+</div>
+</div>
+<div id="fonctionnement-général-dapache-spark" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Fonctionnement général d’Apache Spark<a href="présentation-générale-dapache-spark.html#fonctionnement-général-dapache-spark" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Le fonctionnement de Spark peut être compris comme une succession d’étapes logiques allant de l’écriture du programme à l’exécution effective des calculs sur le cluster.</p>
+<div id="ecriture-du-programme" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Ecriture du programme<a href="présentation-générale-dapache-spark.html#ecriture-du-programme" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>L’utilisateur écrit un programme Spark en utilisant une API (Python, Scala, SQL, etc.) et définit une suite de transformations sur les données.</p>
+<p>À ce stade :
+- aucune donnée n’est encore traitée,
+- Spark se contente d’enregistrer les opérations demandées.</p>
+</div>
+<div id="construction-du-dag" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Construction du DAG<a href="présentation-générale-dapache-spark.html#construction-du-dag" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Lorsque l’utilisateur appelle une <strong>action</strong>, Spark analyse l’ensemble des transformations et construit un <strong>DAG</strong> représentant le plan logique d’exécution.</p>
+<p>Ce DAG permet à Spark :
+- d’identifier les dépendances entre les opérations,
+- d’optimiser l’ordre des calculs,
+- de détecter les points nécessitant des échanges de données (shuffles).</p>
+</div>
+<div id="découpage-en-stages" class="section level3 hasAnchor" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Découpage en stages<a href="présentation-générale-dapache-spark.html#découpage-en-stages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>À partir du DAG, Spark divise le plan d’exécution en <strong>stages</strong>.</p>
+<p>Chaque stage correspond à :
+- un ensemble d’opérations pouvant être exécutées localement,
+- une phase sans échange de données entre machines.</p>
+<p>Les frontières entre les stages sont généralement définies par les opérations de shuffle.</p>
+</div>
+<div id="création-et-exécution-des-tasks" class="section level3 hasAnchor" number="3.4.4">
+<h3><span class="header-section-number">3.4.4</span> Création et exécution des tasks<a href="présentation-générale-dapache-spark.html#création-et-exécution-des-tasks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Chaque stage est ensuite découpé en <strong>tasks</strong>, correspondant aux partitions des données.</p>
+<p>Les tasks sont :
+- distribuées aux executors,
+- exécutées en parallèle,
+- supervisées par le driver.</p>
+<p>Cette exécution parallèle permet à Spark de traiter efficacement de très grands volumes de données.</p>
+</div>
+<div id="collecte-des-résultats" class="section level3 hasAnchor" number="3.4.5">
+<h3><span class="header-section-number">3.4.5</span> Collecte des résultats<a href="présentation-générale-dapache-spark.html#collecte-des-résultats" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Une fois les tasks terminées :
+- les résultats sont agrégés,
+- renvoyés au driver si nécessaire,
+- ou stockés dans un système externe (HDFS, S3, base de données, etc.).</p>
+<p>Le traitement Spark est alors considéré comme terminé.</p>
+<hr />
+</div>
+</div>
+<div id="architecture-de-spark" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Architecture de Spark<a href="présentation-générale-dapache-spark.html#architecture-de-spark" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="le-driver-program" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Le Driver Program<a href="présentation-générale-dapache-spark.html#le-driver-program" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le <strong>Driver</strong> est le cerveau de l’application Spark. Il :
+- contient le code principal,
+- crée la <strong>SparkSession</strong>,
+- planifie les opérations,
+- distribue les tâches aux executors,
+- récupère les résultats.</p>
+<p>Le driver <strong>ne traite pas directement les données</strong>, il coordonne l’exécution.</p>
+</div>
+<div id="les-executors" class="section level3 hasAnchor" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Les Executors<a href="présentation-générale-dapache-spark.html#les-executors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les <strong>Executors</strong> sont des processus lancés sur les machines du cluster. Ils :
+- exécutent les tasks envoyées par le driver,
+- stockent temporairement les données en mémoire,
+- renvoient les résultats.</p>
+<p>Plus le nombre d’executors est élevé, plus le traitement est <strong>parallèle et performant</strong>.</p>
+</div>
+<div id="le-cluster-manager" class="section level3 hasAnchor" number="3.5.3">
+<h3><span class="header-section-number">3.5.3</span> Le Cluster Manager<a href="présentation-générale-dapache-spark.html#le-cluster-manager" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le <strong>Cluster Manager</strong> gère l’allocation des ressources (CPU, mémoire).<br />
+Spark peut fonctionner avec différents gestionnaires :
+- <strong>Standalone</strong>,
+- <strong>YARN</strong>,
+- <strong>Mesos</strong>,
+- <strong>Kubernetes</strong>, très utilisé dans les environnements Cloud.</p>
+<hr />
+</div>
+</div>
+<div id="principaux-modules-de-spark" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Principaux modules de Spark<a href="présentation-générale-dapache-spark.html#principaux-modules-de-spark" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="spark-sql" class="section level3 hasAnchor" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Spark SQL<a href="présentation-générale-dapache-spark.html#spark-sql" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Module dédié aux données structurées :
+- exécution de requêtes SQL distribuées,
+- manipulation de DataFrames/Datasets,
+- optimisation automatique via le <strong>Catalyst Optimizer</strong>,
+- lecture de formats comme Parquet, ORC, JSON, CSV.</p>
+</div>
+<div id="spark-streaming" class="section level3 hasAnchor" number="3.6.2">
+<h3><span class="header-section-number">3.6.2</span> Spark Streaming<a href="présentation-générale-dapache-spark.html#spark-streaming" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Module de traitement de flux de données en continu :
+- ingestion depuis Kafka, Kinesis, fichiers streamés,
+- fonctionnement par <strong>micro-batches</strong>,
+- adapté aux applications temps réel (monitoring, détection de fraude).</p>
+</div>
+<div id="mllib" class="section level3 hasAnchor" number="3.6.3">
+<h3><span class="header-section-number">3.6.3</span> MLlib<a href="présentation-générale-dapache-spark.html#mllib" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Bibliothèque de machine learning distribué :
+- régression, classification, clustering,
+- systèmes de recommandation,
+- pipelines de machine learning à grande échelle.</p>
+</div>
+<div id="graphx" class="section level3 hasAnchor" number="3.6.4">
+<h3><span class="header-section-number">3.6.4</span> GraphX<a href="présentation-générale-dapache-spark.html#graphx" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Module spécialisé dans l’analyse de graphes :
+- représentation de graphes distribués,
+- algorithmes comme PageRank ou Connected Components,
+- utile pour l’analyse de réseaux complexes.</p>
+</div>
+
+</div>
+</div>
+</div>
+<footer style="
+  margin-top:3.2em;
+  padding:0;
+  font-family: inherit;
+">
+  <!-- Bande supérieure (accent) -->
+  <div style="
+    height:6px;
+    background: linear-gradient(90deg, #0A1C34 0%, #1A4FA3 40%, #2D7FF9 100%);
+  "></div>
+
+  <!-- Fond footer -->
+  <div style="
+    background: radial-gradient(circle at top, rgba(45,127,249,0.14) 0%, rgba(10,28,52,0.00) 55%),
+                linear-gradient(180deg, #0A1C34 0%, #081A2F 100%);
+    color:#EAF2FF;
+    padding:22px 0;
+    border-top:1px solid rgba(255,255,255,0.08);
+  ">
+    <div style="
+      width:1100
+      margin:0 auto;
+      padding:0 16px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      align-items:center;
+      justify-content:space-between;
+    ">
+
+      <!-- Bloc gauche -->
+      <div style="min-width:260px;">
+        <div style="
+          display:flex;
+          align-items:center;
+          gap:10px;
+          margin-bottom:6px;
+        ">
+          <span style="
+            display:inline-flex;
+            width:34px; height:34px;
+            border-radius:10px;
+            background: rgba(45,127,249,0.18);
+            border:1px solid rgba(45,127,249,0.35);
+            align-items:center; justify-content:center;
+            font-size:16px;
+          ">⚡</span>
+
+          <div style="line-height:1.1;">
+            <div style="
+              font-weight:700;
+              font-size:0.98em;
+              letter-spacing:0.2px;
+            ">Spark — Traitement des données massives</div>
+            <div style="
+              font-size:0.82em;
+              color:rgba(234,242,255,0.78);
+              margin-top:2px;
+            ">Temps réel · Batch · Streaming</div>
+          </div>
+        </div>
+
+        <div style="
+          font-size:0.82em;
+          color:rgba(234,242,255,0.78);
+          line-height:1.35;
+        ">
+          ENSAE Dakar · ISEP 2 · <span style="white-space:nowrap;">2025–2026</span><br/>
+          Cours : <em>Initiation au Big Data &amp; Cloud Computing</em>
+        </div>
+      </div>
+
+      <!-- Bloc centre (membres) -->
+      <div style="
+        flex:1;
+        min-width:280px;
+        padding:12px 14px;
+        border-radius:14px;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.10);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      ">
+        <div style="
+          font-size:0.78em;
+          color:rgba(234,242,255,0.75);
+          text-transform:uppercase;
+          letter-spacing:0.08em;
+          margin-bottom:6px;
+          text-align:center;
+        ">Membres du groupe</div>
+
+        <div style="
+          font-size:0.86em;
+          line-height:1.35;
+          color:#EAF2FF;
+        ">
+          <strong>COMPAORE Bassirou</strong> ·
+          <strong>DIAKHATE Khadidiatou</strong> ·
+          <strong>DIALLO Aissatou</strong> ·
+          <strong>FOGWOUNG DJOUFACK Sarah-Laure</strong> ·
+          <strong>FOUMSOU Lawa Prosper</strong>
+        </div>
+      </div>
+
+      <!-- Bloc droit (liens) -->
+      <div style="min-width:240px; text-align:right;">
+        <div style="
+          font-size:0.78em;
+          color:rgba(234,242,255,0.75);
+          margin-bottom:8px;
+        "> Cliquez ici pour accéder à nos ressources </div>
+
+        <a href="https://github.com/Sarahlaure/projet-BDCC-2025---spark-real-time-data-processing-groupe7-"
+           target="_blank" rel="noopener"
+           style="
+             display:inline-block;
+             padding:9px 12px;
+             border-radius:12px;
+             background: rgba(45,127,249,0.18);
+             border:1px solid rgba(45,127,249,0.40);
+             color:#EAF2FF;
+             text-decoration:none;
+             font-weight:600;
+             font-size:0.84em;
+             margin-left:8px;
+           ">
+          GitHub ↗
+        </a>
+
+        <div style="
+          margin-top:10px;
+          font-size:0.78em;
+          color:rgba(234,242,255,0.55);
+        ">
+          © 2025–2026 · Groupe 7
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="méthodologie-de-traitement-avec-apache-spark.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": false,
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": null,
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+# Cadre pratique et description des données
+
+## Justification du choix des données de cryptomonnaies
+
+Dans le cadre de ce projet d’initiation au Big Data et au Cloud Computing, les données issues des marchés de cryptomonnaies ont été retenues comme cas d’étude. Ce choix repose sur des considérations à la fois techniques et méthodologiques.
+
+Les marchés de cryptomonnaies constituent un environnement particulièrement adapté à l’étude des systèmes Big Data, en raison de la nature **continue, volumineuse et fortement dynamique** des données produites. Contrairement aux marchés financiers traditionnels, ces plateformes fonctionnent sans interruption, générant des flux de données en temps réel 24 heures sur 24 et 7 jours sur 7.
+
+Les données de cryptomonnaies présentent ainsi les principales caractéristiques du Big Data (les 3V) :
+- un **volume élevé**, lié au nombre important de transactions,
+- une **vélocité importante**, avec des mises à jour fréquentes des prix et volumes,
+- une **variété des formats**, incluant des données numériques, temporelles et semi-structurées.
+
+Ce contexte en fait un support pertinent pour illustrer les problématiques de traitement distribué, ainsi que la distinction entre traitements batch et traitements streaming.
+
+---
+
+## Collecte des données : connexion à la plateforme Binance
+
+Pour la collecte des données, nous nous sommes connectés à la plateforme **Binance**, l’une des plus grandes plateformes d’échange de cryptomonnaies au monde, via ses **API publiques**.
+
+<div style="max-width: 980px; margin: 0 auto; padding: 8px 0;">
+  <img src="images/binance-1.png" style="width:100%; border-radius:14px; box-shadow: 0 10px 26px rgba(0,0,0,0.10);">
+  <div style="font-size:0.9em; color:#555; margin-top:8px; text-align:center;">
+  </div>
+</div>
+
+
+Techniquement, Binance met à disposition des **flux de données en temps réel (WebSocket)** permettant de recevoir en continu les informations de marché pour différentes paires de cryptomonnaies. Une fois la connexion établie, les données sont transmises **événement par événement**, sans interruption, sous forme de messages structurés.
+
+Ces messages sont ensuite publiés sur un **topic Kafka**, jouant le rôle de couche d’ingestion et de mise en file des données. Kafka permet ainsi de :
+- découpler la phase de collecte de la phase de traitement,
+- assurer une tolérance aux pannes,
+- gérer efficacement des flux de données continus à forte fréquence.
+
+Les flux Kafka sont intégrés dans un traitement où **Apache Spark** intervient pour :
+- ingérer les données en continu ou par lots,
+- structurer les messages reçus,
+- appliquer des transformations et nettoyages.
+
+---
+
+## Description des variables collectées
+
+Les données collectées depuis la plateforme Binance sont composées des variables suivantes :
+
+- **symbol** : identifiant de la paire de cryptomonnaies (par exemple BTCUSDT), permettant de distinguer les actifs analysés.
+- **open_price** : prix d’ouverture sur l’intervalle de temps considéré.
+- **close_price** : prix de clôture sur l’intervalle, souvent utilisé pour l’analyse des tendances.
+- **high_price** : prix maximum atteint durant l’intervalle.
+- **low_price** : prix minimum atteint durant l’intervalle.
+- **volume** : volume total de l’actif échangé sur la période.
+- **quote_volume** : volume échangé exprimé dans la devise de cotation (par exemple en USDT).
+- **timestamp_ts** : horodatage associé à chaque observation, essentiel pour les analyses temporelles (par la suite mis sous format date).
+- **spread** : écart entre les prix acheteur et vendeur, indicateur de la liquidité du marché.
+- **mid_price** : prix moyen calculé à partir des valeurs extrêmes, servant de référence analytique.
+
+Ces variables constituent une base de données cohérente pour l’analyse quantitative des marchés de cryptomonnaies.
+
+---
+
+## Métriques analysées et intérêt du traitement distribué
+
+À partir des données collectées, plusieurs métriques ont été calculées afin de caractériser le comportement du marché, notamment :
+- les rendements: mesure de l’évolution relative des prix sur une période donnée,
+- les mesures de volatilité: 
+- les volumes agrégés par période,
+- les indicateurs statistiques descriptifs (moyennes, écarts-types, minimums et maximums).
+
+L’analyse de ces métriques permet de mieux comprendre la dynamique des marchés, d’identifier les périodes de forte activité ou de volatilité, et de fournir des éléments d’aide à la décision.
+
+Apache Spark joue ici un rôle central en permettant :
+- le traitement de volumes importants de données,
+- l’exécution de calculs analytiques distribués,
+- la gestion efficace des fenêtres temporelles en streaming,
+- l’unification des traitements batch et temps réel au sein d’un même environnement.
+
+</div>

@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 Cas de traitement streaming | _main.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 Cas de traitement streaming | _main.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 Cas de traitement streaming | _main.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="cas-de-traitement-batch.html"/>
+<link rel="next" href="forces-et-limites-dapache-spark.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link rel="shortcut icon" href="images/bookdown.ico" type="image/x-icon">
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li style="text-align:center;">
+  <img src="images/image2.png" style="max-width:200px; width:100%; height:auto; display:inline-block; margin-bottom:0.35em;">
+</li>
+<li><a href="index.html"> Apache Spark</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Apache Spark</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#contexte-général-lexplosion-des-données"><i class="fa fa-check"></i><b>2.1</b> Contexte général : l’explosion des données</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#limites-des-approches-traditionnelles-sql-et-hadoop"><i class="fa fa-check"></i><b>2.2</b> Limites des approches traditionnelles : SQL et Hadoop</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#apache-spark-une-réponse-aux-besoins-modernes-du-big-data"><i class="fa fa-check"></i><b>2.3</b> Apache Spark : une réponse aux besoins modernes du Big Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html"><i class="fa fa-check"></i><b>3</b> Présentation générale d’Apache Spark</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html#quest-ce-quapache-spark"><i class="fa fa-check"></i><b>3.1</b> Qu’est-ce qu’Apache Spark ?</a></li>
+<li class="chapter" data-level="3.2" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html#philosophie-et-objectifs-de-spark"><i class="fa fa-check"></i><b>3.2</b> Philosophie et objectifs de Spark</a></li>
+<li class="chapter" data-level="3.3" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html#concepts-fondamentaux-de-spark"><i class="fa fa-check"></i><b>3.3</b> Concepts fondamentaux de Spark</a></li>
+<li class="chapter" data-level="3.4" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html#fonctionnement-général-dapache-spark"><i class="fa fa-check"></i><b>3.4</b> Fonctionnement général d’Apache Spark</a></li>
+<li class="chapter" data-level="3.5" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html#architecture-de-spark"><i class="fa fa-check"></i><b>3.5</b> Architecture de Spark</a></li>
+<li class="chapter" data-level="3.6" data-path="présentation-générale-dapache-spark.html"><a href="présentation-générale-dapache-spark.html#principaux-modules-de-spark"><i class="fa fa-check"></i><b>3.6</b> Principaux modules de Spark</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="méthodologie-de-traitement-avec-apache-spark.html"><a href="méthodologie-de-traitement-avec-apache-spark.html"><i class="fa fa-check"></i><b>4</b> Méthodologie de traitement avec Apache Spark</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="méthodologie-de-traitement-avec-apache-spark.html"><a href="méthodologie-de-traitement-avec-apache-spark.html#traitement-batch-par-lots"><i class="fa fa-check"></i><b>4.1</b> Traitement Batch (par lots)</a></li>
+<li class="chapter" data-level="4.2" data-path="méthodologie-de-traitement-avec-apache-spark.html"><a href="méthodologie-de-traitement-avec-apache-spark.html#traitement-streaming-par-flux"><i class="fa fa-check"></i><b>4.2</b> Traitement Streaming (par flux)</a></li>
+<li class="chapter" data-level="4.3" data-path="méthodologie-de-traitement-avec-apache-spark.html"><a href="méthodologie-de-traitement-avec-apache-spark.html#comparaison-batch-vs-streaming"><i class="fa fa-check"></i><b>4.3</b> Comparaison Batch vs Streaming</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="cadre-pratique-et-description-des-données.html"><a href="cadre-pratique-et-description-des-données.html"><i class="fa fa-check"></i><b>5</b> Cadre pratique et description des données</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="cadre-pratique-et-description-des-données.html"><a href="cadre-pratique-et-description-des-données.html#justification-du-choix-des-données-de-cryptomonnaies"><i class="fa fa-check"></i><b>5.1</b> Justification du choix des données de cryptomonnaies</a></li>
+<li class="chapter" data-level="5.2" data-path="cadre-pratique-et-description-des-données.html"><a href="cadre-pratique-et-description-des-données.html#collecte-des-données-connexion-à-la-plateforme-binance"><i class="fa fa-check"></i><b>5.2</b> Collecte des données : connexion à la plateforme Binance</a></li>
+<li class="chapter" data-level="5.3" data-path="cadre-pratique-et-description-des-données.html"><a href="cadre-pratique-et-description-des-données.html#description-des-variables-collectées"><i class="fa fa-check"></i><b>5.3</b> Description des variables collectées</a></li>
+<li class="chapter" data-level="5.4" data-path="cadre-pratique-et-description-des-données.html"><a href="cadre-pratique-et-description-des-données.html#métriques-analysées-et-intérêt-du-traitement-distribué"><i class="fa fa-check"></i><b>5.4</b> Métriques analysées et intérêt du traitement distribué</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html"><i class="fa fa-check"></i><b>6</b> Cas de traitement batch</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#mise-en-place-de-lenvironnement-de-travail"><i class="fa fa-check"></i><b>6.1</b> Mise en place de l’environnement de travail</a></li>
+<li class="chapter" data-level="6.2" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#connexion-aux-données-et-lecture-du-dernier-batch-disponible"><i class="fa fa-check"></i><b>6.2</b> Connexion aux données et lecture du dernier batch disponible</a></li>
+<li class="chapter" data-level="6.3" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#connexion-aux-données-et-sélection-du-dernier-batch"><i class="fa fa-check"></i><b>6.3</b> Connexion aux données et sélection du dernier batch</a></li>
+<li class="chapter" data-level="6.4" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#enrichissement-et-construction-des-indicateurs-de-marché"><i class="fa fa-check"></i><b>6.4</b> Enrichissement et construction des indicateurs de marché</a></li>
+<li class="chapter" data-level="6.5" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#agrégation-des-résultats-et-classements-top-5"><i class="fa fa-check"></i><b>6.5</b> Agrégation des résultats et classements « Top 5 »</a></li>
+<li class="chapter" data-level="6.6" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#génération-automatisée-dun-rapport-html"><i class="fa fa-check"></i><b>6.6</b> Génération automatisée d’un rapport HTML</a></li>
+<li class="chapter" data-level="6.7" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#envoi-automatique-du-rapport-par-courrier-électronique"><i class="fa fa-check"></i><b>6.7</b> Envoi automatique du rapport par courrier électronique</a></li>
+<li class="chapter" data-level="6.8" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#reproductibilité-du-traitement"><i class="fa fa-check"></i><b>6.8</b> Reproductibilité du traitement</a></li>
+<li class="chapter" data-level="6.9" data-path="cas-de-traitement-batch.html"><a href="cas-de-traitement-batch.html#exécution-du-batch"><i class="fa fa-check"></i><b>6.9</b> Exécution du batch</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html"><i class="fa fa-check"></i><b>7</b> Cas de traitement streaming</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#mise-en-place-de-lenvironnement-de-travail-1"><i class="fa fa-check"></i><b>7.1</b> Mise en place de l’environnement de travail</a></li>
+<li class="chapter" data-level="7.2" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#installation-et-configuration-dapache-spark-en-local"><i class="fa fa-check"></i><b>7.2</b> Installation et configuration d’Apache Spark en local</a></li>
+<li class="chapter" data-level="7.3" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#rôle-de-docker-dans-le-projet"><i class="fa fa-check"></i><b>7.3</b> Rôle de Docker dans le projet</a></li>
+<li class="chapter" data-level="7.4" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#orchestration-des-services-avec-docker-compose"><i class="fa fa-check"></i><b>7.4</b> Orchestration des services avec <em>docker-compose</em></a></li>
+<li class="chapter" data-level="7.5" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#kafka-organisation-du-streaming-des-données"><i class="fa fa-check"></i><b>7.5</b> Kafka : organisation du streaming des données</a></li>
+<li class="chapter" data-level="7.6" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#extraction-des-données-en-temps-réel-websocket-binance-vers-kafka"><i class="fa fa-check"></i><b>7.6</b> Extraction des données en temps réel : WebSocket Binance vers Kafka</a></li>
+<li class="chapter" data-level="7.7" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#traitement-des-flux-avec-spark-structured-streaming"><i class="fa fa-check"></i><b>7.7</b> Traitement des flux avec Spark Structured Streaming</a></li>
+<li class="chapter" data-level="7.8" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#stockage-des-données-traitées-dans-postgresql"><i class="fa fa-check"></i><b>7.8</b> Stockage des données traitées dans PostgreSQL</a></li>
+<li class="chapter" data-level="7.9" data-path="cas-de-traitement-streaming.html"><a href="cas-de-traitement-streaming.html#dashboard"><i class="fa fa-check"></i><b>7.9</b> Dashboard</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="forces-et-limites-dapache-spark.html"><a href="forces-et-limites-dapache-spark.html"><i class="fa fa-check"></i><b>8</b> Forces et limites d’Apache Spark</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="forces-et-limites-dapache-spark.html"><a href="forces-et-limites-dapache-spark.html#forces-dapache-spark"><i class="fa fa-check"></i><b>8.1</b> 1. Forces d’Apache Spark</a></li>
+<li class="chapter" data-level="8.2" data-path="forces-et-limites-dapache-spark.html"><a href="forces-et-limites-dapache-spark.html#limites-dapache-spark"><i class="fa fa-check"></i><b>8.2</b> 2. Limites d’Apache Spark</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="conclusion-générale.html"><a href="conclusion-générale.html"><i class="fa fa-check"></i><b>9</b> Conclusion générale</a></li>
+<li class="chapter" data-level="10" data-path="ressources-bibliographiques.html"><a href="ressources-bibliographiques.html"><i class="fa fa-check"></i><b>10</b> Ressources bibliographiques</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ressources-bibliographiques.html"><a href="ressources-bibliographiques.html#apache-spark-et-big-data"><i class="fa fa-check"></i><b>10.1</b> Apache Spark et Big Data</a></li>
+<li class="chapter" data-level="10.2" data-path="ressources-bibliographiques.html"><a href="ressources-bibliographiques.html#streaming-de-données-et-kafka"><i class="fa fa-check"></i><b>10.2</b> Streaming de données et Kafka</a></li>
+<li class="chapter" data-level="10.3" data-path="ressources-bibliographiques.html"><a href="ressources-bibliographiques.html#conteneurisation-et-docker"><i class="fa fa-check"></i><b>10.3</b> Conteneurisation et Docker</a></li>
+<li class="chapter" data-level="10.4" data-path="ressources-bibliographiques.html"><a href="ressources-bibliographiques.html#bases-de-données-relationnelles"><i class="fa fa-check"></i><b>10.4</b> Bases de données relationnelles</a></li>
+<li class="chapter" data-level="10.5" data-path="ressources-bibliographiques.html"><a href="ressources-bibliographiques.html#données-financières-et-api-binance"><i class="fa fa-check"></i><b>10.5</b> Données financières et API Binance</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publié avec bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="cas-de-traitement-streaming" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> Cas de traitement streaming<a href="cas-de-traitement-streaming.html#cas-de-traitement-streaming" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Cette section présente de manière détaillée la mise en œuvre du <strong>traitement en streaming</strong> appliqué aux données de marché issues de la plateforme Binance.<br />
+Contrairement au traitement batch, le streaming vise à traiter les données <strong>au fil de leur arrivée</strong>, avec une faible latence, afin de réagir quasi instantanément aux nouveaux événements de marché.</p>
+<hr />
+<div id="mise-en-place-de-lenvironnement-de-travail-1" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Mise en place de l’environnement de travail<a href="cas-de-traitement-streaming.html#mise-en-place-de-lenvironnement-de-travail-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La mise en œuvre du traitement streaming repose sur une <strong>architecture hybride</strong>, combinant des services conteneurisés et un moteur de calcul exécuté localement.</p>
+<p>Plus précisément :</p>
+<ul>
+<li><strong>Docker</strong> est utilisé pour exécuter les services d’infrastructure (Kafka, Zookeeper, PostgreSQL) dans des environnements isolés et reproductibles ;</li>
+<li><strong>Apache Spark</strong> est exécuté en local (hors conteneur), afin de faciliter le développement, le débogage et l’observation des traitements.</li>
+</ul>
+<p>Cette approche permet de bénéficier à la fois :
+- de la <strong>reproductibilité</strong> offerte par Docker,
+- et de la <strong>simplicité de développement</strong> d’un Spark local.</p>
+<hr />
+</div>
+<div id="installation-et-configuration-dapache-spark-en-local" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Installation et configuration d’Apache Spark en local<a href="cas-de-traitement-streaming.html#installation-et-configuration-dapache-spark-en-local" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Le traitement streaming est réalisé à l’aide d’Apache Spark exécuté directement sur une machine Windows.</p>
+<div id="installation-dapache-spark" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Installation d’Apache Spark<a href="cas-de-traitement-streaming.html#installation-dapache-spark" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La version suivante a été utilisée :</p>
+<ul>
+<li><strong>Apache Spark 4.0.1</strong> (<code>spark-4.0.1-bin-hadoop3.tgz</code>)</li>
+</ul>
+<p>Apache Spark est développé en <strong>Scala</strong> et repose sur l’écosystème Hadoop. Même lorsque les traitements sont écrits en Python (via PySpark), Spark s’exécute sur la <strong>Java Virtual Machine (JVM)</strong>.</p>
+</div>
+<div id="spécificités-windows" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Spécificités Windows<a href="cas-de-traitement-streaming.html#spécificités-windows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Sous Windows, certaines dépendances Hadoop ne sont pas disponibles nativement. Afin d’assurer le bon fonctionnement de Spark, les éléments suivants ont été ajoutés :</p>
+<ul>
+<li><code>winutils.exe</code></li>
+<li><code>hadoop.dll</code></li>
+</ul>
+<p>Ces fichiers sont nécessaires pour :
+- la gestion correcte du système de fichiers,
+- certaines opérations internes de Spark et Hadoop.</p>
+<p>Sans ces composants, Spark peut démarrer mais échouer lors de traitements plus avancés.</p>
+<hr />
+</div>
+</div>
+<div id="rôle-de-docker-dans-le-projet" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Rôle de Docker dans le projet<a href="cas-de-traitement-streaming.html#rôle-de-docker-dans-le-projet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="pourquoi-utiliser-docker" class="section level3 hasAnchor" number="7.3.1">
+<h3><span class="header-section-number">7.3.1</span> Pourquoi utiliser Docker ?<a href="cas-de-traitement-streaming.html#pourquoi-utiliser-docker" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Docker est une plateforme de <strong>conteneurisation</strong> permettant d’exécuter des applications dans des environnements isolés, incluant toutes leurs dépendances.</p>
+<p>Dans le cadre de ce projet, Docker permet de :</p>
+<ul>
+<li>déployer rapidement les services nécessaires au streaming,</li>
+<li>éviter les conflits de versions entre machines,</li>
+<li>garantir un environnement d’exécution reproductible.</li>
+</ul>
+<p>Contrairement à une machine virtuelle complète, Docker :</p>
+<ul>
+<li>partage le noyau du système hôte,</li>
+<li>est plus léger,</li>
+<li>démarre plus rapidement.</li>
+</ul>
+</div>
+<div id="docker-desktop-sous-windows" class="section level3 hasAnchor" number="7.3.2">
+<h3><span class="header-section-number">7.3.2</span> Docker Desktop sous Windows<a href="cas-de-traitement-streaming.html#docker-desktop-sous-windows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Docker repose sur des mécanismes propres au noyau Linux. Sous Windows, Docker Desktop s’appuie donc sur <strong>WSL2</strong> ou <strong>Hyper-V</strong> afin d’exécuter une machine Linux légère permettant au moteur Docker de fonctionner correctement.</p>
+<hr />
+</div>
+</div>
+<div id="orchestration-des-services-avec-docker-compose" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Orchestration des services avec <em>docker-compose</em><a href="cas-de-traitement-streaming.html#orchestration-des-services-avec-docker-compose" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Afin de gérer plusieurs services simultanément, un fichier <code>docker-compose.yml</code> a été utilisé.</p>
+<p>Ce fichier permet de :</p>
+<ul>
+<li>définir plusieurs services dans un seul document,</li>
+<li>configurer les ports, volumes et réseaux,</li>
+<li>lancer ou arrêter l’ensemble de l’infrastructure avec une seule commande.</li>
+</ul>
+<div id="services-déployés" class="section level3 hasAnchor" number="7.4.1">
+<h3><span class="header-section-number">7.4.1</span> Services déployés<a href="cas-de-traitement-streaming.html#services-déployés" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dans le cadre de ce projet, <code>docker-compose</code> permet de lancer :</p>
+<ul>
+<li><strong>Zookeeper</strong>, nécessaire à la coordination de Kafka ;</li>
+<li><strong>Kafka</strong>, utilisé pour la gestion des flux de données en temps réel ;</li>
+<li><strong>PostgreSQL</strong>, utilisé pour le stockage persistant des données traitées.</li>
+</ul>
+<p>Apache Spark n’est pas conteneurisé et reste exécuté localement.</p>
+</div>
+<div id="image-docker-et-conteneur-docker" class="section level3 hasAnchor" number="7.4.2">
+<h3><span class="header-section-number">7.4.2</span> Image Docker et conteneur Docker<a href="cas-de-traitement-streaming.html#image-docker-et-conteneur-docker" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il convient de distinguer :</p>
+<ul>
+<li>une <strong>image Docker</strong>, qui correspond à un modèle statique contenant l’application et ses dépendances ;</li>
+<li>un <strong>conteneur Docker</strong>, qui est une instance active créée à partir de cette image.</li>
+</ul>
+<div style="max-width: 980px; margin: 0 auto; padding: 8px 0;">
+<img src="images/img_conteneurs.png" style="width:100%; border-radius:14px; box-shadow: 0 10px 26px rgba(0,0,0,0.10);">
+<div style="font-size:0.9em; color:#555; margin-top:8px; text-align:center;">
+
+</div>
+</div>
+</div>
+<div id="lancement-des-services" class="section level3 hasAnchor" number="7.4.3">
+<h3><span class="header-section-number">7.4.3</span> Lancement des services<a href="cas-de-traitement-streaming.html#lancement-des-services" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les services sont démarrés à l’aide de la commande suivante :</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="cas-de-traitement-streaming.html#cb1-1" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">-d</span></span></code></pre></div>
+<p>Une fois cette commande exécutée, l’ensemble des services devient accessible via les ports définis dans le fichier de configuration.</p>
+<hr />
+</div>
+</div>
+<div id="kafka-organisation-du-streaming-des-données" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Kafka : organisation du streaming des données<a href="cas-de-traitement-streaming.html#kafka-organisation-du-streaming-des-données" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Le cœur de l’architecture de streaming repose sur <strong>Apache Kafka</strong>, qui joue le rôle de système de messagerie distribué et tolérant aux pannes. Kafka permet de découpler la <strong>production des données</strong> de leur <strong>traitement</strong>, tout en garantissant un débit élevé et une faible latence.</p>
+<hr />
+<div id="notion-de-topic-kafka" class="section level3 hasAnchor" number="7.5.1">
+<h3><span class="header-section-number">7.5.1</span> Notion de <em>topic</em> Kafka<a href="cas-de-traitement-streaming.html#notion-de-topic-kafka" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dans Kafka, les données sont organisées autour du concept de <strong>topic</strong>.<br />
+Un topic peut être vu comme un <strong>canal de diffusion</strong> dans lequel circulent des messages.</p>
+<p>Un topic met en relation deux types d’acteurs :</p>
+<ul>
+<li>un <strong>producer</strong>, qui publie (écrit) les messages dans le topic ;</li>
+<li>un <strong>consumer</strong>, qui s’abonne au topic pour lire les messages.</li>
+</ul>
+<p>Chaque topic est découpé en <strong>partitions</strong>. Cette organisation permet :</p>
+<ul>
+<li>le <strong>parallélisme</strong>, car plusieurs consommateurs peuvent lire différentes partitions en parallèle ;</li>
+<li>la <strong>montée en charge</strong>, en répartissant les données sur plusieurs partitions ;</li>
+<li>la <strong>conservation temporaire des messages</strong>, ce qui permet de relire les données si nécessaire.</li>
+</ul>
+<p>Kafka garantit ainsi un stockage fiable des flux entrants, même en cas de pic de charge ou de ralentissement du système de traitement.</p>
+<hr />
+</div>
+<div id="topic-utilisé-dans-le-projet" class="section level3 hasAnchor" number="7.5.2">
+<h3><span class="header-section-number">7.5.2</span> Topic utilisé dans le projet<a href="cas-de-traitement-streaming.html#topic-utilisé-dans-le-projet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dans le cadre de ce projet, un seul topic Kafka a été créé :</p>
+<ul>
+<li><code>projet-bdcc</code></li>
+</ul>
+<p>Ce topic centralise l’ensemble des messages de marché transmis en temps réel depuis la plateforme Binance.<br />
+Il constitue le point d’entrée unique des données streaming avant leur traitement par Apache Spark.</p>
+<hr />
+</div>
+</div>
+<div id="extraction-des-données-en-temps-réel-websocket-binance-vers-kafka" class="section level2 hasAnchor" number="7.6">
+<h2><span class="header-section-number">7.6</span> Extraction des données en temps réel : WebSocket Binance vers Kafka<a href="cas-de-traitement-streaming.html#extraction-des-données-en-temps-réel-websocket-binance-vers-kafka" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="principe-du-websocket" class="section level3 hasAnchor" number="7.6.1">
+<h3><span class="header-section-number">7.6.1</span> Principe du WebSocket<a href="cas-de-traitement-streaming.html#principe-du-websocket" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Un <strong>WebSocket</strong> est un protocole de communication permettant d’établir une connexion persistante entre un client et un serveur.<br />
+Contrairement aux requêtes HTTP classiques, la connexion reste ouverte et permet l’échange de données <strong>en continu</strong>, sans avoir à relancer de nouvelles requêtes.</p>
+<p>Ce mécanisme est particulièrement adapté aux cas d’usage temps réel, où les données sont produites de manière fréquente et imprévisible.</p>
+<hr />
+</div>
+<div id="flux-binance-utilisé" class="section level3 hasAnchor" number="7.6.2">
+<h3><span class="header-section-number">7.6.2</span> Flux Binance utilisé<a href="cas-de-traitement-streaming.html#flux-binance-utilisé" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les données de marché sont récupérées à partir du flux WebSocket public fourni par Binance : <a href="wss://stream.binance.com:9443/ws/!miniTicker@arr" class="uri">wss://stream.binance.com:9443/ws/!miniTicker@arr</a></p>
+<p>Ce flux diffuse en continu des informations de marché pour un grand nombre de paires de cryptomonnaies.<br />
+Les messages sont transmis sous forme <strong>JSON</strong>, chaque message correspondant à un événement de marché (mise à jour de prix, volumes, etc.).</p>
+<hr />
+</div>
+<div id="envoi-des-données-vers-kafka" class="section level3 hasAnchor" number="7.6.3">
+<h3><span class="header-section-number">7.6.3</span> Envoi des données vers Kafka<a href="cas-de-traitement-streaming.html#envoi-des-données-vers-kafka" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Une fois la connexion WebSocket établie :</p>
+<ul>
+<li>chaque message reçu est immédiatement pris en charge par un <strong>Kafka Producer</strong> ;</li>
+<li>le message est publié dans le topic <code>projet-bdcc</code>.</li>
+</ul>
+<div style="max-width: 980px; margin: 0 auto; padding: 8px 0;">
+<img src="images/img_sqlpad.png" style="width:100%; border-radius:14px; box-shadow: 0 10px 26px rgba(0,0,0,0.10);">
+<div style="font-size:0.9em; color:#555; margin-top:8px; text-align:center;">
+
+</div>
+</div>
+<p>Kafka joue ainsi le rôle de <strong>tampon fiable</strong> entre la source de données (Binance) et le moteur de calcul (Apache Spark).<br />
+Cette architecture permet de :</p>
+<ul>
+<li>absorber les variations de débit des données entrantes ;
+<ul>
+<li>garantir qu’aucune donnée ne soit perdue ;</li>
+</ul></li>
+<li>découpler la collecte des données de leur traitement analytique.</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="traitement-des-flux-avec-spark-structured-streaming" class="section level2 hasAnchor" number="7.7">
+<h2><span class="header-section-number">7.7</span> Traitement des flux avec Spark Structured Streaming<a href="cas-de-traitement-streaming.html#traitement-des-flux-avec-spark-structured-streaming" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Les messages stockés dans Kafka sont ensuite consommés par Apache Spark à l’aide du module <strong>Structured Streaming</strong>.</p>
+<p>Spark Structured Streaming permet de traiter des flux de données continus en s’appuyant sur le modèle des <strong>DataFrames</strong>, déjà utilisé pour les traitements batch.</p>
+<p>Concrètement, Spark assure les opérations suivantes :</p>
+<ul>
+<li>lecture continue des messages depuis le topic Kafka ;</li>
+<li>parsing et désérialisation des messages JSON ;</li>
+<li>normalisation des champs (prix, volumes, horodatage, symboles, etc.) ;</li>
+<li>application de transformations et de calculs analytiques en temps réel.</li>
+</ul>
+<div style="max-width: 980px; margin: 0 auto; padding: 8px 0;">
+<img src="images/img_sortie_spark.png" style="width:100%; border-radius:14px; box-shadow: 0 10px 26px rgba(0,0,0,0.10);">
+<div style="font-size:0.9em; color:#555; margin-top:8px; text-align:center;">
+
+</div>
+</div>
+<p>Grâce à cette approche, les traitements streaming restent proches des traitements batch classiques, ce qui facilite :</p>
+<ul>
+<li>la compréhension du code,</li>
+<li>la maintenance,</li>
+<li>et l’évolution du pipeline analytique.</li>
+</ul>
+<hr />
+</div>
+<div id="stockage-des-données-traitées-dans-postgresql" class="section level2 hasAnchor" number="7.8">
+<h2><span class="header-section-number">7.8</span> Stockage des données traitées dans PostgreSQL<a href="cas-de-traitement-streaming.html#stockage-des-données-traitées-dans-postgresql" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Une fois les données traitées par Spark, elles sont stockées dans une base de données relationnelle afin d’assurer leur persistance et leur exploitation ultérieure.</p>
+<div style="max-width: 980px; margin: 0 auto; padding: 8px 0;">
+<img src="images/img_sqlpad_1.png" style="width:100%; border-radius:14px; box-shadow: 0 10px 26px rgba(0,0,0,0.10);">
+<div style="font-size:0.9em; color:#555; margin-top:8px; text-align:center;">
+
+</div>
+</div>
+<p>Dans l’architecture mise en place :</p>
+<ul>
+<li><strong>PostgreSQL</strong> s’exécute dans un conteneur Docker ;</li>
+<li>Apache Spark écrit les données via une connexion <strong>JDBC</strong> ;</li>
+<li>les données sont insérées ou mises à jour selon la logique définie dans le projet.</li>
+</ul>
+<hr />
+</div>
+<div id="dashboard" class="section level2 hasAnchor" number="7.9">
+<h2><span class="header-section-number">7.9</span> Dashboard<a href="cas-de-traitement-streaming.html#dashboard" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Un tableau de bord interactif a été développé avec <strong>Streamlit</strong> afin de visualiser, en quasi temps réel, les données de marché issues de Binance et traitées par le pipeline de streaming.</p>
+<div id="architecture-et-flux-de-données" class="section level3 hasAnchor" number="7.9.1">
+<h3><span class="header-section-number">7.9.1</span> Architecture et flux de données<a href="cas-de-traitement-streaming.html#architecture-et-flux-de-données" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le dashboard se connecte directement à la base <strong>PostgreSQL</strong> (via <code>SQLAlchemy</code>) contenant une table <code>projet_bdcc</code>. À chaque rafraîchissement, l’application exécute une requête SQL filtrant les observations selon :</p>
+<ul>
+<li>une sélection de cryptomonnaies (<code>symbol</code>) choisie dans la barre latérale ;</li>
+<li>une limite d’observations (<code>LIMIT</code>) afin de contrôler le volume chargé en mémoire ;</li>
+<li>un tri temporel sur <code>timestamp_ts</code> afin de reconstruire correctement les séries temporelles.</li>
+</ul>
+<p>Les données sont ensuite converties en <code>DataFrame</code> Pandas pour permettre la production rapide de métriques et de graphiques.</p>
+</div>
+<div id="rafraîchissement-automatique-et-logique-de-cache" class="section level3 hasAnchor" number="7.9.2">
+<h3><span class="header-section-number">7.9.2</span> Rafraîchissement automatique et logique de cache<a href="cas-de-traitement-streaming.html#rafraîchissement-automatique-et-logique-de-cache" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le suivi temps réel est assuré par un <strong>auto-refresh</strong> (<code>streamlit_autorefresh</code>) déclenché toutes les <code>REFRESH_INTERVAL = 5</code> secondes. Ce mécanisme permet de recharger les données en continu sans intervention manuelle.</p>
+<p>Pour éviter des requêtes inutiles et améliorer la performance, le chargement est encapsulé dans une fonction décorée par <code>@st.cache_data</code> avec un <em>TTL</em> (Time To Live). Ainsi, sur un court intervalle, Streamlit réutilise le résultat en cache plutôt que de relancer systématiquement la requête.</p>
+</div>
+<div id="enrichissement-des-données-indicateurs-calculés-côté-dashboard" class="section level3 hasAnchor" number="7.9.3">
+<h3><span class="header-section-number">7.9.3</span> Enrichissement des données : indicateurs calculés côté dashboard<a href="cas-de-traitement-streaming.html#enrichissement-des-données-indicateurs-calculés-côté-dashboard" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Après chargement, l’application calcule plusieurs indicateurs dérivés afin d’obtenir des mesures directement interprétables :</p>
+<ul>
+<li><p><strong>Variation relative (%)</strong> : Cet indicateur mesure le rendement sur la période observée.</p></li>
+<li><p><strong>Volatilité relative</strong> : Il donne une approximation de l’amplitude des fluctuations, normalisée par le prix.</p></li>
+<li><p><strong>Spread</strong> : Il représente l’écart absolu entre le maximum et le minimum observés sur la période.</p></li>
+</ul>
+<p>Ces calculs sont effectués à l’affichage afin de rendre l’interface autonome, tout en laissant la persistance se concentrer sur les variables brutes essentielles.</p>
+</div>
+<div id="paramétrage-utilisateur-sidebar" class="section level3 hasAnchor" number="7.9.4">
+<h3><span class="header-section-number">7.9.4</span> Paramétrage utilisateur (Sidebar)<a href="cas-de-traitement-streaming.html#paramétrage-utilisateur-sidebar" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La barre latérale permet :</p>
+<ul>
+<li>de sélectionner les cryptomonnaies à suivre (<code>multiselect</code>) à partir de la liste des symboles disponibles en base ;</li>
+<li>de filtrer la période d’observation (<code>1H</code>, <code>24H</code>, <code>7J</code>, <code>30J</code>, <code>Tout</code>) via un filtre temporel appliqué sur <code>timestamp_ts</code> ;</li>
+</ul>
+<p>Ce choix d’interface permet à l’utilisateur d’adapter dynamiquement le périmètre d’analyse sans modifier le code.</p>
+</div>
+<div id="organisation-fonctionnelle-du-dashboard-onglets" class="section level3 hasAnchor" number="7.9.5">
+<h3><span class="header-section-number">7.9.5</span> Organisation fonctionnelle du dashboard (onglets)<a href="cas-de-traitement-streaming.html#organisation-fonctionnelle-du-dashboard-onglets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le dashboard est structuré en cinq onglets principaux, chacun répondant à un besoin analytique complémentaire.</p>
+<div id="overview-résumé-par-actif" class="section level4 hasAnchor" number="7.9.5.1">
+<h4><span class="header-section-number">7.9.5.1</span> <em>Overview</em> : résumé par actif<a href="cas-de-traitement-streaming.html#overview-résumé-par-actif" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>L’onglet <strong>Overview</strong> fournit, pour chaque crypto sélectionnée :</p>
+<ul>
+<li>le dernier prix de clôture ;</li>
+<li>la variation absolue et relative sur la période filtrée ;</li>
+<li>des statistiques agrégées : prix moyen, maximum, minimum, volatilité moyenne et volume cumulé.</li>
+</ul>
+<div style="max-width: 980px; margin: 0 auto; padding: 8px 0;">
+<img src="images/overview.png" style="width:100%; border-radius:14px; box-shadow: 0 10px 26px rgba(0,0,0,0.10);">
+<div style="font-size:0.9em; color:#555; margin-top:8px; text-align:center;">
+
+</div>
+</div>
+<p>Ces métriques sont affichées sous forme de <em>cards</em> et de blocs synthétiques afin de faciliter une lecture rapide de l’état du marché.</p>
+</div>
+<div id="graphiques-volume-et-tendances" class="section level4 hasAnchor" number="7.9.5.2">
+<h4><span class="header-section-number">7.9.5.2</span> <em>Graphiques</em> : volume et tendances<a href="cas-de-traitement-streaming.html#graphiques-volume-et-tendances" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>L’onglet <strong>Graphiques</strong> propose, pour chaque crypto :</p>
+<ul>
+<li>un graphique <em>candlestick</em> (Open/High/Low/Close) ;</li>
+<li>deux <strong>moyennes mobiles</strong> (<code>MA7</code>, <code>MA25</code>) pour visualiser la tendance ;</li>
+<li>un histogramme de <strong>volume</strong> superposé.</li>
+</ul>
+<div style="max-width: 980px; margin: 0 auto; padding: 8px 0;">
+<img src="images/graphiques.png" style="width:100%; border-radius:14px; box-shadow: 0 10px 26px rgba(0,0,0,0.10);">
+<div style="font-size:0.9em; color:#555; margin-top:8px; text-align:center;">
+
+</div>
+</div>
+<p>L’objectif est de combiner sur une même vue :</p>
+<ul>
+<li>la dynamique des prix,</li>
+<li>les zones de volatilité,</li>
+<li>et l’intensité des échanges (liquidité via le volume).</li>
+</ul>
+</div>
+<div id="top-cryptos-classements-et-comparaison" class="section level4 hasAnchor" number="7.9.5.3">
+<h4><span class="header-section-number">7.9.5.3</span> <em>Top Cryptos</em> : classements et comparaison<a href="cas-de-traitement-streaming.html#top-cryptos-classements-et-comparaison" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>L’onglet <strong>Top Cryptos</strong> construit des classements à partir de la dernière observation de chaque symbole :</p>
+<ul>
+<li><strong>Top 5 par volume</strong> (actifs les plus échangés) ;</li>
+<li><strong>Top Gainers</strong> (plus fortes hausses, via <code>pct_change</code>) ;</li>
+<li><strong>Top Losers</strong> (plus fortes baisses).</li>
+</ul>
+<div style="max-width: 980px; margin: 0 auto; padding: 8px 0;">
+<img src="images/Top_crptos.png" style="width:100%; border-radius:14px; box-shadow: 0 10px 26px rgba(0,0,0,0.10);">
+<div style="font-size:0.9em; color:#555; margin-top:8px; text-align:center;">
+
+</div>
+</div>
+<p>Deux visualisations complémentaires sont proposées :</p>
+<ul>
+<li>évolution des <em>gainers</em> sous forme d’indice base 100 (comparabilité des trajectoires) ;</li>
+<li>barres de variation (%) pour les <em>losers</em> (lecture immédiate des chutes).</li>
+</ul>
+</div>
+<div id="anomalies-alertes-de-marché" class="section level4 hasAnchor" number="7.9.5.4">
+<h4><span class="header-section-number">7.9.5.4</span> <em>Anomalies</em> : alertes de marché<a href="cas-de-traitement-streaming.html#anomalies-alertes-de-marché" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>L’onglet <strong>Anomalies</strong> détecte des comportements atypiques sur la dernière observation disponible :</p>
+<ul>
+<li><strong>Variations extrêmes</strong> : <span class="math inline">\(|pct\_change| &gt; 5\%\)</span><br />
+</li>
+<li><strong>Volatilité élevée</strong> : sélection des symboles au-dessus du 3e quartile de <code>volatility</code></li>
+</ul>
+<div style="max-width: 980px; margin: 0 auto; padding: 8px 0;">
+<img src="images/anomalies.png" style="width:100%; border-radius:14px; box-shadow: 0 10px 26px rgba(0,0,0,0.10);">
+<div style="font-size:0.9em; color:#555; margin-top:8px; text-align:center;">
+
+</div>
+</div>
+<p>Les anomalies sont accompagnées :</p>
+<ul>
+<li>de tableaux stylisés (gradients),</li>
+<li>et de graphiques en barres pour synthétiser les alertes.</li>
+</ul>
+<p>Cette partie vise à fournir un mécanisme simple de <em>surveillance</em> du marché, utile pour identifier rapidement les actifs “instables” ou “en mouvement”.</p>
+</div>
+<div id="détails-crypto-focus-sur-un-actif" class="section level4 hasAnchor" number="7.9.5.5">
+<h4><span class="header-section-number">7.9.5.5</span> <em>Détails Crypto</em> : focus sur un actif<a href="cas-de-traitement-streaming.html#détails-crypto-focus-sur-un-actif" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>L’onglet <strong>Détails Crypto</strong> permet une analyse approfondie d’un actif choisi :</p>
+<ul>
+<li>tableau récapitulatif des dernières valeurs (Open, Close, High, Low, spread, variation, volatilité, volume) ;</li>
+<li>graphique High/Low + moyennes mobiles ;</li>
+<li>graphique de volume ;</li>
+<li>historique complet formaté (table interactive) avec mise en évidence de la variation et de la volatilité.</li>
+</ul>
+<div style="max-width: 980px; margin: 0 auto; padding: 8px 0;">
+<img src="images/D%C3%A9tails_Crypto.png" style="width:100%; border-radius:14px; box-shadow: 0 10px 26px rgba(0,0,0,0.10);">
+<div style="font-size:0.9em; color:#555; margin-top:8px; text-align:center;">
+
+</div>
+</div>
+<p>Cette vue détaillée permet à l’utilisation, après une observation globale, d’explorer un actif en profondeur.</p>
+</div>
+<div id="apport-du-dashboard-dans-le-pipeline-streaming" class="section level4 hasAnchor" number="7.9.5.6">
+<h4><span class="header-section-number">7.9.5.6</span> Apport du dashboard dans le pipeline streaming<a href="cas-de-traitement-streaming.html#apport-du-dashboard-dans-le-pipeline-streaming" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Le dashboard Streamlit matérialise la dernière étape du pipeline en offrant :</p>
+<ul>
+<li>une <strong>visualisation quasi temps réel</strong> des données ingérées en streaming,</li>
+<li>une capacité de <strong>monitoring</strong> via des indicateurs et alertes,</li>
+<li>une <strong>interface interactive</strong> facilitant l’exploration des séries temporelles et des anomalies,</li>
+<li>une exploitation directe des données persistées dans PostgreSQL, sans dépendre d’un environnement de développement.</li>
+</ul>
+<p>En pratique, il constitue un composant clé pour démontrer la valeur du streaming : au lieu d’attendre un traitement batch, l’information est consultable dès qu’elle est disponible dans la base, avec un rafraîchissement automatique.</p>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<footer style="
+  margin-top:3.2em;
+  padding:0;
+  font-family: inherit;
+">
+  <!-- Bande supérieure (accent) -->
+  <div style="
+    height:6px;
+    background: linear-gradient(90deg, #0A1C34 0%, #1A4FA3 40%, #2D7FF9 100%);
+  "></div>
+
+  <!-- Fond footer -->
+  <div style="
+    background: radial-gradient(circle at top, rgba(45,127,249,0.14) 0%, rgba(10,28,52,0.00) 55%),
+                linear-gradient(180deg, #0A1C34 0%, #081A2F 100%);
+    color:#EAF2FF;
+    padding:22px 0;
+    border-top:1px solid rgba(255,255,255,0.08);
+  ">
+    <div style="
+      width:1100
+      margin:0 auto;
+      padding:0 16px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      align-items:center;
+      justify-content:space-between;
+    ">
+
+      <!-- Bloc gauche -->
+      <div style="min-width:260px;">
+        <div style="
+          display:flex;
+          align-items:center;
+          gap:10px;
+          margin-bottom:6px;
+        ">
+          <span style="
+            display:inline-flex;
+            width:34px; height:34px;
+            border-radius:10px;
+            background: rgba(45,127,249,0.18);
+            border:1px solid rgba(45,127,249,0.35);
+            align-items:center; justify-content:center;
+            font-size:16px;
+          ">⚡</span>
+
+          <div style="line-height:1.1;">
+            <div style="
+              font-weight:700;
+              font-size:0.98em;
+              letter-spacing:0.2px;
+            ">Spark — Traitement des données massives</div>
+            <div style="
+              font-size:0.82em;
+              color:rgba(234,242,255,0.78);
+              margin-top:2px;
+            ">Temps réel · Batch · Streaming</div>
+          </div>
+        </div>
+
+        <div style="
+          font-size:0.82em;
+          color:rgba(234,242,255,0.78);
+          line-height:1.35;
+        ">
+          ENSAE Dakar · ISEP 2 · <span style="white-space:nowrap;">2025–2026</span><br/>
+          Cours : <em>Initiation au Big Data &amp; Cloud Computing</em>
+        </div>
+      </div>
+
+      <!-- Bloc centre (membres) -->
+      <div style="
+        flex:1;
+        min-width:280px;
+        padding:12px 14px;
+        border-radius:14px;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.10);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      ">
+        <div style="
+          font-size:0.78em;
+          color:rgba(234,242,255,0.75);
+          text-transform:uppercase;
+          letter-spacing:0.08em;
+          margin-bottom:6px;
+          text-align:center;
+        ">Membres du groupe</div>
+
+        <div style="
+          font-size:0.86em;
+          line-height:1.35;
+          color:#EAF2FF;
+        ">
+          <strong>COMPAORE Bassirou</strong> ·
+          <strong>DIAKHATE Khadidiatou</strong> ·
+          <strong>DIALLO Aissatou</strong> ·
+          <strong>FOGWOUNG DJOUFACK Sarah-Laure</strong> ·
+          <strong>FOUMSOU Lawa Prosper</strong>
+        </div>
+      </div>
+
+      <!-- Bloc droit (liens) -->
+      <div style="min-width:240px; text-align:right;">
+        <div style="
+          font-size:0.78em;
+          color:rgba(234,242,255,0.75);
+          margin-bottom:8px;
+        "> Cliquez ici pour accéder à nos ressources </div>
+
+        <a href="https://github.com/Sarahlaure/projet-BDCC-2025---spark-real-time-data-processing-groupe7-"
+           target="_blank" rel="noopener"
+           style="
+             display:inline-block;
+             padding:9px 12px;
+             border-radius:12px;
+             background: rgba(45,127,249,0.18);
+             border:1px solid rgba(45,127,249,0.40);
+             color:#EAF2FF;
+             text-decoration:none;
+             font-weight:600;
+             font-size:0.84em;
+             margin-left:8px;
+           ">
+          GitHub ↗
+        </a>
+
+        <div style="
+          margin-top:10px;
+          font-size:0.78em;
+          color:rgba(234,242,255,0.55);
+        ">
+          © 2025–2026 · Groupe 7
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="cas-de-traitement-batch.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="forces-et-limites-dapache-spark.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": false,
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": null,
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

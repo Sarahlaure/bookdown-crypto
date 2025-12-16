@@ -1,0 +1,124 @@
+# Forces et limites d’Apache Spark
+
+Cette section propose une synthèse critique des principaux **atouts** et **limites** d’Apache Spark. L’objectif est de mettre en évidence les situations dans lesquelles Spark constitue une solution particulièrement adaptée, ainsi que les contraintes techniques qu’il convient de prendre en compte lors de son utilisation.
+
+---
+
+## 1. Forces d’Apache Spark
+
+### 1.1 Performances élevées grâce au calcul en mémoire
+
+L’un des principaux atouts d’Apache Spark réside dans son modèle de calcul **in-memory**.  
+Contrairement à Hadoop MapReduce, qui écrit systématiquement les résultats intermédiaires sur disque, Spark conserve les données en mémoire vive (RAM) lorsque cela est possible.
+
+Ce mécanisme permet :
+- une réduction significative des temps de latence,
+- des performances très élevées pour les traitements itératifs,
+- une exécution rapide des algorithmes analytiques et de machine learning.
+
+Dans les cas pratiques étudiés, ce modèle est particulièrement adapté :
+- au calcul fréquent d’indicateurs de marché,
+- à l’analyse répétée de fenêtres temporelles,
+- aux agrégations complexes sur des volumes importants de données.
+
+---
+
+### 1.2 Un moteur unifié pour différents types de traitements
+
+Apache Spark se distingue par sa **polyvalence**. Il repose sur un moteur unique capable de gérer :
+- le traitement **batch** de grands volumes de données,
+- le **streaming** quasi temps réel (Structured Streaming),
+- les requêtes **SQL** (Spark SQL),
+- les algorithmes de **machine learning** (MLlib),
+- le traitement de graphes (GraphX).
+
+Cette unification présente plusieurs avantages :
+- un même modèle de programmation pour des cas d’usage variés,
+- une réduction de la complexité logicielle,
+- une meilleure cohérence dans les pipelines de données.
+
+Dans le cadre de ce projet, Spark a permis d’implémenter à la fois :
+- des traitements batch pour l’analyse consolidée des données,
+- des traitements streaming pour l’analyse en continu des flux temps réel.
+
+---
+
+### 1.3 Scalabilité et parallélisme
+
+Spark est conçu pour fonctionner :
+- sur une **machine unique** (mode local),
+- ou sur un **cluster distribué** composé de plusieurs nœuds.
+
+Grâce au découpage automatique des données en partitions et à l’exécution parallèle des tâches, Spark permet :
+- une montée en charge progressive,
+- une exploitation efficace des ressources CPU et mémoire,
+- une adaptation à des volumes de données croissants.
+
+Cette caractéristique rend Spark particulièrement adapté aux environnements Big Data et aux architectures Cloud.
+
+---
+
+### 1.4 Résilience et tolérance aux pannes
+
+Apache Spark intègre des mécanismes avancés de **tolérance aux pannes**.  
+Les données sont représentées sous forme de structures immuables (RDDs ou DataFrames), associées à une logique de reconstruction basée sur le **DAG (Directed Acyclic Graph)**.
+
+En cas de défaillance :
+- Spark est capable de recalculer automatiquement les partitions perdues,
+- l’exécution peut se poursuivre sans redémarrage complet du job.
+
+Cette résilience est essentielle dans des environnements distribués, où les pannes matérielles ou logicielles sont fréquentes.
+
+---
+
+## 2. Limites d’Apache Spark
+
+### 2.1 Forte consommation de ressources mémoire
+
+La principale contrepartie du calcul en mémoire est la **consommation élevée de RAM**.  
+Pour fonctionner efficacement, Spark nécessite :
+- une quantité suffisante de mémoire,
+- un dimensionnement précis des ressources,
+- une configuration adaptée (gestion des partitions, cache, persistence).
+
+Dans les environnements Cloud ou sur des machines limitées, cela peut entraîner :
+- un coût matériel ou financier élevé,
+- des problèmes de performance si la mémoire est insuffisante.
+
+---
+
+### 2.2 Streaming basé sur le micro-batching
+
+Bien que Spark Structured Streaming permette le traitement de flux continus, il repose sur un modèle de **micro-batching**.  
+Les données sont traitées par petits lots successifs, et non strictement événement par événement.
+
+Cela implique :
+- une latence faible mais non nulle,
+- une légère différence avec le “vrai” temps réel.
+
+Pour des applications nécessitant une latence extrêmement faible (par exemple, trading haute fréquence ou détection instantanée d’événements critiques), d’autres solutions comme **Apache Flink** peuvent être plus adaptées.
+
+---
+
+### 2.3 Complexité de l’optimisation des performances
+
+Bien que l’API Spark soit relativement accessible, l’optimisation fine des performances peut s’avérer complexe, notamment pour :
+- le choix du nombre de partitions,
+- la gestion du cache mémoire,
+- l’équilibrage des ressources,
+- la compréhension des plans d’exécution (DAG, stages, tasks).
+
+Cette complexité peut constituer une barrière pour les débutants et nécessite une bonne compréhension des mécanismes internes de Spark.
+
+---
+
+### 2.4 Moins adapté à la gestion d’un très grand nombre de petits fichiers
+
+Spark peut être moins performant lorsqu’il est confronté à :
+- un très grand nombre de fichiers de petite taille,
+- des accès disque fragmentés.
+
+Dans ce cas, des solutions complémentaires (compaction des fichiers, formats optimisés comme Parquet, ou systèmes spécialisés) sont souvent nécessaires.
+
+</div>
+
